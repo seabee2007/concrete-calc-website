@@ -24,7 +24,7 @@ export default function ProductMockup() {
 
         <div className="overflow-hidden bg-navy-950">
           <img
-            src="/images/dashboard.png"
+            src="/images/dashboard-dark.png"
             alt="Concrete Calc project dashboard showing estimates, schedules, and project overview"
             className="aspect-[16/10] w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
           />
