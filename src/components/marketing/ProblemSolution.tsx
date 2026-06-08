@@ -11,7 +11,7 @@ const beforeItems = [
 
 const afterItems = [
   'Estimates, proposals, and schedules in one workspace',
-  'Logic networks and pour plans linked to your timeline',
+  'Logic networks and concrete placement plans linked to your timeline',
   'Change orders, contracts, and daily reports organized',
   'PDF exports and client records always up to date',
 ]

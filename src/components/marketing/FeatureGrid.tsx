@@ -66,8 +66,8 @@ const features: Feature[] = [
   },
   {
     icon: HardHat,
-    title: 'Pour Planner',
-    description: 'Plan concrete pours with risk assessment, crew scheduling, and weather windows.',
+    title: 'Concrete Planner',
+    description: 'Plan concrete placements with risk assessment, crew scheduling, and weather windows.',
   },
   {
     icon: FileDown,

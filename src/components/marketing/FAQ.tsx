@@ -13,12 +13,12 @@ const faqs: FAQItem[] = [
   {
     question: 'What is Concrete Calc?',
     answer:
-      'Concrete Calc is a professional construction project management software suite. It helps contractors, builders, estimators, and project managers create estimates, proposals, schedules, logic networks, change orders, contracts, daily reports, PDF exports, and concrete pour plans — all from one workspace.',
+      'Concrete Calc is a professional construction project management software suite. It helps contractors, builders, estimators, and project managers create estimates, proposals, schedules, logic networks, change orders, contracts, daily reports, PDF exports, and concrete placement plans — all from one workspace.',
   },
   {
     question: 'Is this only for concrete contractors?',
     answer:
-      'No. While Concrete Calc includes specialized pour planning tools, the platform is built for all types of construction teams — general contractors, subcontractors, estimators, and project managers working on commercial, residential, and infrastructure projects.',
+      'No. While Concrete Calc includes specialized concerete planning tools, the platform is built for all types of construction teams — general contractors, subcontractors, estimators, and project managers working on commercial, residential, and infrastructure projects.',
   },
   {
     question: 'Can I create estimates and proposals?',
