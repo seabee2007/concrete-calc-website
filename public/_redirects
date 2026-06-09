@@ -1,1 +1,6 @@
+/login https://app.concrete-calc.com/login 302
+/signup https://app.concrete-calc.com/signup 302
+/auth/callback https://app.concrete-calc.com/auth/callback 302
+/app https://app.concrete-calc.com 302
+
 /* /index.html 200
