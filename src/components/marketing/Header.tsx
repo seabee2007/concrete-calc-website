@@ -22,8 +22,12 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-white/10 bg-navy-950/80 backdrop-blur-md">
       <div className="section-container flex h-16 items-center justify-between lg:h-[72px]">
         <div className="flex items-center gap-3">
-          <a href="#" className="text-lg font-bold text-white lg:text-xl">
-            {BRAND_NAME}
+          <a href="#" className="flex shrink-0 items-center" aria-label={BRAND_NAME}>
+            <img
+              src="/images/logo_dark_banner_simple.png"
+              alt={BRAND_NAME}
+              className="h-8 w-auto object-contain sm:h-9 lg:h-10"
+            />
           </a>
           <span className="hidden rounded-full border border-electric-500/30 bg-electric-500/10 px-2.5 py-0.5 text-xs font-medium text-electric-400 sm:inline-block">
             Construction Management Software

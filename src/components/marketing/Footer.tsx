@@ -29,7 +29,15 @@ export default function Footer() {
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {/* Brand */}
             <div className="sm:col-span-2 lg:col-span-1">
-              <p className="text-lg font-bold text-white">{BRAND_NAME}</p>
+              <a href="#" className="inline-block" aria-label={BRAND_NAME}>
+                <img
+                  src="/images/logo_dark_banner_simple.png"
+                  alt={BRAND_NAME}
+                  className="h-10 w-auto max-w-[220px] object-contain"
+                />
+              </a>
+              <p className="mt-3 text-sm font-medium text-white">{BRAND_NAME}</p>
+              <p className="mt-1 text-sm text-electric-400">Estimate. Schedule. Deliver.</p>
               <p className="mt-3 max-w-xs text-sm leading-relaxed text-concrete-400">
                 Professional construction project management software for estimates, proposals, schedules, and planning.
               </p>

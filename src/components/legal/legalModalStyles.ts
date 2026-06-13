@@ -1,10 +1,10 @@
 /** Shared presentation classes for marketing site legal modals. */
 
 export const LEGAL_MODAL_BACKDROP =
-  'fixed inset-0 z-[100] flex items-center justify-center bg-navy-950/80 p-4 backdrop-blur-sm'
+  'fixed inset-0 z-[100] flex items-center justify-center bg-navy-950/90 p-4 backdrop-blur-md'
 
 export const LEGAL_MODAL_SHELL =
-  'relative flex max-h-[min(90dvh,100%)] w-full max-w-3xl flex-col overflow-hidden rounded-3xl border border-white/15 bg-charcoal-900/95 shadow-glass'
+  'relative flex max-h-[85vh] w-full max-w-3xl flex-col overflow-hidden rounded-3xl border border-white/10 bg-charcoal-900/95 shadow-glass backdrop-blur-md'
 
 export const LEGAL_MODAL_HEADER =
   'flex shrink-0 items-start justify-between gap-4 border-b border-white/10 px-6 py-5'
