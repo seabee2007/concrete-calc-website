@@ -21,11 +21,6 @@ export default function Hero() {
             variants={fadeUp}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            <img
-              src="/images/logo_dark_banner.png"
-              alt="Arden Project OS"
-              className="mb-8 max-w-xs object-contain sm:max-w-md lg:max-w-xl"
-            />
             <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
               Professional estimating, scheduling, and project planning software for construction teams.
             </h1>
