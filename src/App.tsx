@@ -11,21 +11,22 @@ import Footer from './components/marketing/Footer'
 
 export default function App() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-navy-950 text-slate-100">
-      <div className="marketing-page-bg pointer-events-none fixed inset-0 z-0" aria-hidden="true" />
-      <div className="pointer-events-none fixed inset-0 z-[1] grid-bg gradient-radial opacity-70" aria-hidden />
-      <Header />
-      <main className="relative z-10">
-        <Hero />
-        <ProblemSolution />
-        <FeatureGrid />
-        <ScreenshotShowcase />
-        <WorkflowSection />
-        <PricingPreview />
-        <FAQ />
-        <FinalCTA />
-      </main>
-      <Footer />
+    <div className="relative min-h-screen overflow-hidden bg-[#050b13]">
+      <div className="marketing-page-bg" aria-hidden="true" />
+      <div className="relative z-10 min-h-screen text-white">
+        <Header />
+        <main>
+          <Hero />
+          <ProblemSolution />
+          <FeatureGrid />
+          <ScreenshotShowcase />
+          <WorkflowSection />
+          <PricingPreview />
+          <FAQ />
+          <FinalCTA />
+        </main>
+        <Footer />
+      </div>
     </div>
   )
 }

@@ -14,11 +14,11 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
       <div
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,19,0.55)_0%,rgba(5,11,19,0.12)_48%,transparent_72%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(27,166,181,0.12),transparent_34%)]"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,rgba(27,166,181,0.1),transparent_28%)]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-56 bg-gradient-to-b from-transparent via-[#050b13]/70 to-[#050b13]"
         aria-hidden="true"
       />
       <div className="section-container relative z-10">
