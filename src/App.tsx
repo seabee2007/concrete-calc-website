@@ -1,32 +1,29 @@
-import Header from './components/marketing/Header'
-import Hero from './components/marketing/Hero'
-import ProblemSolution from './components/marketing/ProblemSolution'
-import FeatureGrid from './components/marketing/FeatureGrid'
-import ScreenshotShowcase from './components/marketing/ScreenshotShowcase'
-import WorkflowSection from './components/marketing/WorkflowSection'
-import PricingPreview from './components/marketing/PricingPreview'
-import FAQ from './components/marketing/FAQ'
-import FinalCTA from './components/marketing/FinalCTA'
-import Footer from './components/marketing/Footer'
+import { useSyncExternalStore } from 'react'
+import MarketingHome from './pages/MarketingHome'
+import PrivacyPage from './pages/PrivacyPage'
+import TermsPage from './pages/TermsPage'
+
+function usePathname() {
+  return useSyncExternalStore(
+    (onStoreChange) => {
+      window.addEventListener('popstate', onStoreChange)
+      return () => window.removeEventListener('popstate', onStoreChange)
+    },
+    () => window.location.pathname,
+    () => '/',
+  )
+}
 
 export default function App() {
-  return (
-    <div className="relative min-h-screen overflow-hidden bg-[#050b13]">
-      <div className="marketing-page-bg" aria-hidden="true" />
-      <div className="relative z-10 min-h-screen text-white">
-        <Header />
-        <main>
-          <Hero />
-          <ProblemSolution />
-          <FeatureGrid />
-          <ScreenshotShowcase />
-          <WorkflowSection />
-          <PricingPreview />
-          <FAQ />
-          <FinalCTA />
-        </main>
-        <Footer />
-      </div>
-    </div>
-  )
+  const pathname = usePathname()
+
+  if (pathname === '/privacy') {
+    return <PrivacyPage />
+  }
+
+  if (pathname === '/terms') {
+    return <TermsPage />
+  }
+
+  return <MarketingHome />
 }

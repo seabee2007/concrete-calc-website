@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-import { APP_LOGIN, APP_SIGNUP, BRAND_NAME, SECTION_IDS, scrollToSection } from '../../constants/marketing'
+import { APP_LOGIN, APP_SIGNUP, SECTION_IDS, scrollToSection } from '../../constants/marketing'
 
 const navLinks = [
   { label: 'Features', id: SECTION_IDS.features },
@@ -19,45 +19,47 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-navy-950/80 backdrop-blur-md">
-      <div className="section-container flex h-16 items-center justify-between lg:h-[72px]">
-        <div className="flex items-center gap-3">
-          <a href="#" className="text-lg font-bold tracking-wide text-white lg:text-xl">
-            {BRAND_NAME}
-          </a>
-          <span className="hidden rounded-full border border-electric-500/30 bg-electric-500/10 px-2.5 py-0.5 text-xs font-medium text-electric-400 sm:inline-block">
-            Construction Management Software
-          </span>
-        </div>
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050b13]/90 backdrop-blur-xl">
+      <div className="mx-auto flex min-h-[72px] max-w-7xl items-center justify-between px-6 lg:px-8">
+        <a href="#" className="flex shrink-0 items-center">
+          <img
+            src="/images/ARDEN-removebg-preview.png"
+            alt="Arden Project OS"
+            className="h-auto max-h-9 w-[150px] object-contain sm:max-h-10 sm:w-[170px] lg:w-[210px]"
+          />
+        </a>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden flex-1 items-center justify-center gap-8 lg:flex">
           {navLinks.map((link) => (
             <button
               key={link.id}
               type="button"
               onClick={() => handleNavClick(link.id)}
-              className="text-sm font-medium text-concrete-300 transition-colors hover:text-white"
+              className="text-sm font-semibold text-slate-300 transition hover:text-white"
             >
               {link.label}
             </button>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden shrink-0 items-center gap-5 lg:flex">
           <a
             href={APP_LOGIN}
-            className="text-sm font-medium text-concrete-300 transition-colors hover:text-white"
+            className="text-sm font-semibold text-slate-300 transition hover:text-white"
           >
             Login
           </a>
-          <a href={APP_SIGNUP} className="btn-primary">
+          <a
+            href={APP_SIGNUP}
+            className="inline-flex h-11 items-center justify-center rounded-2xl bg-cyan-500 px-6 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-cyan-400"
+          >
             Start Free Trial
           </a>
         </div>
 
         <button
           type="button"
-          className="rounded-lg p-2 text-concrete-300 hover:bg-white/5 md:hidden"
+          className="rounded-lg p-2 text-slate-300 transition hover:bg-white/5 hover:text-white lg:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
         >
@@ -71,10 +73,10 @@ export default function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden border-t border-white/10 md:hidden"
+            className="overflow-hidden border-t border-white/10 lg:hidden"
           >
-            <div className="section-container flex flex-col gap-4 py-4">
-              <span className="rounded-full border border-electric-500/30 bg-electric-500/10 px-2.5 py-0.5 text-xs font-medium text-electric-400 w-fit">
+            <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-4 lg:px-8">
+              <span className="w-fit rounded-full border border-electric-500/30 bg-electric-500/10 px-2.5 py-0.5 text-xs font-medium text-electric-400">
                 Construction Management Software
               </span>
               {navLinks.map((link) => (
@@ -82,16 +84,22 @@ export default function Header() {
                   key={link.id}
                   type="button"
                   onClick={() => handleNavClick(link.id)}
-                  className="text-left text-sm font-medium text-concrete-300 hover:text-white"
+                  className="text-left text-sm font-semibold text-slate-300 transition hover:text-white"
                 >
                   {link.label}
                 </button>
               ))}
               <div className="flex flex-col gap-3 pt-2">
-                <a href={APP_LOGIN} className="btn-secondary text-center">
+                <a
+                  href={APP_LOGIN}
+                  className="btn-secondary text-center text-sm font-semibold"
+                >
                   Login
                 </a>
-                <a href={APP_SIGNUP} className="btn-primary text-center">
+                <a
+                  href={APP_SIGNUP}
+                  className="inline-flex h-11 items-center justify-center rounded-2xl bg-cyan-500 px-6 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-cyan-400"
+                >
                   Start Free Trial
                 </a>
               </div>
