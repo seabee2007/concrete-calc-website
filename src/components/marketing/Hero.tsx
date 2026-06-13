@@ -25,7 +25,7 @@ export default function Hero() {
               Professional estimating, scheduling, and project planning software for construction teams.
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-concrete-400">
-              Concrete Calc helps contractors build estimates, proposals, schedules, logic networks, and project plans from one clean workspace.
+              Arden Project OS helps contractors build estimates, proposals, schedules, logic networks, and project plans from one clean workspace.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">

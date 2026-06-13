@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-import { APP_LOGIN, APP_SIGNUP, SECTION_IDS, scrollToSection } from '../../constants/marketing'
+import { APP_LOGIN, APP_SIGNUP, BRAND_NAME, SECTION_IDS, scrollToSection } from '../../constants/marketing'
 
 const navLinks = [
   { label: 'Features', id: SECTION_IDS.features },
@@ -23,7 +23,7 @@ export default function Header() {
       <div className="section-container flex h-16 items-center justify-between lg:h-[72px]">
         <div className="flex items-center gap-3">
           <a href="#" className="text-lg font-bold text-white lg:text-xl">
-            Concrete Calc
+            {BRAND_NAME}
           </a>
           <span className="hidden rounded-full border border-electric-500/30 bg-electric-500/10 px-2.5 py-0.5 text-xs font-medium text-electric-400 sm:inline-block">
             Construction Management Software

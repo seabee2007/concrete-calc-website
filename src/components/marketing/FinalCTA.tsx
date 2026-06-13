@@ -21,7 +21,7 @@ export default function FinalCTA() {
               Build better estimates. Plan cleaner projects. Win more work.
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-concrete-400">
-              Start with one project and see how Concrete Calc can organize your estimating, proposals, and planning workflow.
+              Start with one project and see how Arden Project OS can organize your estimating, proposals, and planning workflow.
             </p>
             <a href={APP_SIGNUP} className="btn-primary mt-8 inline-flex gap-2 px-8 py-3.5 text-base">
               Start Free Trial

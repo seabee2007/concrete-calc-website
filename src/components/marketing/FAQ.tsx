@@ -11,14 +11,14 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: 'What is Concrete Calc?',
+    question: 'What is Arden Project OS?',
     answer:
-      'Concrete Calc is a professional construction project management software suite. It helps contractors, builders, estimators, and project managers create estimates, proposals, schedules, logic networks, change orders, contracts, daily reports, PDF exports, and concrete placement plans — all from one workspace.',
+      'Arden Project OS is professional construction project management software. It helps contractors, builders, estimators, and project managers create estimates, proposals, schedules, logic networks, change orders, contracts, daily reports, PDF exports, and construction planning records — all from one workspace.',
   },
   {
     question: 'Is this only for concrete contractors?',
     answer:
-      'No. While Concrete Calc includes specialized concerete planning tools, the platform is built for all types of construction teams — general contractors, subcontractors, estimators, and project managers working on commercial, residential, and infrastructure projects.',
+      'No. While Arden Project OS includes specialized construction planning tools, the platform is built for all types of construction teams — general contractors, subcontractors, estimators, and project managers working on commercial, residential, and infrastructure projects.',
   },
   {
     question: 'Can I create estimates and proposals?',
@@ -38,7 +38,7 @@ const faqs: FAQItem[] = [
   {
     question: 'Do I need to install anything?',
     answer:
-      'No. Concrete Calc is a cloud-based web application. Access it from any modern browser on desktop, tablet, or mobile — no downloads or installations required.',
+      'No. Arden Project OS is a cloud-based web application. Access it from any modern browser on desktop, tablet, or mobile — no downloads or installations required.',
   },
   {
     question: 'Is there a free trial?',
@@ -96,7 +96,7 @@ export default function FAQ() {
         >
           <h2 className="section-heading">Frequently asked questions</h2>
           <p className="section-subheading mx-auto">
-            Everything you need to know about Concrete Calc.
+            Everything you need to know about Arden Project OS.
           </p>
         </motion.div>
 

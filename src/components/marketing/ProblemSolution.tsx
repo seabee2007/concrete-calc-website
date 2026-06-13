@@ -31,7 +31,7 @@ export default function ProblemSolution() {
           <h2 className="section-heading">Stop juggling disconnected tools</h2>
           <p className="section-subheading mx-auto">
             Contractors are often stuck using spreadsheets, paper notes, disconnected apps, emails, and text messages.
-            Concrete Calc brings everything into one organized workspace.
+            Arden Project OS brings everything into one organized workspace.
           </p>
         </motion.div>
 
@@ -48,7 +48,7 @@ export default function ProblemSolution() {
             className="glass-panel rounded-3xl p-6 lg:p-8"
           >
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-sm font-medium text-red-400">
-              Before Concrete Calc
+              Before Arden
             </div>
             <ul className="space-y-4">
               {beforeItems.map((item) => (
@@ -68,7 +68,7 @@ export default function ProblemSolution() {
             className="glass-panel-strong rounded-3xl border-electric-500/20 p-6 shadow-glow lg:p-8"
           >
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-electric-500/30 bg-electric-500/10 px-3 py-1 text-sm font-medium text-electric-400">
-              With Concrete Calc
+              With Arden Project OS
             </div>
             <ul className="space-y-4">
               {afterItems.map((item) => (

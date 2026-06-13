@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Moon, Sun } from 'lucide-react'
-import { SECTION_IDS } from '../../constants/marketing'
+import { BRAND_NAME, SECTION_IDS } from '../../constants/marketing'
 import { staggerContainer, fadeUpItem, viewportOnce } from './motion'
 
 type ScreenshotMode = 'dark' | 'light'
@@ -118,7 +118,7 @@ function ScreenshotCard({
             <motion.img
               key={src}
               src={src}
-              alt={`${item.title} — Concrete Calc ${screenshotMode} mode`}
+              alt={`${item.title} — ${BRAND_NAME} ${screenshotMode} mode`}
               loading="lazy"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

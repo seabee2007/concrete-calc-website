@@ -1,4 +1,7 @@
 import { motion } from 'framer-motion'
+import { APP_URL } from '../../constants/marketing'
+
+const APP_HOST = new URL(APP_URL).host
 
 export default function ProductMockup() {
   return (
@@ -18,14 +21,14 @@ export default function ProductMockup() {
             <div className="h-3 w-3 rounded-full bg-emerald-500/80" />
           </div>
           <div className="mx-auto flex h-7 w-48 items-center justify-center rounded-md bg-white/5 text-[10px] text-concrete-500 sm:w-64">
-            app.concrete-calc.com
+            {APP_HOST}
           </div>
         </div>
 
         <div className="overflow-hidden bg-navy-950">
           <img
             src="/images/dashboard-dark.png"
-            alt="Concrete Calc project dashboard showing estimates, schedules, and project overview"
+            alt="Arden Project OS project dashboard showing estimates, schedules, and project overview"
             className="aspect-[16/10] w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
           />
         </div>
