@@ -18,7 +18,7 @@ const afterItems = [
 
 export default function ProblemSolution() {
   return (
-    <section className="py-20 lg:py-28">
+    <section className="relative z-10 py-20 lg:py-28">
       <div className="section-container">
         <motion.div
           initial="hidden"

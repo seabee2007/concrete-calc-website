@@ -13,7 +13,15 @@ const stats = [
 export default function Hero() {
   return (
     <section className="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
-      <div className="section-container">
+      <div
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,19,0.55)_0%,rgba(5,11,19,0.12)_48%,transparent_72%)]"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,rgba(27,166,181,0.1),transparent_28%)]"
+        aria-hidden="true"
+      />
+      <div className="section-container relative z-10">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <motion.div
             initial="hidden"

@@ -24,7 +24,7 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="border-t border-white/10 bg-navy-950/50 py-12 lg:py-16">
+      <footer className="relative z-10 border-t border-white/10 bg-navy-950/30 py-12 backdrop-blur-sm lg:py-16">
         <div className="section-container">
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {/* Brand */}
