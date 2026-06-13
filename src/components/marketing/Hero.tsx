@@ -17,10 +17,6 @@ export default function Hero() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(27,166,181,0.12),transparent_34%)]"
         aria-hidden="true"
       />
-      <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-56 bg-gradient-to-b from-transparent via-[#050b13]/70 to-[#050b13]"
-        aria-hidden="true"
-      />
       <div className="section-container relative z-10">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <motion.div
