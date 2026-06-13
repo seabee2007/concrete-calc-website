@@ -1,22 +1,11 @@
 import { useState } from 'react'
-import { APP_LOGIN, APP_SIGNUP, BRAND_NAME, SECTION_IDS, scrollToSection } from '../../constants/marketing'
+import { BRAND_NAME } from '../../constants/marketing'
 import LegalDocumentModal from '../legal/LegalDocumentModal'
 import PrivacyPolicy from '../legal/PrivacyPolicy'
 import TermsOfService from '../legal/TermsOfService'
 
-const productLinks = [
-  { label: 'Features', id: SECTION_IDS.features },
-  { label: 'Screenshots', id: SECTION_IDS.screenshots },
-  { label: 'Pricing', id: SECTION_IDS.pricing },
-  { label: 'FAQ', id: SECTION_IDS.faq },
-]
-
-const companyLinks = [
-  { label: 'About', href: '#' },
-  { label: 'Contact', href: '#' },
-  { label: 'Privacy', action: 'privacy' as const },
-  { label: 'Terms', action: 'terms' as const },
-]
+const legalLinkClassName =
+  'text-slate-400 transition-colors hover:text-cyan-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07111d]'
 
 export default function Footer() {
   const [showTerms, setShowTerms] = useState(false)
@@ -24,100 +13,38 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="relative z-10 border-t border-white/10 bg-navy-950/30 py-12 backdrop-blur-sm lg:py-16">
-        <div className="section-container">
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {/* Brand */}
-            <div className="sm:col-span-2 lg:col-span-1">
-              <a href="#" className="inline-block" aria-label={BRAND_NAME}>
-                <img
-                  src="/images/logo_dark_banner_simple.png"
-                  alt={BRAND_NAME}
-                  className="h-10 w-auto max-w-[220px] object-contain"
-                />
-              </a>
-              <p className="mt-3 text-sm font-medium text-white">{BRAND_NAME}</p>
-              <p className="mt-1 text-sm text-electric-400">Estimate. Schedule. Deliver.</p>
-              <p className="mt-3 max-w-xs text-sm leading-relaxed text-concrete-400">
-                Professional construction project management software for estimates, proposals, schedules, and planning.
-              </p>
-            </div>
+      <footer className="relative z-10 border-t border-white/10 bg-[#07111d]/90 px-6 py-8 text-center backdrop-blur-md sm:py-10">
+        <div
+          className="pointer-events-none absolute left-1/2 top-8 h-24 w-80 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl"
+          aria-hidden="true"
+        />
 
-            {/* Product */}
-            <div>
-              <p className="text-sm font-semibold text-white">Product</p>
-              <ul className="mt-4 space-y-3">
-                {productLinks.map((link) => (
-                  <li key={link.id}>
-                    <button
-                      type="button"
-                      onClick={() => scrollToSection(link.id)}
-                      className="text-sm text-concrete-400 transition-colors hover:text-white"
-                    >
-                      {link.label}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <div className="relative mx-auto max-w-4xl">
+          <img
+            src="/images/ARDEN-removebg-preview.png"
+            alt="Arden Project OS"
+            className="mx-auto h-auto w-[240px] max-w-[80vw] object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)] sm:w-[260px]"
+          />
 
-            {/* Company */}
-            <div>
-              <p className="text-sm font-semibold text-white">Company</p>
-              <ul className="mt-4 space-y-3">
-                {companyLinks.map((link) => (
-                  <li key={link.label}>
-                    {'action' in link ? (
-                      <button
-                        type="button"
-                        onClick={() =>
-                          link.action === 'terms' ? setShowTerms(true) : setShowPrivacy(true)
-                        }
-                        className="text-sm text-concrete-400 transition-colors hover:text-white"
-                      >
-                        {link.label}
-                      </button>
-                    ) : (
-                      <a
-                        href={link.href}
-                        className="text-sm text-concrete-400 transition-colors hover:text-white"
-                      >
-                        {link.label}
-                      </a>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <p className="mt-3 text-sm text-slate-400 sm:text-base">Built for construction professionals.</p>
 
-            {/* Account */}
-            <div>
-              <p className="text-sm font-semibold text-white">Get Started</p>
-              <ul className="mt-4 space-y-3">
-                <li>
-                  <a
-                    href={APP_LOGIN}
-                    className="text-sm text-concrete-400 transition-colors hover:text-white"
-                  >
-                    Login
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={APP_SIGNUP}
-                    className="text-sm font-medium text-electric-400 transition-colors hover:text-electric-300"
-                  >
-                    Start Free Trial
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <nav
+            className="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-sm text-slate-400"
+            aria-label="Legal"
+          >
+            <button type="button" onClick={() => setShowTerms(true)} className={legalLinkClassName}>
+              Terms of Service
+            </button>
+            <button type="button" onClick={() => setShowPrivacy(true)} className={legalLinkClassName}>
+              Privacy Policy
+            </button>
+            <a href="mailto:support@ardenprojectos.com" className={legalLinkClassName}>
+              Contact Us
+            </a>
+          </nav>
 
-          <div className="mt-12 border-t border-white/10 pt-8">
-            <p className="text-center text-sm text-concrete-500">
-              &copy; {new Date().getFullYear()} {BRAND_NAME}. All rights reserved.
-            </p>
+          <div className="mt-6 border-t border-white/10 pt-4 text-xs text-slate-500">
+            © {new Date().getFullYear()} {BRAND_NAME}. All rights reserved.
           </div>
         </div>
       </footer>
