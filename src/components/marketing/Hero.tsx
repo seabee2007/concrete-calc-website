@@ -26,7 +26,7 @@ export default function Hero() {
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
             <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
-              Professional estimating, scheduling, and project planning software for construction teams.
+              Construction Project Management Software for Contractors
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-concrete-400">
               Arden Project OS helps contractors build estimates, proposals, schedules, logic networks, and project plans from one clean workspace.

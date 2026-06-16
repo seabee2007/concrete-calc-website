@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+Disallow: /login
+Disallow: /signup
+Disallow: /auth/
+Disallow: /complete-profile
+Disallow: /reset-password
+Disallow: /settings/
+Disallow: /projects/
+Disallow: /calculator
+Disallow: /planner/
+Disallow: /dev/
+Disallow: /invite/
+Disallow: /test-onboarding
+
+Sitemap: https://ardenprojectos.com/sitemap.xml

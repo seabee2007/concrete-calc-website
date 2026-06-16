@@ -12,7 +12,7 @@ export default function TermsOfService() {
   return (
     <div className={LEGAL_MODAL_ROOT}>
       <section className={LEGAL_MODAL_SECTION}>
-        <h2 className={`${LEGAL_MODAL_H3} text-xl`}>Arden Project OS Terms of Service</h2>
+        <h1 className={`${LEGAL_MODAL_H3} text-xl`}>Arden Project OS Terms of Service</h1>
         <p className={LEGAL_MODAL_META}>Last Updated: 12 June 2026</p>
         <p>
           These Terms of Service (&ldquo;Terms&rdquo;) govern your access to and use of Arden Project OS,

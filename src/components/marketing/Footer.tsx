@@ -30,8 +30,11 @@ export default function Footer() {
           <a href="/privacy" className={legalLinkClassName}>
             Privacy Policy
           </a>
-          <a href="mailto:support@ardenprojectos.com" className={legalLinkClassName}>
+          <a href="/contact" className={legalLinkClassName}>
             Contact Us
+          </a>
+          <a href="mailto:support@ardenprojectos.com" className={legalLinkClassName}>
+            Email Support
           </a>
         </nav>
 

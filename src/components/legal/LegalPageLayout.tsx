@@ -1,19 +1,14 @@
-import { useEffect, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { BRAND_NAME } from '../../constants/marketing'
 
 const legalLinkClassName =
   'text-slate-400 transition-colors hover:text-cyan-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07111d]'
 
 interface LegalPageLayoutProps {
-  title: string
   children: ReactNode
 }
 
-export default function LegalPageLayout({ title, children }: LegalPageLayoutProps) {
-  useEffect(() => {
-    document.title = `${title} — ${BRAND_NAME}`
-  }, [title])
-
+export default function LegalPageLayout({ children }: LegalPageLayoutProps) {
   return (
     <div className="relative min-h-screen bg-[#050b13] text-white">
       <header className="border-b border-white/10 bg-[#050b13]/90 backdrop-blur-xl">
@@ -31,6 +26,9 @@ export default function LegalPageLayout({ title, children }: LegalPageLayoutProp
             </a>
             <a href="/privacy" className={legalLinkClassName}>
               Privacy Policy
+            </a>
+            <a href="/contact" className={legalLinkClassName}>
+              Contact
             </a>
           </nav>
         </div>
@@ -52,7 +50,7 @@ export default function LegalPageLayout({ title, children }: LegalPageLayoutProp
           <a href="/privacy" className={legalLinkClassName}>
             Privacy Policy
           </a>
-          <a href="mailto:support@ardenprojectos.com" className={legalLinkClassName}>
+          <a href="/contact" className={legalLinkClassName}>
             Contact Us
           </a>
         </nav>

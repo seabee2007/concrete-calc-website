@@ -13,7 +13,7 @@ export default function PrivacyPolicy() {
   return (
     <div className={LEGAL_MODAL_ROOT}>
       <section className={LEGAL_MODAL_SECTION}>
-        <h2 className={`${LEGAL_MODAL_H3} text-xl`}>Arden Project OS Privacy Policy</h2>
+        <h1 className={`${LEGAL_MODAL_H3} text-xl`}>Arden Project OS Privacy Policy</h1>
         <p className={LEGAL_MODAL_META}>Last Updated: 12 June 2026</p>
         <p>
           This Privacy Policy explains how <strong>[Insert Legal Entity Name]</strong> (&ldquo;Arden Project OS,&rdquo;
