@@ -7,7 +7,7 @@
  *   node scripts/verify-seo.mjs --base-url https://ardenprojectos.com
  */
 
-import { readFileSync, existsSync, readdirSync, appendFileSync } from 'node:fs'
+import { readFileSync, existsSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -22,26 +22,6 @@ const baseUrl = baseUrlArgIndex >= 0 ? args[baseUrlArgIndex + 1]?.replace(/\/$/,
 const failures = []
 const warnings = []
 const passes = []
-
-// #region agent log
-function debugLog(hypothesisId, location, message, data) {
-  const payload = {
-    sessionId: '304cd4',
-    runId: baseUrl ? 'remote-check' : 'local-check',
-    hypothesisId,
-    location,
-    message,
-    data,
-    timestamp: Date.now(),
-  }
-  appendFileSync(join(root, 'debug-304cd4.log'), `${JSON.stringify(payload)}\n`)
-  fetch('http://127.0.0.1:7574/ingest/3015d7f4-7c64-47ce-83f7-840eacd69b91', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '304cd4' },
-    body: JSON.stringify(payload),
-  }).catch(() => {})
-}
-// #endregion
 
 function pass(message) {
   passes.push(message)
@@ -278,34 +258,9 @@ async function fetchStatus(url, { follow = false } = {}) {
 async function checkRemote(base) {
   pass(`remote checks against ${base}`)
 
-  // #region agent log
-  debugLog('B', 'verify-seo.mjs:checkRemote:dist', 'local dist static files', {
-    robotsExists: existsSync(join(root, 'dist/robots.txt')),
-    sitemapExists: existsSync(join(root, 'dist/sitemap.xml')),
-    robotsStartsWithUserAgent: existsSync(join(root, 'dist/robots.txt'))
-      ? readFileSync(join(root, 'dist/robots.txt'), 'utf8').startsWith('User-agent:')
-      : false,
-  })
-  // #endregion
-
   for (const path of ['/robots.txt', '/sitemap.xml']) {
     const response = await fetchStatus(`${base}${path}`, { follow: true })
     const body = response.body ?? ''
-    const contentType = response.headers.get('content-type')
-
-    // #region agent log
-    debugLog('A', 'verify-seo.mjs:checkRemote:fetch', `production response for ${path}`, {
-      url: `${base}${path}`,
-      status: response.status,
-      finalUrl: response.finalUrl,
-      contentType,
-      bodyLength: body.length,
-      bodyPrefix: body.slice(0, 80),
-      isHtml: body.trimStart().startsWith('<!doctype') || body.trimStart().startsWith('<html'),
-      isRobotsTxt: body.startsWith('User-agent:'),
-      isSitemapXml: body.includes('<urlset'),
-    })
-    // #endregion
 
     if (response.status === 200 && path === '/robots.txt' && body.startsWith('User-agent:')) {
       pass(`${path} returns 200 with valid robots.txt body`)
@@ -427,8 +382,12 @@ async function main() {
   }
 
   console.log('\nResult: PASS')
-  if (warnings.some((message) => message.includes('SPA limitation') || message.includes('raw HTML'))) {
-    console.log('\nNext step: deploy, rerun with --base-url, submit sitemap in Search Console, plan SEO Phase 2 prerender.')
+  if (baseUrl && warnings.some((message) => message.includes('SPA limitation') || message.includes('raw HTML'))) {
+    console.log(
+      '\nNext step: submit sitemap in Google Search Console, request indexing for priority pages, plan SEO Phase 2 prerender.',
+    )
+  } else if (!baseUrl) {
+    console.log('\nNext step: run with --base-url https://ardenprojectos.com after deploy.')
   }
 }
 
