@@ -1,5 +1,5 @@
 import { ArrowRight } from 'lucide-react'
-import { APP_SIGNUP, MARKETING_URL } from '../../constants/marketing'
+import { MARKETING_URL } from '../../constants/marketing'
 import { organizationJsonLd } from '../../lib/jsonLd'
 import SeoHead from '../seo/SeoHead'
 import MarketingPageShell from './MarketingPageShell'
@@ -62,8 +62,8 @@ export default function TopicLandingPage({
             Bring estimates, schedules, field records, and client approvals into one workspace built for
             contractors.
           </p>
-          <a href={APP_SIGNUP} className="btn-primary mt-8 inline-flex gap-2 px-8 py-3.5 text-base">
-            Start Free Trial
+          <a href="/pricing" className="btn-primary mt-8 inline-flex gap-2 px-8 py-3.5 text-base">
+            View pricing
             <ArrowRight className="h-4 w-4" />
           </a>
         </section>

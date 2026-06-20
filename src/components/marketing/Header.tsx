@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-import { APP_LOGIN, APP_SIGNUP, SECTION_IDS, scrollToSection } from '../../constants/marketing'
+import { APP_LOGIN, SECTION_IDS, scrollToSection } from '../../constants/marketing'
 
 const navLinks = [
   { label: 'Features', id: SECTION_IDS.features },
@@ -50,10 +50,10 @@ export default function Header() {
             Login
           </a>
           <a
-            href={APP_SIGNUP}
+            href="/pricing"
             className="inline-flex h-11 items-center justify-center rounded-2xl bg-cyan-500 px-6 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-cyan-400"
           >
-            Start Free Trial
+            View pricing
           </a>
         </div>
 
@@ -97,10 +97,10 @@ export default function Header() {
                   Login
                 </a>
                 <a
-                  href={APP_SIGNUP}
+                  href="/pricing"
                   className="inline-flex h-11 items-center justify-center rounded-2xl bg-cyan-500 px-6 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-cyan-400"
                 >
-                  Start Free Trial
+                  View pricing
                 </a>
               </div>
             </div>

@@ -1,4 +1,5 @@
 import { MARKETING_URL } from '../constants/marketing'
+import { getJsonLdOffers } from './publicPlanCatalog'
 
 export const organizationJsonLd = {
   '@context': 'https://schema.org',
@@ -19,9 +20,5 @@ export const softwareApplicationJsonLd = {
   name: 'Arden Project OS',
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Web',
-  offers: [
-    { '@type': 'Offer', name: 'Starter', price: '49', priceCurrency: 'USD' },
-    { '@type': 'Offer', name: 'Professional', price: '129', priceCurrency: 'USD' },
-    { '@type': 'Offer', name: 'Business', price: '249', priceCurrency: 'USD' },
-  ],
+  offers: getJsonLdOffers(),
 }

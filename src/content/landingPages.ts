@@ -49,7 +49,7 @@ export const constructionProjectManagementPage: Omit<TopicLandingPageProps, neve
     {
       heading: 'Start with a platform designed for construction',
       paragraphs: [
-        'Arden Project OS is cloud-based construction project management software — no installs, no per-device sync headaches. Start a free trial, set up your first project, and see how much cleaner your estimating, scheduling, and field workflow can be.',
+        'Arden Project OS is cloud-based construction project management software — no installs, no per-device sync headaches. Choose a plan, set up your first project, and see how much cleaner your estimating, scheduling, and field workflow can be.',
       ],
     },
   ],

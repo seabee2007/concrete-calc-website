@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
-import { APP_SIGNUP } from '../../constants/marketing'
 import { fadeUp, viewportOnce } from './motion'
 
 export default function FinalCTA() {
@@ -23,8 +22,8 @@ export default function FinalCTA() {
             <p className="mx-auto mt-4 max-w-2xl text-lg text-concrete-400">
               Start with one project and see how Arden Project OS can organize your estimating, proposals, and planning workflow.
             </p>
-            <a href={APP_SIGNUP} className="btn-primary mt-8 inline-flex gap-2 px-8 py-3.5 text-base">
-              Start Free Trial
+            <a href="/pricing" className="btn-primary mt-8 inline-flex gap-2 px-8 py-3.5 text-base">
+              View pricing
               <ArrowRight className="h-4 w-4" />
             </a>
           </div>

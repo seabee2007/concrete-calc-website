@@ -41,9 +41,9 @@ const faqs: FAQItem[] = [
       'No. Arden Project OS is a cloud-based web application. Access it from any modern browser on desktop, tablet, or mobile — no downloads or installations required.',
   },
   {
-    question: 'Is there a free trial?',
+    question: 'How does pricing work?',
     answer:
-      'Yes. Start with a free trial to explore the platform with your own project. No credit card required to get started.',
+      'Arden Project OS offers Starter, Professional, and Business plans with the same prices and limits shown on this site and in-app Billing. Choose a plan in Billing to subscribe; monthly and annual billing options are available.',
   },
 ]
 

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, ChevronDown, Zap, LayoutGrid, TrendingUp } from 'lucide-react'
-import { APP_SIGNUP, SECTION_IDS, scrollToSection } from '../../constants/marketing'
+import { ArrowRight, ChevronDown, LayoutGrid, TrendingUp, Zap } from 'lucide-react'
+import { SECTION_IDS, scrollToSection } from '../../constants/marketing'
 import { fadeUp } from './motion'
 import ProductMockup from './ProductMockup'
 
@@ -33,10 +33,14 @@ export default function Hero() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <a href={APP_SIGNUP} className="btn-primary gap-2 px-6 py-3 text-base">
-                Start Free Trial
+              <button
+                type="button"
+                onClick={() => scrollToSection(SECTION_IDS.pricing)}
+                className="btn-primary gap-2 px-6 py-3 text-base"
+              >
+                View pricing
                 <ArrowRight className="h-4 w-4" />
-              </a>
+              </button>
               <button
                 type="button"
                 onClick={() => scrollToSection(SECTION_IDS.features)}
