@@ -1,46 +1,60 @@
+import { LayoutGrid } from 'lucide-react'
 import { BRAND_NAME } from '../../constants/marketing'
 
-const legalLinkClassName =
-  'text-slate-400 transition-colors hover:text-cyan-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07111d]'
+const productLinks = [
+  { href: '/#features', label: 'Project OS features' },
+  { href: '/#screenshots', label: 'Screenshots' },
+  { href: '/pricing', label: 'Pricing' },
+  { href: '/apps', label: 'Arden Apps' },
+]
+
+const legalLinks = [
+  { href: '/terms', label: 'Terms' },
+  { href: '/privacy', label: 'Privacy' },
+  { href: '/contact', label: 'Contact' },
+  { href: 'mailto:support@ardenprojectos.com', label: 'Support' },
+]
 
 export default function Footer() {
   return (
-    <footer className="relative z-10 border-t border-white/10 bg-[#07111d]/90 px-6 py-8 text-center backdrop-blur-md sm:py-10">
-      <div
-        className="pointer-events-none absolute left-1/2 top-8 h-24 w-80 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl"
-        aria-hidden="true"
-      />
-
-      <div className="relative mx-auto max-w-4xl">
-        <img
-          src="/images/ARDEN-removebg-preview.png"
-          alt={BRAND_NAME}
-          className="mx-auto h-auto w-[240px] max-w-[80vw] object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)] sm:w-[260px]"
-        />
-
-        <p className="mt-3 text-sm text-slate-400 sm:text-base">Built for construction professionals.</p>
-
-        <nav
-          className="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-sm text-slate-400"
-          aria-label="Legal"
-        >
-          <a href="/terms" className={legalLinkClassName}>
-            Terms of Service
+    <footer className="arden-site-footer px-4 py-12 sm:px-6">
+      <div className="mx-auto grid w-full max-w-[96rem] gap-10 md:grid-cols-[1.2fr_0.7fr_0.7fr]">
+        <div>
+          <a href="/" className="inline-flex items-center gap-3 text-slate-900 no-underline">
+            <span className="arden-site-header__mark">
+              <LayoutGrid className="h-5 w-5" aria-hidden="true" />
+            </span>
+            <strong>{BRAND_NAME}</strong>
           </a>
-          <a href="/privacy" className={legalLinkClassName}>
-            Privacy Policy
-          </a>
-          <a href="/contact" className={legalLinkClassName}>
-            Contact Us
-          </a>
-          <a href="mailto:support@ardenprojectos.com" className={legalLinkClassName}>
-            Email Support
-          </a>
-        </nav>
-
-        <div className="mt-6 border-t border-white/10 pt-4 text-xs text-slate-500">
-          © {new Date().getFullYear()} {BRAND_NAME}. All rights reserved.
+          <p className="mt-4 max-w-md text-sm leading-6 text-slate-600">
+            Construction project software for clearer estimating, planning, field execution, and
+            project control—built as the foundation of Arden Systems.
+          </p>
         </div>
+        <nav aria-label="Product" className="text-sm">
+          <p className="font-bold text-slate-900">Product</p>
+          <div className="mt-4 grid gap-3">
+            {productLinks.map((link) => (
+              <a key={link.href} href={link.href} className="text-slate-600 hover:text-cyan-700">
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </nav>
+        <nav aria-label="Company and legal" className="text-sm">
+          <p className="font-bold text-slate-900">Company</p>
+          <div className="mt-4 grid gap-3">
+            {legalLinks.map((link) => (
+              <a key={link.href} href={link.href} className="text-slate-600 hover:text-cyan-700">
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </nav>
+      </div>
+      <div className="mx-auto mt-10 flex w-full max-w-[96rem] flex-wrap justify-between gap-3 border-t border-slate-200 pt-5 text-xs text-slate-500">
+        <span>© {new Date().getFullYear()} {BRAND_NAME}. All rights reserved.</span>
+        <span>Built for construction professionals.</span>
       </div>
     </footer>
   )

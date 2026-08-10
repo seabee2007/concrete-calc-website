@@ -25,6 +25,7 @@
       "marketableFeatureKeys": [
         "quick_estimates",
         "conceptual_estimates",
+        "employee_portal",
         "calculators",
         "resources",
         "proposals"
@@ -34,7 +35,7 @@
     {
       "planId": "professional",
       "name": "Professional",
-      "audience": "For contractors managing active field work, estimating, schedules, and change control.",
+      "audience": "For contractors managing active field capacity, estimating, schedules, and change control.",
       "monthlyPriceUsd": 129,
       "annualMonthlyUsd": 109,
       "annualTotalUsd": 1308,
@@ -44,6 +45,8 @@
       "marketableFeatureKeys": [
         "activity_based_estimating",
         "arden_calc_in_estimator",
+        "bill_of_materials",
+        "bom_ai_pricing",
         "employee_portal",
         "rfis",
         "fars",

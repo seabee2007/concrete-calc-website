@@ -1,0 +1,318 @@
+{
+  "schemaVersion": "public-arden-catalog.v1",
+  "contentDigest": "sha256:720085275f68b13b081de28f9c726604a703a9f0f79c8204d38903c90a727bb6",
+  "products": [
+    {
+      "productId": "project_os",
+      "slug": "project-os",
+      "displayName": "Arden Project OS",
+      "shortName": "Project OS",
+      "summary": "Estimate, plan, schedule, track, and deliver construction work from one professional workspace.",
+      "description": "Estimate, plan, schedule, track, and deliver construction work from one professional workspace.",
+      "audience": [
+        "Construction contractors and project teams"
+      ],
+      "capabilities": [
+        "estimating and cost control",
+        "CPM, Logic Network, and Level III scheduling",
+        "RFIs, FARs, QC, documents, and field execution",
+        "proposals and change control",
+        "financial and reporting workflows",
+        "Design Builder Beta"
+      ],
+      "iconKey": "project_os",
+      "releaseStatus": "live",
+      "interestCaptureAllowed": false,
+      "sortOrder": 20
+    },
+    {
+      "productId": "proposals",
+      "slug": "proposals",
+      "displayName": "Arden Proposals",
+      "shortName": "Proposals",
+      "summary": "Create professional contractor proposals, price the work, send a secure client link, and track the decision.",
+      "description": "Create professional contractor proposals, price the work, send a secure client link, and track the decision.",
+      "audience": [
+        "Construction contractors"
+      ],
+      "capabilities": [
+        "branded proposal templates",
+        "labor/material/equipment/subcontractor pricing",
+        "scope, exclusions, allowances, and terms",
+        "PDF and email delivery",
+        "public review link",
+        "acceptance/decline tracking"
+      ],
+      "iconKey": "proposals",
+      "releaseStatus": "coming_soon",
+      "interestCaptureAllowed": true,
+      "sortOrder": 30
+    },
+    {
+      "productId": "crm",
+      "slug": "crm",
+      "displayName": "Arden CRM",
+      "shortName": "CRM",
+      "summary": "Organize leads, clients, opportunities, and follow-ups before the job becomes a project.",
+      "description": "Organize leads, clients, opportunities, and follow-ups before the job becomes a project.",
+      "audience": [
+        "Construction contractors"
+      ],
+      "capabilities": [],
+      "iconKey": "crm",
+      "releaseStatus": "planned",
+      "interestCaptureAllowed": true,
+      "sortOrder": 40
+    },
+    {
+      "productId": "invoicing",
+      "slug": "invoicing",
+      "displayName": "Arden Invoicing",
+      "shortName": "Invoicing",
+      "summary": "Create and track contractor invoices from accepted work, projects, and approved changes.",
+      "description": "Create and track contractor invoices from accepted work, projects, and approved changes.",
+      "audience": [
+        "Construction contractors"
+      ],
+      "capabilities": [],
+      "iconKey": "invoicing",
+      "releaseStatus": "planned",
+      "interestCaptureAllowed": true,
+      "sortOrder": 50
+    },
+    {
+      "productId": "calc",
+      "slug": "calc",
+      "displayName": "Arden Calc",
+      "shortName": "Calc",
+      "summary": "Field-ready construction calculators with saved work, material planning, and professional reports.",
+      "description": "Field-ready construction calculators with saved work, material planning, and professional reports.",
+      "audience": [
+        "Construction contractors"
+      ],
+      "capabilities": [],
+      "iconKey": "calc",
+      "releaseStatus": "planned",
+      "interestCaptureAllowed": true,
+      "sortOrder": 60
+    },
+    {
+      "productId": "change_orders",
+      "slug": "change-orders",
+      "displayName": "Arden Change Orders",
+      "shortName": "Change Orders",
+      "summary": "Price, document, send, and track construction change orders before extra work is lost.",
+      "description": "Price, document, send, and track construction change orders before extra work is lost.",
+      "audience": [
+        "Construction contractors"
+      ],
+      "capabilities": [],
+      "iconKey": "change_orders",
+      "releaseStatus": "planned",
+      "interestCaptureAllowed": true,
+      "sortOrder": 70
+    },
+    {
+      "productId": "field_log",
+      "slug": "field-log",
+      "displayName": "Arden Field Log",
+      "shortName": "Field Log",
+      "summary": "Complete daily reports with manpower, weather, work, equipment, delays, and photos.",
+      "description": "Complete daily reports with manpower, weather, work, equipment, delays, and photos.",
+      "audience": [
+        "Construction contractors"
+      ],
+      "capabilities": [],
+      "iconKey": "field_log",
+      "releaseStatus": "planned",
+      "interestCaptureAllowed": true,
+      "sortOrder": 80
+    },
+    {
+      "productId": "subtracker",
+      "slug": "subtracker",
+      "displayName": "Arden SubTracker",
+      "shortName": "SubTracker",
+      "summary": "Track subcontractor insurance, W-9s, licenses, workers compensation, and expiration dates.",
+      "description": "Track subcontractor insurance, W-9s, licenses, workers compensation, and expiration dates.",
+      "audience": [
+        "Construction contractors"
+      ],
+      "capabilities": [],
+      "iconKey": "subtracker",
+      "releaseStatus": "planned",
+      "interestCaptureAllowed": true,
+      "sortOrder": 90
+    },
+    {
+      "productId": "quote_leveler",
+      "slug": "quote-leveler",
+      "displayName": "Arden Quote Leveler",
+      "shortName": "Quote Leveler",
+      "summary": "Compare subcontractor and vendor quotes on an equal-scope basis instead of relying on the lowest raw number.",
+      "description": "Compare subcontractor and vendor quotes on an equal-scope basis instead of relying on the lowest raw number.",
+      "audience": [
+        "Construction contractors"
+      ],
+      "capabilities": [],
+      "iconKey": "quote_leveler",
+      "releaseStatus": "planned",
+      "interestCaptureAllowed": true,
+      "sortOrder": 100
+    },
+    {
+      "productId": "safety",
+      "slug": "safety",
+      "displayName": "Arden Safety",
+      "shortName": "Safety",
+      "summary": "Manage JHAs, toolbox talks, attendance, inspections, incidents, and compliance records.",
+      "description": "Manage JHAs, toolbox talks, attendance, inspections, incidents, and compliance records.",
+      "audience": [
+        "Construction contractors"
+      ],
+      "capabilities": [],
+      "iconKey": "safety",
+      "releaseStatus": "planned",
+      "interestCaptureAllowed": true,
+      "sortOrder": 110
+    },
+    {
+      "productId": "crew_cost",
+      "slug": "crew-cost",
+      "displayName": "Arden Crew Cost",
+      "shortName": "Crew Cost",
+      "summary": "Calculate fully burdened labor, crew cost, production cost, billing rates, and target margin.",
+      "description": "Calculate fully burdened labor, crew cost, production cost, billing rates, and target margin.",
+      "audience": [
+        "Construction contractors"
+      ],
+      "capabilities": [],
+      "iconKey": "crew_cost",
+      "releaseStatus": "planned",
+      "interestCaptureAllowed": true,
+      "sortOrder": 130
+    }
+  ],
+  "integrations": [
+    {
+      "integrationId": "quickbooks_online",
+      "displayName": "QuickBooks Online",
+      "description": "Current repository support is Export for QuickBooks CSV, not synchronization; QuickBooks Online API synchronization is coming soon.",
+      "iconKey": "quickbooks_online",
+      "availability": "coming_soon",
+      "capabilities": [
+        {
+          "capabilityId": "api_synchronization",
+          "displayName": "QuickBooks API synchronization",
+          "summary": "Synchronize accounting data through the QuickBooks Online API.",
+          "supportState": "not_yet_supported"
+        }
+      ],
+      "supportedProductIds": [
+        "project_os"
+      ],
+      "sortOrder": 10
+    },
+    {
+      "integrationId": "microsoft_365",
+      "displayName": "Microsoft 365",
+      "description": "Planned Microsoft 365 connections with capability-level release tracking for files, calendars, notifications, and document synchronization.",
+      "iconKey": "microsoft_365",
+      "availability": "coming_soon",
+      "capabilities": [
+        {
+          "capabilityId": "onedrive_export",
+          "displayName": "OneDrive export",
+          "summary": "Export Project OS documents to Microsoft OneDrive.",
+          "supportState": "not_yet_supported"
+        },
+        {
+          "capabilityId": "outlook_calendar",
+          "displayName": "Outlook Calendar",
+          "summary": "Connect Project OS schedule activity with Outlook Calendar.",
+          "supportState": "not_yet_supported"
+        },
+        {
+          "capabilityId": "teams_notifications",
+          "displayName": "Teams notifications",
+          "summary": "Send selected Project OS notifications through Microsoft Teams.",
+          "supportState": "not_yet_supported"
+        },
+        {
+          "capabilityId": "sharepoint_synchronization",
+          "displayName": "SharePoint synchronization",
+          "summary": "Synchronize selected Project OS documents with Microsoft SharePoint.",
+          "supportState": "not_yet_supported"
+        }
+      ],
+      "supportedProductIds": [
+        "project_os"
+      ],
+      "sortOrder": 20
+    },
+    {
+      "integrationId": "google_workspace",
+      "displayName": "Google Workspace",
+      "description": "A planned customer-provider integration whose individual capabilities are not yet committed.",
+      "iconKey": "google_workspace",
+      "availability": "planned",
+      "capabilities": [],
+      "supportedProductIds": [
+        "project_os"
+      ],
+      "sortOrder": 30
+    }
+  ],
+  "artwork": [
+    {
+      "iconKey": "proposals",
+      "fileName": "proposals.webp",
+      "sha256": "sha256:185dc34b3c348b37ca544807a312172541f2313c23dafdb70d1c381cda69ae3b"
+    },
+    {
+      "iconKey": "crm",
+      "fileName": "crm.webp",
+      "sha256": "sha256:4154ff2206358ff08be61e9caf615dc207550a79ecfab7ce32f504521b0d4fbe"
+    },
+    {
+      "iconKey": "invoicing",
+      "fileName": "invoicing.webp",
+      "sha256": "sha256:f2e05c7a894a252d57e3ce3affcd25293e7d35f6edf2801cf8fd1fcd7bd8e31a"
+    },
+    {
+      "iconKey": "calc",
+      "fileName": "calc.webp",
+      "sha256": "sha256:f190a4ba4d3a74ae120a2c5e8c227f2274bed4fb912d2e470f8fa4da8ba29946"
+    },
+    {
+      "iconKey": "change_orders",
+      "fileName": "change_orders.webp",
+      "sha256": "sha256:533fe936bd00d4acc0955e83162beec1216ce292b5354879df12aa53992106a8"
+    },
+    {
+      "iconKey": "field_log",
+      "fileName": "field_log.webp",
+      "sha256": "sha256:62cb73125ee669a95b0bb0d35d110fe5480d895bf7c402fdb214dcc7f98bc647"
+    },
+    {
+      "iconKey": "subtracker",
+      "fileName": "subtracker.webp",
+      "sha256": "sha256:0f1ac6e412dfc0cf91e0075abc6bbd7466f83c24e6267ece96281116c12bf42e"
+    },
+    {
+      "iconKey": "quote_leveler",
+      "fileName": "quote_leveler.webp",
+      "sha256": "sha256:5ca6edc0939e9e9c03e77c3f08d0a3146bdfa2b489bf2cf2ac3baaad175ff2d5"
+    },
+    {
+      "iconKey": "safety",
+      "fileName": "safety.webp",
+      "sha256": "sha256:cf75108b10abc70c07fef7cf1cfb52c2f78b215ec06d86f96ea785aa7fcf35f4"
+    },
+    {
+      "iconKey": "crew_cost",
+      "fileName": "crew_cost.webp",
+      "sha256": "sha256:acb71af1c7054c09798dd7940e246dbe5b44d37d2dc250d649b2e0294fced037"
+    }
+  ]
+}
