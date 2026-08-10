@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ArrowRight, CheckCircle2, LogIn, X } from 'lucide-react'
 import CatalogArtwork from '../components/catalog/CatalogArtwork'
 import Footer from '../components/marketing/Footer'
@@ -18,6 +18,23 @@ import {
 type CatalogSelection =
   | { kind: 'product'; item: PublicArdenProductV1 }
   | { kind: 'integration'; item: PublicArdenIntegrationV1 }
+
+/**
+ * Mirrors the authenticated Hub's clockwise four-column, three-row perimeter.
+ * Registry order remains authoritative; these slots are presentation-only.
+ */
+const PUBLIC_CATALOG_ORBIT_SLOTS = Object.freeze([
+  { gridColumn: '1', gridRow: '1' },
+  { gridColumn: '2', gridRow: '1' },
+  { gridColumn: '3', gridRow: '1' },
+  { gridColumn: '4', gridRow: '1' },
+  { gridColumn: '4', gridRow: '2' },
+  { gridColumn: '4', gridRow: '3' },
+  { gridColumn: '3', gridRow: '3' },
+  { gridColumn: '2', gridRow: '3' },
+  { gridColumn: '1', gridRow: '3' },
+  { gridColumn: '1', gridRow: '2' },
+] as const)
 
 function CatalogDialog({ selection, onClose }: { selection: CatalogSelection; onClose: () => void }) {
   const dialogRef = useRef<HTMLDivElement>(null)
@@ -200,6 +217,7 @@ export default function AppsPage() {
   const [selection, setSelection] = useState<CatalogSelection | null>(null)
   const projectOs = PUBLIC_ARDEN_CATALOG.products.find(({ productId }) => productId === 'project_os')
   const products = PUBLIC_ARDEN_CATALOG.products.filter(({ productId }) => productId !== 'project_os')
+  const orbitSupported = products.length === PUBLIC_CATALOG_ORBIT_SLOTS.length
 
   if (!projectOs) throw new Error('Public catalog is missing Arden Project OS.')
 
@@ -281,7 +299,7 @@ export default function AppsPage() {
           </div>
         </section>
 
-        <section id="products" className="bg-[#eaf3f3] px-4 py-20 sm:px-6 lg:py-28" aria-labelledby="products-heading">
+        <section id="products" className="catalog-products-section px-4 py-20 sm:px-6 lg:py-28" aria-labelledby="products-heading">
           <div className="mx-auto w-full max-w-[96rem]">
             <div className="mx-auto max-w-3xl text-center">
               <p className="arden-eyebrow">Discover Arden</p>
@@ -294,42 +312,50 @@ export default function AppsPage() {
               </p>
             </div>
 
-            <div className="catalog-constellation hidden xl:block" data-testid="public-catalog-constellation">
-              <div className="catalog-constellation__core">
-                <div>
-                  <CatalogArtwork iconKey="project_os" size={56} />
-                  <strong className="mt-1 block text-sm">Project OS</strong>
-                  <span className="text-xs text-slate-500">Available now</span>
+            {orbitSupported ? (
+              <div className="catalog-constellation hidden xl:grid" data-testid="public-catalog-constellation">
+                <div className="catalog-constellation__core">
+                  <div className="catalog-constellation__core-content">
+                    <span className="catalog-constellation__core-label">Available now</span>
+                    <CatalogArtwork iconKey="project_os" size={72} />
+                    <strong>Arden Project OS</strong>
+                    <span>One workspace for today&apos;s construction projects.</span>
+                  </div>
                 </div>
-              </div>
-              {products.map((product, index) => {
-                const angle = index * (360 / products.length) - 90
-                const style = {
-                  '--orbit-angle': `${angle}deg`,
-                  '--orbit-counter-angle': `${-angle}deg`,
-                } as CSSProperties
-                return (
-                  <button
-                    key={product.productId}
-                    type="button"
-                    style={style}
-                    className="catalog-constellation__card group"
-                    onClick={() => setSelection({ kind: 'product', item: product })}
-                    aria-label={`${product.displayName}, ${productStatusLabel(product.releaseStatus)}`}
-                  >
-                    <CatalogArtwork iconKey={product.iconKey} size={48} />
-                    <span className="min-w-0">
-                      <strong className="block text-sm leading-5">{product.shortName}</strong>
-                      <span className="block text-xs text-slate-500">
-                        {productStatusLabel(product.releaseStatus)}
-                      </span>
-                    </span>
-                  </button>
-                )
-              })}
-            </div>
+                {products.map((product, index) => {
+                  const slot = PUBLIC_CATALOG_ORBIT_SLOTS[index]
+                  if (!slot) return null
 
-            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:hidden" data-testid="public-catalog-grid">
+                  return (
+                    <div
+                      key={product.productId}
+                      className="catalog-constellation__slot"
+                      style={{ gridColumn: slot.gridColumn, gridRow: slot.gridRow }}
+                      data-orbit-column={slot.gridColumn}
+                      data-orbit-row={slot.gridRow}
+                    >
+                      <button
+                        type="button"
+                        className="catalog-constellation__card group"
+                        onClick={() => setSelection({ kind: 'product', item: product })}
+                        aria-label={`${product.displayName}, ${productStatusLabel(product.releaseStatus)}`}
+                      >
+                        <CatalogArtwork iconKey={product.iconKey} size={56} />
+                        <span className="min-w-0 flex-1">
+                          <strong className="block text-sm leading-5">{product.shortName}</strong>
+                          <span className="block text-xs text-slate-500">
+                            {productStatusLabel(product.releaseStatus)}
+                          </span>
+                          <span className="catalog-constellation__summary">{product.summary}</span>
+                        </span>
+                      </button>
+                    </div>
+                  )
+                })}
+              </div>
+            ) : null}
+
+            <div className={`mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 ${orbitSupported ? 'xl:hidden' : ''}`} data-testid="public-catalog-grid">
               {products.map((product) => (
                 <ProductCard
                   key={product.productId}
@@ -341,7 +367,7 @@ export default function AppsPage() {
           </div>
         </section>
 
-        <section id="integrations" className="px-4 py-20 sm:px-6 lg:py-28" aria-labelledby="integrations-heading">
+        <section id="integrations" className="catalog-integrations-section px-4 py-20 sm:px-6 lg:py-28" aria-labelledby="integrations-heading">
           <div className="mx-auto w-full max-w-[96rem]">
             <div className="grid gap-8 lg:grid-cols-[1fr_0.75fr] lg:items-end">
               <div>
@@ -381,7 +407,7 @@ export default function AppsPage() {
           </div>
         </section>
 
-        <section className="marketing-dark-band px-4 py-20 text-center sm:px-6 lg:py-28">
+        <section className="marketing-dark-band catalog-final-cta px-4 py-20 text-center sm:px-6 lg:py-28">
           <div className="mx-auto max-w-3xl">
             <p className="text-xs font-bold uppercase tracking-[0.24em] text-cyan-300">Start with Project OS</p>
             <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-5xl">

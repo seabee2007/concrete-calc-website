@@ -27,7 +27,7 @@ export default function MarketingHomeRefresh() {
         <ProjectOsHero />
         <ProblemSolution />
         <FeatureGrid />
-        <div className="marketing-dark-band">
+        <div className="marketing-dark-band marketing-dark-showcase">
           <ScreenshotShowcase />
         </div>
         <WorkflowSection />

@@ -84,7 +84,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
-    <section id={SECTION_IDS.faq} className="py-20 lg:py-28">
+    <section id={SECTION_IDS.faq} className="marketing-section marketing-section--faq py-20 lg:py-28">
       <div className="section-container">
         <motion.div
           initial="hidden"

@@ -5,7 +5,7 @@ import { fadeUpItem, staggerContainer, viewportOnce } from './motion'
 
 export default function PricingPreview() {
   return (
-    <section id={SECTION_IDS.pricing} className="py-20 lg:py-28">
+    <section id={SECTION_IDS.pricing} className="marketing-section marketing-section--pricing py-20 lg:py-28">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
