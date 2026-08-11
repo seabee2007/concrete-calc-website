@@ -1,51 +1,86 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion, type Variants } from 'framer-motion'
 import { SECTION_IDS } from '../../constants/marketing'
-import { staggerContainer, fadeUpItem, viewportOnce } from './motion'
+import { viewportOnce } from './motion'
 
 const steps = [
-  { number: 1, title: 'Project', description: 'Set up phases, milestones, and team assignments.' },
-  { number: 2, title: 'Estimate', description: 'Build detailed estimates with assemblies and cost codes.' },
-  { number: 3, title: 'Proposal', description: 'Turn approved pricing into polished client proposals.' },
-  { number: 4, title: 'Schedule', description: 'Coordinate dependencies, critical paths, and milestones.' },
-  { number: 5, title: 'Track', description: 'Monitor progress, costs, changes, and daily field activity.' },
-  { number: 6, title: 'Report', description: 'Export professional records and share project status.' },
+  {
+    number: 1,
+    title: 'Project',
+    description: 'Set up your project with phases, milestones, and team assignments.',
+  },
+  {
+    number: 2,
+    title: 'Estimate',
+    description: 'Build detailed estimates with line items, assemblies, and cost codes.',
+  },
+  {
+    number: 3,
+    title: 'Proposal',
+    description: 'Generate polished proposals from your estimates and send to clients.',
+  },
+  {
+    number: 4,
+    title: 'Schedule',
+    description: 'Create Gantt charts with dependencies and critical path analysis.',
+  },
+  {
+    number: 5,
+    title: 'Track',
+    description: 'Monitor progress, costs, change orders, and daily field reports.',
+  },
+  {
+    number: 6,
+    title: 'Report',
+    description: 'Export PDFs and share project status with stakeholders.',
+  },
 ]
+
+const stepVariants: Variants = {
+  hidden: (index: number) => ({
+    opacity: 0,
+    x: index < steps.length / 2 ? -34 : 34,
+    y: 18,
+  }),
+  visible: (index: number) => ({
+    opacity: 1,
+    x: 0,
+    y: 0,
+    transition: {
+      duration: 0.58,
+      delay: index * 0.07,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+}
 
 export default function WorkflowSection() {
   const reducedMotion = Boolean(useReducedMotion())
 
   return (
-    <section id={SECTION_IDS.workflow} className="marketing-section marketing-section--workflow py-20 lg:py-28">
+    <section id={SECTION_IDS.workflow} className="marketing-section marketing-section--workflow">
       <div className="section-container">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
-          transition={{ duration: 0.6 }}
-          className="mx-auto max-w-3xl text-center"
+          transition={{ duration: reducedMotion ? 0 : 0.62 }}
+          className="workflow-heading"
         >
-          <p className="arden-eyebrow">Connected workflow</p>
-          <h2 className="section-heading mt-4">Your workflow, simplified</h2>
-          <p className="section-subheading mx-auto">
-            From first estimate to final report—every stage stays connected in one Project OS workspace.
+          <h2 className="section-heading">Your workflow, simplified</h2>
+          <p className="section-subheading">
+            From first estimate to final report — every step connected in one platform.
           </p>
         </motion.div>
 
-        <motion.ol
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-          variants={staggerContainer}
-          className="workflow-steps mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-6"
-        >
-          {steps.map((step) => (
+        <ol className="workflow-steps">
+          {steps.map((step, index) => (
             <motion.li
               key={step.title}
-              variants={fadeUpItem}
-              whileHover={reducedMotion ? undefined : { scale: 1.1, y: -4 }}
-              whileFocus={reducedMotion ? undefined : { scale: 1.1, y: -4 }}
-              transition={{ duration: reducedMotion ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] }}
-              tabIndex={0}
+              custom={index}
+              initial={reducedMotion ? false : 'hidden'}
+              whileInView="visible"
+              viewport={viewportOnce}
+              variants={stepVariants}
               className="workflow-step"
             >
               <span className="workflow-step__number">{step.number}</span>
@@ -53,7 +88,7 @@ export default function WorkflowSection() {
               <p>{step.description}</p>
             </motion.li>
           ))}
-        </motion.ol>
+        </ol>
       </div>
     </section>
   )

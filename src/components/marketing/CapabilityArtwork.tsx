@@ -18,14 +18,16 @@ export type CapabilityArtworkKey =
 export default function CapabilityArtwork({
   artworkKey,
   fallback: Fallback,
+  size = '4.25rem',
 }: {
   artworkKey: CapabilityArtworkKey
   fallback: LucideIcon
+  size?: string
 }) {
   const [loaded, setLoaded] = useState(false)
   const [failed, setFailed] = useState(false)
   const state = failed ? 'fallback' : loaded ? 'loaded' : 'loading'
-  const style = { '--capability-art-size': '6.75rem' } as CSSProperties
+  const style = { '--capability-art-size': size } as CSSProperties
 
   return (
     <span
@@ -36,7 +38,7 @@ export default function CapabilityArtwork({
       data-capability-artwork-state={state}
     >
       <span className="capability-artwork__fallback">
-        <Fallback className="h-7 w-7" strokeWidth={1.7} />
+        <Fallback className="h-6 w-6" strokeWidth={1.7} />
       </span>
       {!failed ? (
         <img

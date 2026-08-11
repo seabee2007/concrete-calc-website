@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react'
-import { useEffect, useSyncExternalStore } from 'react'
+import { useSyncExternalStore } from 'react'
 import ContactPage from './pages/ContactPage'
 import MarketingHomeRefresh from './pages/MarketingHomeRefresh'
 import PricingPage from './pages/PricingPage'
@@ -26,24 +26,8 @@ function usePathname() {
   )
 }
 
-function LegacyAppsRedirect() {
-  useEffect(() => {
-    window.location.replace(`/hub${window.location.search}${window.location.hash}`)
-  }, [])
-
-  return (
-    <main className="marketing-refresh grid min-h-screen place-items-center px-6 text-center">
-      <div>
-        <p className="arden-eyebrow">Arden Systems</p>
-        <h1 className="mt-4 text-3xl font-semibold text-slate-900">Opening the public Arden Hub…</h1>
-      </div>
-    </main>
-  )
-}
-
 const PAGE_ROUTES: Readonly<Record<string, ComponentType>> = {
   '/hub': PublicHubPage,
-  '/apps': LegacyAppsRedirect,
   '/privacy': PrivacyPage,
   '/privacy-policy': PrivacyPage,
   '/terms': TermsPage,

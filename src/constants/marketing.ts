@@ -14,7 +14,7 @@ export function appLoginHref(returnTo = '/dashboard') {
 export const SECTION_IDS = {
   workflow: 'workflow',
   features: 'features',
-  ecosystem: 'ecosystem',
+  ecosystem: 'apps',
   integrations: 'connected-apps',
   screenshots: 'screenshots',
   pricing: 'pricing',

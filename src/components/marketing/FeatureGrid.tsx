@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion, type Variants } from 'framer-motion'
 import {
   Calculator,
   FileText,
@@ -15,7 +15,7 @@ import {
   type LucideIcon,
 } from 'lucide-react'
 import { SECTION_IDS } from '../../constants/marketing'
-import { staggerContainer, fadeUpItem, viewportOnce } from './motion'
+import { viewportOnce } from './motion'
 import CapabilityArtwork, { type CapabilityArtworkKey } from './CapabilityArtwork'
 
 interface Feature {
@@ -40,44 +40,61 @@ const features: Feature[] = [
   { artworkKey: 'cost-tracking', icon: PieChart, title: 'Cost Tracking', description: 'Monitor budget vs. actual costs across labor, materials, and equipment.' },
 ]
 
+const cardVariants: Variants = {
+  hidden: (index: number) => ({
+    opacity: 0,
+    x: index % 4 < 2 ? -30 : 30,
+    y: 20,
+  }),
+  visible: (index: number) => ({
+    opacity: 1,
+    x: 0,
+    y: 0,
+    transition: {
+      duration: 0.52,
+      delay: (index % 4) * 0.055 + Math.floor(index / 4) * 0.07,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+}
+
 export default function FeatureGrid() {
+  const reducedMotion = Boolean(useReducedMotion())
+
   return (
-    <section id={SECTION_IDS.features} className="marketing-section marketing-section--capabilities py-20 lg:py-28">
+    <section id={SECTION_IDS.features} className="marketing-section marketing-section--capabilities">
       <div className="section-container">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
-          transition={{ duration: 0.6 }}
-          className="mx-auto max-w-3xl text-center"
+          transition={{ duration: reducedMotion ? 0 : 0.62 }}
+          className="capabilities-heading"
         >
-          <p className="arden-eyebrow">Project OS capabilities</p>
-          <h2 className="section-heading mt-4">Everything you need to run projects</h2>
-          <p className="section-subheading mx-auto">
+          <h2 className="section-heading">Everything you need to run projects</h2>
+          <p className="section-subheading">
             A complete suite of tools built for the way construction teams actually work.
           </p>
         </motion.div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-          variants={staggerContainer}
-          className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-        >
-          {features.map((feature) => (
+        <div className="capability-grid">
+          {features.map((feature, index) => (
             <motion.article
               key={feature.title}
-              variants={fadeUpItem}
-              whileHover={{ y: -4, transition: { duration: 0.18 } }}
-              className="capability-card group"
+              custom={index}
+              initial={reducedMotion ? false : 'hidden'}
+              whileInView="visible"
+              viewport={viewportOnce}
+              variants={cardVariants}
+              whileHover={reducedMotion ? undefined : { y: -4 }}
+              className="capability-card"
             >
-              <CapabilityArtwork artworkKey={feature.artworkKey} fallback={feature.icon} />
+              <CapabilityArtwork artworkKey={feature.artworkKey} fallback={feature.icon} size="4.25rem" />
               <h3>{feature.title}</h3>
               <p>{feature.description}</p>
             </motion.article>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

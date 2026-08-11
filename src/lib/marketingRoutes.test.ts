@@ -9,9 +9,9 @@ describe('marketing and public Hub composition contracts', () => {
       'workflow',
       'capabilities',
       'ecosystem',
-      'connected-apps',
       'screenshots',
       'faq',
+      'connected-apps',
       'pricing',
       'footer',
     ])

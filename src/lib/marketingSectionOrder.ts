@@ -3,9 +3,9 @@ export const MARKETING_SECTION_ORDER = [
   'workflow',
   'capabilities',
   'ecosystem',
-  'connected-apps',
   'screenshots',
   'faq',
+  'connected-apps',
   'pricing',
   'footer',
 ] as const

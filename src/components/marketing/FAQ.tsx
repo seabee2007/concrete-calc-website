@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import { SECTION_IDS } from '../../constants/marketing'
-import { fadeUp, viewportOnce } from './motion'
+import { viewportOnce } from './motion'
 
 interface FAQItem {
   question: string
@@ -11,69 +11,64 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: 'What is Arden Project OS?',
+    question: 'What is Arden Hub?',
     answer:
-      'Arden Project OS is the live Arden construction project management workspace. It brings estimating, proposals, schedules, logic networks, change orders, field records, exports, and project controls into one browser-based application.',
+      'Arden Hub is the public launch point for the Arden product suite. Visitors can explore the approved roadmap, plans, and provider registry; signed-in teams also receive their secure Project OS launch route and account actions.',
   },
   {
-    question: 'Who is Project OS built for?',
+    question: 'Which Arden products are available today?',
     answer:
-      'It is designed for general contractors, subcontractors, estimators, project managers, and construction teams working across commercial, residential, concrete, and infrastructure projects.',
+      'Arden Project OS is available today. Other products remain clearly labeled Coming Soon or Planned from the canonical Arden registry.',
   },
   {
-    question: 'Can I create estimates and proposals?',
+    question: 'What do Planned and Coming Soon mean?',
     answer:
-      'Yes. Project OS supports detailed estimates with line items, assemblies, and cost codes, plus professional client proposals based on your project pricing and terms.',
+      'Coming Soon marks approved near-term product direction. Planned marks approved catalog direction at an earlier stage. Neither label promises a release date or checkout availability.',
   },
   {
-    question: 'Does it include scheduling and project controls?',
+    question: 'Are Connected Workflow providers already live?',
     answer:
-      'Project OS includes project planning, visual schedules, dependency and logic-network tools, milestone tracking, change management, and reporting workflows.',
+      'Not yet. Provider cards describe approved integration direction only. They do not imply a connected account, live synchronization, endorsement, or production availability.',
   },
   {
-    question: 'Are all Arden products and connected apps available now?',
+    question: 'How do I choose a plan?',
     answer:
-      'No. Project OS is the live Arden product. Every other product and integration is labeled Coming Soon or Planned from the canonical Arden registry. Those labels are not release dates, checkout availability, or evidence of a live provider connection.',
+      'Compare the verified Starter, Professional, and Business plan limits below. The same pricing and included capabilities appear in Project OS Billing.',
   },
   {
-    question: 'Do I need to install anything?',
+    question: 'Can employees use Arden Project OS?',
     answer:
-      'No. Arden Project OS is a cloud-based web application that runs in a modern browser on supported desktop, tablet, and mobile devices.',
-  },
-  {
-    question: 'How does pricing work?',
-    answer:
-      'The Starter, Professional, and Business plans shown here are generated from the same verified pricing contract used by in-app Billing. Monthly and annual options are available where shown.',
+      'Yes. Eligible employees can use the field portal and assigned project workflows available through their organization’s plan and access settings.',
   },
 ]
 
-function FAQAccordionItem({ item, isOpen, onToggle }: { item: FAQItem; isOpen: boolean; onToggle: () => void }) {
+function FAQAccordionItem({
+  item,
+  isOpen,
+  onToggle,
+  reducedMotion,
+}: {
+  item: FAQItem
+  isOpen: boolean
+  onToggle: () => void
+  reducedMotion: boolean
+}) {
   return (
-    <div className="border-b border-white/10 last:border-0">
-      <button
-        type="button"
-        onClick={onToggle}
-        className="flex w-full items-center justify-between gap-4 py-5 text-left"
-        aria-expanded={isOpen}
-      >
-        <span className="font-medium text-white">{item.question}</span>
-        <ChevronDown
-          className={`h-5 w-5 shrink-0 text-concrete-400 transition-transform duration-200 ${
-            isOpen ? 'rotate-180' : ''
-          }`}
-          aria-hidden="true"
-        />
+    <div className="faq-item">
+      <button type="button" onClick={onToggle} aria-expanded={isOpen}>
+        <span>{item.question}</span>
+        <ChevronDown className={isOpen ? 'is-open' : ''} aria-hidden="true" />
       </button>
       <AnimatePresence initial={false}>
         {isOpen ? (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
+            initial={reducedMotion ? false : { height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden"
+            exit={reducedMotion ? undefined : { height: 0, opacity: 0 }}
+            transition={{ duration: reducedMotion ? 0 : 0.26, ease: [0.22, 1, 0.36, 1] }}
+            className="faq-item__answer"
           >
-            <p className="pb-5 text-sm leading-relaxed text-concrete-400">{item.answer}</p>
+            <p>{item.answer}</p>
           </motion.div>
         ) : null}
       </AnimatePresence>
@@ -83,29 +78,29 @@ function FAQAccordionItem({ item, isOpen, onToggle }: { item: FAQItem; isOpen: b
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
+  const reducedMotion = Boolean(useReducedMotion())
 
   return (
-    <section id={SECTION_IDS.faq} className="marketing-section marketing-section--faq py-20 lg:py-28">
-      <div className="section-container">
+    <section id={SECTION_IDS.faq} className="marketing-section marketing-section--faq">
+      <div className="section-container faq-layout">
         <motion.div
-          initial="hidden"
-          whileInView="visible"
+          className="faq-layout__intro"
+          initial={reducedMotion ? false : { opacity: 0, x: -42 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={viewportOnce}
-          variants={fadeUp}
-          transition={{ duration: 0.6 }}
-          className="mx-auto max-w-3xl text-center"
+          transition={{ duration: reducedMotion ? 0 : 0.62 }}
         >
-          <p className="arden-eyebrow">Buyer FAQ</p>
-          <h2 className="section-heading mt-4">Frequently asked questions</h2>
-          <p className="section-subheading mx-auto">What to know before choosing Arden Project OS.</p>
+          <p className="arden-eyebrow">Frequently asked</p>
+          <h2>Clear answers before you choose the next tool.</h2>
+          <p>Availability, status, and provider claims stay anchored to Arden&apos;s canonical registries.</p>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          className="faq-list"
+          initial={reducedMotion ? false : { opacity: 0, x: 42 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={viewportOnce}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mx-auto mt-12 max-w-3xl glass-panel rounded-3xl px-6 lg:px-8"
+          transition={{ duration: reducedMotion ? 0 : 0.62, delay: reducedMotion ? 0 : 0.08 }}
         >
           {faqs.map((item, index) => (
             <FAQAccordionItem
@@ -113,6 +108,7 @@ export default function FAQ() {
               item={item}
               isOpen={openIndex === index}
               onToggle={() => setOpenIndex(openIndex === index ? null : index)}
+              reducedMotion={reducedMotion}
             />
           ))}
         </motion.div>

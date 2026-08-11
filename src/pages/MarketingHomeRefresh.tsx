@@ -28,11 +28,11 @@ export default function MarketingHomeRefresh() {
         <WorkflowSection />
         <FeatureGrid />
         <EcosystemPreview />
-        <ConnectedAppsSection />
         <div className="marketing-dark-band marketing-dark-showcase">
           <ScreenshotShowcase />
         </div>
         <FAQ />
+        <ConnectedAppsSection />
         <PricingPreview />
       </main>
       <Footer />

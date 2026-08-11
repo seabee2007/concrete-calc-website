@@ -1,16 +1,10 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight, LayoutGrid, TrendingUp, Zap } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { appLoginHref } from '../../constants/marketing'
-
-const proofPoints = [
-  { icon: Zap, label: 'Estimate faster', detail: 'Build detailed bids in minutes' },
-  { icon: LayoutGrid, label: 'Plan cleaner', detail: 'Organize every project phase' },
-  { icon: TrendingUp, label: 'Track better', detail: 'Monitor costs and progress' },
-]
 
 export default function ProjectOsHero() {
   const reducedMotion = Boolean(useReducedMotion())
-  const projectOsLogin = appLoginHref('/dashboard')
+  const dashboardLogin = appLoginHref('/dashboard')
 
   return (
     <section className="project-os-hero" aria-labelledby="project-os-hero-heading">
@@ -23,47 +17,37 @@ export default function ProjectOsHero() {
         fetchPriority="high"
         decoding="async"
         className="project-os-hero__photo"
-        initial={reducedMotion ? false : { opacity: 0, x: 28 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: reducedMotion ? 0 : 0.85, ease: [0.22, 1, 0.36, 1] }}
+        initial={reducedMotion ? false : { opacity: 0, scale: 1.035 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: reducedMotion ? 0 : 1.05, ease: [0.22, 1, 0.36, 1] }}
         onError={(event) => {
           event.currentTarget.style.display = 'none'
         }}
       />
       <div className="project-os-hero__wash" aria-hidden="true" />
+
       <div className="project-os-hero__content">
         <motion.div
           className="project-os-hero__copy"
-          initial={reducedMotion ? false : { opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: reducedMotion ? 0 : 0.7, delay: reducedMotion ? 0 : 0.08 }}
+          initial={reducedMotion ? false : { opacity: 0, x: -38, y: 12 }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
+          transition={{ duration: reducedMotion ? 0 : 0.78, delay: reducedMotion ? 0 : 0.12 }}
         >
           <p className="project-os-hero__eyebrow">Arden Systems</p>
           <h1 id="project-os-hero-heading">One launch point for every stage of the work.</h1>
           <p className="project-os-hero__lede">
-            Arden Project OS gives contractors one professional construction project management
-            workspace for estimates, proposals, schedules, logic networks, change orders, field
-            records, costs, and progress.
+            Start with Arden Project OS today, then grow into a connected suite for estimating,
+            planning, field execution, and business operations.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a href={projectOsLogin} className="btn-primary gap-2 px-6 py-3 text-base">
+          <div className="project-os-hero__actions">
+            <a href={dashboardLogin} className="btn-primary project-os-hero__primary-action">
               Open Project OS
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>
-            <a href="/hub" className="btn-secondary gap-2 px-6 py-3 text-base">
-              Explore Arden apps
+            <a href="/#apps" className="btn-secondary project-os-hero__secondary-action">
+              Explore apps
             </a>
-          </div>
-
-          <div className="project-os-hero__stats" aria-label="Project OS outcomes">
-            {proofPoints.map((point) => (
-              <div key={point.label} className="project-os-hero__stat">
-                <point.icon className="h-5 w-5 text-electric-600" aria-hidden="true" />
-                <p className="mt-2 text-sm font-bold text-slate-900">{point.label}</p>
-                <p className="mt-1 text-xs leading-5 text-slate-600">{point.detail}</p>
-              </div>
-            ))}
           </div>
         </motion.div>
       </div>
