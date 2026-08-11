@@ -1,36 +1,40 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
+import { Sparkles } from 'lucide-react'
 import MarketingPricingCards from './MarketingPricingCards'
 import { SECTION_IDS } from '../../constants/marketing'
-import { fadeUpItem, staggerContainer, viewportOnce } from './motion'
+import { viewportOnce } from './motion'
 
 export default function PricingPreview() {
+  const reducedMotion = Boolean(useReducedMotion())
+
   return (
-    <section id={SECTION_IDS.pricing} className="marketing-section marketing-section--pricing py-20 lg:py-28">
+    <section id={SECTION_IDS.pricing} className="marketing-section marketing-section--pricing">
       <div className="section-container">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 26 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
-          transition={{ duration: 0.6 }}
-          className="mx-auto max-w-3xl text-center"
+          transition={{ duration: reducedMotion ? 0 : 0.62 }}
+          className="pricing-preview__intro"
         >
-          <h2 className="section-heading">Plans built for contractor workflows</h2>
-          <p className="section-subheading mx-auto">
-            Starter, Professional, and Business pricing matches in-app Billing — including project limits,
-            field seats, and verified capabilities.
+          <p className="pricing-preview__eyebrow">
+            <Sparkles className="h-4 w-4" aria-hidden="true" />
+            Plans for the way you build
+          </p>
+          <h2>Start focused. Grow without changing systems.</h2>
+          <p>
+            Every paid plan starts with Arden Project OS. Choose the operating depth your team needs today.
           </p>
         </motion.div>
 
         <motion.div
-          initial="hidden"
-          whileInView="visible"
+          initial={reducedMotion ? false : { opacity: 0, y: 34 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
-          variants={staggerContainer}
-          className="mt-12"
+          transition={{ duration: reducedMotion ? 0 : 0.68, delay: reducedMotion ? 0 : 0.1 }}
+          className="pricing-preview__cards"
         >
-          <motion.div variants={fadeUpItem}>
-            <MarketingPricingCards compact showUsageDetails={false} />
-          </motion.div>
+          <MarketingPricingCards compact showUsageDetails={false} />
         </motion.div>
       </div>
     </section>

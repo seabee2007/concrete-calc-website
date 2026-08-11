@@ -7,11 +7,18 @@ import {
   getPublicPlanCatalog,
   getPublicPlanCtaLabel,
   type BillingInterval,
+  type PaidPlanId,
 } from '../../lib/publicPlanCatalog'
 
 interface MarketingPricingCardsProps {
   showUsageDetails?: boolean
   compact?: boolean
+}
+
+const planCategories: Record<PaidPlanId, string> = {
+  starter: 'Foundation',
+  professional: 'Field',
+  business: 'Portfolio',
 }
 
 export default function MarketingPricingCards({
@@ -21,101 +28,76 @@ export default function MarketingPricingCards({
   const plans = getPublicPlanCatalog()
   const [billingInterval, setBillingInterval] = useState<BillingInterval>('month')
   const isAnnual = billingInterval === 'year'
-
   const maxAnnualSavingsPercent = Math.max(...plans.map((plan) => plan.annualSavingsPercent))
 
   return (
-    <div className="space-y-8">
-      <div className="flex flex-wrap items-center justify-center gap-3">
-        <div
-          className="inline-flex rounded-xl border border-white/10 bg-white/5 p-1"
-          role="tablist"
-          aria-label="Billing interval"
+    <div className="marketing-pricing-cards">
+      <div className="billing-toggle" role="tablist" aria-label="Billing interval">
+        <button
+          type="button"
+          role="tab"
+          aria-selected={!isAnnual}
+          className={!isAnnual ? 'is-active' : ''}
+          onClick={() => setBillingInterval('month')}
         >
-          <button
-            type="button"
-            role="tab"
-            aria-selected={!isAnnual}
-            className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-              !isAnnual ? 'bg-electric-500 text-navy-950' : 'text-concrete-300 hover:text-white'
-            }`}
-            onClick={() => setBillingInterval('month')}
-          >
-            Monthly
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-selected={isAnnual}
-            className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-              isAnnual ? 'bg-electric-500 text-navy-950' : 'text-concrete-300 hover:text-white'
-            }`}
-            onClick={() => setBillingInterval('year')}
-          >
-            Annual
-            {maxAnnualSavingsPercent > 0 ? (
-              <span className="ml-1.5 text-xs font-semibold">Save up to {maxAnnualSavingsPercent}%</span>
-            ) : null}
-          </button>
-        </div>
+          Monthly
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={isAnnual}
+          className={isAnnual ? 'is-active' : ''}
+          onClick={() => setBillingInterval('year')}
+        >
+          Annual{maxAnnualSavingsPercent > 0 ? ` · save up to ${maxAnnualSavingsPercent}%` : ''}
+        </button>
       </div>
 
-      <div className={`grid gap-6 ${compact ? 'lg:grid-cols-3 lg:gap-6' : 'lg:grid-cols-3 lg:gap-8'}`}>
+      <div className="pricing-card-grid">
         {plans.map((plan) => {
           const displayPrice = getDisplayPrice(plan, billingInterval)
           const ctaLabel = getPublicPlanCtaLabel(plan.planId)
+          const highlights = compact ? plan.highlights.slice(0, 5) : plan.highlights
 
           return (
             <article
               key={plan.planId}
-              className={`relative flex flex-col rounded-3xl p-6 lg:p-8 ${
-                plan.recommended
-                  ? 'scale-[1.02] border-2 border-electric-500/50 bg-electric-500/5 shadow-glow-lg'
-                  : 'glass-panel'
-              }`}
+              className={`pricing-card ${plan.recommended ? 'pricing-card--featured' : ''}`}
             >
-              {plan.recommended ? (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-electric-500 px-3 py-0.5 text-xs font-semibold text-navy-950">
-                  Recommended
-                </span>
-              ) : null}
-
-              <h3 className="text-xl font-bold text-white">{plan.name}</h3>
-              {!compact ? <p className="mt-2 text-sm leading-relaxed text-concrete-400">{plan.audience}</p> : null}
-
-              <div className="mt-4">
-                <p className="text-3xl font-extrabold text-white">
-                  {formatUsd(displayPrice)}
-                  <span className="text-base font-medium text-concrete-400">/mo</span>
-                </p>
-                <p className="mt-1 text-xs text-concrete-500">
-                  {isAnnual
-                    ? `Billed annually at ${formatUsd(plan.annualTotalUsd)}/year · save ${formatUsd(plan.annualSavingsUsd)}/yr`
-                    : 'Billed monthly · cancel anytime'}
-                </p>
+              <div className="pricing-card__topline">
+                <span>{planCategories[plan.planId]}</span>
+                {plan.recommended ? <strong>Most popular</strong> : null}
               </div>
 
-              <ul className="mt-6 flex-1 space-y-3">
-                {plan.highlights.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-electric-400" />
-                    <span className="text-sm text-concrete-300">{feature}</span>
+              <h3>{plan.name}</h3>
+              <p className="pricing-card__audience">{plan.audience}</p>
+
+              <p className="pricing-card__price">
+                {formatUsd(displayPrice)}
+                <span>/ month</span>
+              </p>
+              <p className="pricing-card__billing-note">
+                {isAnnual
+                  ? `Billed annually at ${formatUsd(plan.annualTotalUsd)}/year · save ${formatUsd(plan.annualSavingsUsd)}/yr`
+                  : 'Billed monthly · change plans from Billing'}
+              </p>
+
+              <ul>
+                {highlights.map((feature) => (
+                  <li key={feature}>
+                    <Check aria-hidden="true" />
+                    <span>{feature}</span>
                   </li>
                 ))}
               </ul>
 
               {showUsageDetails ? (
-                <p className="mt-4 text-xs leading-relaxed text-concrete-500">
-                  <span className="font-medium text-concrete-400">Plan limits and usage:</span> {plan.usageSummary}
+                <p className="pricing-card__usage">
+                  <strong>Plan limits and usage:</strong> {plan.usageSummary}
                 </p>
               ) : null}
 
-              <a
-                href={getPlanCheckoutUrl(plan.planId)}
-                className={`mt-8 text-center ${
-                  plan.recommended ? 'btn-primary w-full py-3' : 'btn-secondary w-full py-3'
-                }`}
-              >
+              <a href={getPlanCheckoutUrl(plan.planId)} className="pricing-card__cta">
                 {ctaLabel}
               </a>
             </article>

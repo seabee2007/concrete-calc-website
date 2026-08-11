@@ -152,12 +152,10 @@ for (const artwork of artifact.artwork) {
   else fail(`${artwork.fileName} hash mismatch: expected ${artwork.sha256}, received ${actualHash}`)
 }
 
-const repoCandidates = [
-  process.env.ARDEN_APP_REPO,
-  resolve(root, '..', 'arden-authenticated-hub-split'),
-  resolve(root, '..', 'calc'),
-  resolve(root, '..', '..'),
-].filter(Boolean)
+const explicitAppRepo = process.env.ARDEN_APP_REPO
+const repoCandidates = explicitAppRepo
+  ? [resolve(explicitAppRepo)]
+  : [resolve(root, '..', 'calc'), resolve(root, '..', '..')]
 const parityArtifacts = [...new Set(repoCandidates)]
   .map((candidate) => join(candidate, 'shared/public-arden-catalog-v1.json'))
   .filter((candidate) => candidate !== artifactPath && existsSync(candidate))

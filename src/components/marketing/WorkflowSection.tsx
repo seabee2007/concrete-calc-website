@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion'
-import { staggerContainer, fadeUpItem, viewportOnce } from './motion'
+import { motion, useReducedMotion, type Variants } from 'framer-motion'
+import { SECTION_IDS } from '../../constants/marketing'
+import { viewportOnce } from './motion'
 
 const steps = [
   {
@@ -34,55 +35,60 @@ const steps = [
   },
 ]
 
+const stepVariants: Variants = {
+  hidden: (index: number) => ({
+    opacity: 0,
+    x: index < steps.length / 2 ? -34 : 34,
+    y: 18,
+  }),
+  visible: (index: number) => ({
+    opacity: 1,
+    x: 0,
+    y: 0,
+    transition: {
+      duration: 0.58,
+      delay: index * 0.07,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+}
+
 export default function WorkflowSection() {
+  const reducedMotion = Boolean(useReducedMotion())
+
   return (
-    <section className="marketing-section marketing-section--from-dark py-20 lg:py-28">
+    <section id={SECTION_IDS.workflow} className="marketing-section marketing-section--workflow">
       <div className="section-container">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={reducedMotion ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
-          transition={{ duration: 0.6 }}
-          className="mx-auto max-w-3xl text-center"
+          transition={{ duration: reducedMotion ? 0 : 0.62 }}
+          className="workflow-heading"
         >
           <h2 className="section-heading">Your workflow, simplified</h2>
-          <p className="section-subheading mx-auto">
+          <p className="section-subheading">
             From first estimate to final report — every step connected in one platform.
           </p>
         </motion.div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-          variants={staggerContainer}
-          className="relative mt-12"
-        >
-          {/* Desktop connector line */}
-          <div
-            className="absolute top-8 right-0 left-0 hidden h-px bg-gradient-to-r from-transparent via-electric-500/40 to-transparent lg:block"
-            aria-hidden
-          />
-
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-6 lg:gap-4">
-            {steps.map((step, index) => (
-              <motion.div
-                key={step.title}
-                variants={fadeUpItem}
-                className="relative flex flex-col items-center text-center"
-              >
-                <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-2xl border border-electric-500/30 bg-electric-500/10 text-xl font-bold text-electric-400 shadow-glow">
-                  {step.number}
-                </div>
-                {index < steps.length - 1 && (
-                  <div className="my-2 h-8 w-px bg-electric-500/30 lg:hidden" aria-hidden />
-                )}
-                <h3 className="mt-4 font-semibold text-white">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-concrete-400">{step.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+        <ol className="workflow-steps">
+          {steps.map((step, index) => (
+            <motion.li
+              key={step.title}
+              custom={index}
+              initial={reducedMotion ? false : 'hidden'}
+              whileInView="visible"
+              viewport={viewportOnce}
+              variants={stepVariants}
+              className="workflow-step"
+            >
+              <span className="workflow-step__number">{step.number}</span>
+              <h3>{step.title}</h3>
+              <p>{step.description}</p>
+            </motion.li>
+          ))}
+        </ol>
       </div>
     </section>
   )

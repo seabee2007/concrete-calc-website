@@ -1,10 +1,10 @@
 import type { ComponentType } from 'react'
 import { useSyncExternalStore } from 'react'
-import AppsPage from './pages/AppsPage'
 import ContactPage from './pages/ContactPage'
 import MarketingHomeRefresh from './pages/MarketingHomeRefresh'
 import PricingPage from './pages/PricingPage'
 import PrivacyPage from './pages/PrivacyPage'
+import PublicHubPage from './pages/PublicHubPage'
 import TermsPage from './pages/TermsPage'
 import ChangeOrderManagementPage from './pages/marketing/ChangeOrderManagementPage'
 import ConstructionClientPortalPage from './pages/marketing/ConstructionClientPortalPage'
@@ -27,7 +27,7 @@ function usePathname() {
 }
 
 const PAGE_ROUTES: Readonly<Record<string, ComponentType>> = {
-  '/apps': AppsPage,
+  '/hub': PublicHubPage,
   '/privacy': PrivacyPage,
   '/privacy-policy': PrivacyPage,
   '/terms': TermsPage,
@@ -46,6 +46,5 @@ const PAGE_ROUTES: Readonly<Record<string, ComponentType>> = {
 export default function App() {
   const pathname = usePathname()
   const Page = PAGE_ROUTES[pathname]
-
   return Page ? <Page /> : <MarketingHomeRefresh />
 }

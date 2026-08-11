@@ -55,12 +55,12 @@ const EXPECTED_PAGES = [
     h1Pattern: /<h1\b/,
   },
   {
-    path: '/apps',
-    title: 'Arden Systems Apps | Construction Software Catalog',
+    path: '/hub',
+    title: 'Arden Hub | Construction Software Catalog',
     description:
       'Explore Arden Project OS and the approved Arden Systems catalog for estimating, proposals, field work, safety, cost control, and connected construction workflows.',
-    canonical: `${MARKETING_URL}/apps`,
-    h1Files: ['src/pages/AppsPage.tsx'],
+    canonical: `${MARKETING_URL}/hub`,
+    h1Files: ['src/pages/PublicHubPage.tsx'],
     h1Pattern: /<h1\b/,
   },
   {
