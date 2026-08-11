@@ -5,7 +5,7 @@ const productLinks = [
   { href: '/#features', label: 'Project OS features' },
   { href: '/#screenshots', label: 'Screenshots' },
   { href: '/pricing', label: 'Pricing' },
-  { href: '/apps', label: 'Arden Apps' },
+  { href: '/hub', label: 'Arden Hub' },
 ]
 
 const legalLinks = [
@@ -20,11 +20,11 @@ export default function Footer() {
     <footer className="arden-site-footer px-4 py-12 sm:px-6">
       <div className="mx-auto grid w-full max-w-[96rem] gap-10 md:grid-cols-[1.2fr_0.7fr_0.7fr]">
         <div>
-          <a href="/" className="inline-flex items-center gap-3 text-slate-900 no-underline">
+          <a href="/" className="inline-flex items-center gap-3 text-slate-900 no-underline" aria-label="Arden Systems home">
             <span className="arden-site-header__mark">
               <LayoutGrid className="h-5 w-5" aria-hidden="true" />
             </span>
-            <strong>{BRAND_NAME}</strong>
+            <strong>Arden Systems</strong>
           </a>
           <p className="mt-4 max-w-md text-sm leading-6 text-slate-600">
             Construction project software for clearer estimating, planning, field execution, and

@@ -1,42 +1,21 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
+import { SECTION_IDS } from '../../constants/marketing'
 import { staggerContainer, fadeUpItem, viewportOnce } from './motion'
 
 const steps = [
-  {
-    number: 1,
-    title: 'Project',
-    description: 'Set up your project with phases, milestones, and team assignments.',
-  },
-  {
-    number: 2,
-    title: 'Estimate',
-    description: 'Build detailed estimates with line items, assemblies, and cost codes.',
-  },
-  {
-    number: 3,
-    title: 'Proposal',
-    description: 'Generate polished proposals from your estimates and send to clients.',
-  },
-  {
-    number: 4,
-    title: 'Schedule',
-    description: 'Create Gantt charts with dependencies and critical path analysis.',
-  },
-  {
-    number: 5,
-    title: 'Track',
-    description: 'Monitor progress, costs, change orders, and daily field reports.',
-  },
-  {
-    number: 6,
-    title: 'Report',
-    description: 'Export PDFs and share project status with stakeholders.',
-  },
+  { number: 1, title: 'Project', description: 'Set up phases, milestones, and team assignments.' },
+  { number: 2, title: 'Estimate', description: 'Build detailed estimates with assemblies and cost codes.' },
+  { number: 3, title: 'Proposal', description: 'Turn approved pricing into polished client proposals.' },
+  { number: 4, title: 'Schedule', description: 'Coordinate dependencies, critical paths, and milestones.' },
+  { number: 5, title: 'Track', description: 'Monitor progress, costs, changes, and daily field activity.' },
+  { number: 6, title: 'Report', description: 'Export professional records and share project status.' },
 ]
 
 export default function WorkflowSection() {
+  const reducedMotion = Boolean(useReducedMotion())
+
   return (
-    <section className="marketing-section marketing-section--from-dark py-20 lg:py-28">
+    <section id={SECTION_IDS.workflow} className="marketing-section marketing-section--workflow py-20 lg:py-28">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -45,44 +24,36 @@ export default function WorkflowSection() {
           transition={{ duration: 0.6 }}
           className="mx-auto max-w-3xl text-center"
         >
-          <h2 className="section-heading">Your workflow, simplified</h2>
+          <p className="arden-eyebrow">Connected workflow</p>
+          <h2 className="section-heading mt-4">Your workflow, simplified</h2>
           <p className="section-subheading mx-auto">
-            From first estimate to final report — every step connected in one platform.
+            From first estimate to final report—every stage stays connected in one Project OS workspace.
           </p>
         </motion.div>
 
-        <motion.div
+        <motion.ol
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
           variants={staggerContainer}
-          className="relative mt-12"
+          className="workflow-steps mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-6"
         >
-          {/* Desktop connector line */}
-          <div
-            className="absolute top-8 right-0 left-0 hidden h-px bg-gradient-to-r from-transparent via-electric-500/40 to-transparent lg:block"
-            aria-hidden
-          />
-
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-6 lg:gap-4">
-            {steps.map((step, index) => (
-              <motion.div
-                key={step.title}
-                variants={fadeUpItem}
-                className="relative flex flex-col items-center text-center"
-              >
-                <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-2xl border border-electric-500/30 bg-electric-500/10 text-xl font-bold text-electric-400 shadow-glow">
-                  {step.number}
-                </div>
-                {index < steps.length - 1 && (
-                  <div className="my-2 h-8 w-px bg-electric-500/30 lg:hidden" aria-hidden />
-                )}
-                <h3 className="mt-4 font-semibold text-white">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-concrete-400">{step.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+          {steps.map((step) => (
+            <motion.li
+              key={step.title}
+              variants={fadeUpItem}
+              whileHover={reducedMotion ? undefined : { scale: 1.1, y: -4 }}
+              whileFocus={reducedMotion ? undefined : { scale: 1.1, y: -4 }}
+              transition={{ duration: reducedMotion ? 0 : 0.18, ease: [0.22, 1, 0.36, 1] }}
+              tabIndex={0}
+              className="workflow-step"
+            >
+              <span className="workflow-step__number">{step.number}</span>
+              <h3>{step.title}</h3>
+              <p>{step.description}</p>
+            </motion.li>
+          ))}
+        </motion.ol>
       </div>
     </section>
   )

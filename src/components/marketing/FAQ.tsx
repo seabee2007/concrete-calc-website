@@ -13,37 +13,37 @@ const faqs: FAQItem[] = [
   {
     question: 'What is Arden Project OS?',
     answer:
-      'Arden Project OS is professional construction project management software. It helps contractors, builders, estimators, and project managers create estimates, proposals, schedules, logic networks, change orders, contracts, daily reports, PDF exports, and construction planning records — all from one workspace.',
+      'Arden Project OS is the live Arden construction project management workspace. It brings estimating, proposals, schedules, logic networks, change orders, field records, exports, and project controls into one browser-based application.',
   },
   {
-    question: 'Is this only for concrete contractors?',
+    question: 'Who is Project OS built for?',
     answer:
-      'No. While Arden Project OS includes specialized construction planning tools, the platform is built for all types of construction teams — general contractors, subcontractors, estimators, and project managers working on commercial, residential, and infrastructure projects.',
+      'It is designed for general contractors, subcontractors, estimators, project managers, and construction teams working across commercial, residential, concrete, and infrastructure projects.',
   },
   {
     question: 'Can I create estimates and proposals?',
     answer:
-      'Yes. Build detailed estimates with line items, assemblies, and cost codes, then generate polished client proposals directly from your estimates with your branding and terms.',
+      'Yes. Project OS supports detailed estimates with line items, assemblies, and cost codes, plus professional client proposals based on your project pricing and terms.',
   },
   {
-    question: 'Will it support schedules and Gantt charts?',
+    question: 'Does it include scheduling and project controls?',
     answer:
-      'Yes. Create visual schedules with Gantt charts, task dependencies, critical path analysis, and milestone tracking linked to your project estimates and logic networks.',
+      'Project OS includes project planning, visual schedules, dependency and logic-network tools, milestone tracking, change management, and reporting workflows.',
   },
   {
-    question: 'Can I export PDFs?',
+    question: 'Are all Arden products and connected apps available now?',
     answer:
-      'Yes. Export estimates, proposals, schedules, daily reports, and other project documents as professional PDF files ready to share with clients and stakeholders.',
+      'No. Project OS is the live Arden product. Every other product and integration is labeled Coming Soon or Planned from the canonical Arden registry. Those labels are not release dates, checkout availability, or evidence of a live provider connection.',
   },
   {
     question: 'Do I need to install anything?',
     answer:
-      'No. Arden Project OS is a cloud-based web application. Access it from any modern browser on desktop, tablet, or mobile — no downloads or installations required.',
+      'No. Arden Project OS is a cloud-based web application that runs in a modern browser on supported desktop, tablet, and mobile devices.',
   },
   {
     question: 'How does pricing work?',
     answer:
-      'Arden Project OS offers Starter, Professional, and Business plans with the same prices and limits shown on this site and in-app Billing. Choose a plan in Billing to subscribe; monthly and annual billing options are available.',
+      'The Starter, Professional, and Business plans shown here are generated from the same verified pricing contract used by in-app Billing. Monthly and annual options are available where shown.',
   },
 ]
 
@@ -61,10 +61,11 @@ function FAQAccordionItem({ item, isOpen, onToggle }: { item: FAQItem; isOpen: b
           className={`h-5 w-5 shrink-0 text-concrete-400 transition-transform duration-200 ${
             isOpen ? 'rotate-180' : ''
           }`}
+          aria-hidden="true"
         />
       </button>
       <AnimatePresence initial={false}>
-        {isOpen && (
+        {isOpen ? (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
@@ -74,7 +75,7 @@ function FAQAccordionItem({ item, isOpen, onToggle }: { item: FAQItem; isOpen: b
           >
             <p className="pb-5 text-sm leading-relaxed text-concrete-400">{item.answer}</p>
           </motion.div>
-        )}
+        ) : null}
       </AnimatePresence>
     </div>
   )
@@ -94,10 +95,9 @@ export default function FAQ() {
           transition={{ duration: 0.6 }}
           className="mx-auto max-w-3xl text-center"
         >
-          <h2 className="section-heading">Frequently asked questions</h2>
-          <p className="section-subheading mx-auto">
-            Everything you need to know about Arden Project OS.
-          </p>
+          <p className="arden-eyebrow">Buyer FAQ</p>
+          <h2 className="section-heading mt-4">Frequently asked questions</h2>
+          <p className="section-subheading mx-auto">What to know before choosing Arden Project OS.</p>
         </motion.div>
 
         <motion.div

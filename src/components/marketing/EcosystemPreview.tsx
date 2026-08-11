@@ -8,7 +8,7 @@ const previewProducts = PUBLIC_ARDEN_CATALOG.products
 
 export default function EcosystemPreview() {
   return (
-    <section className="ecosystem-preview" aria-labelledby="ecosystem-preview-heading">
+    <section id="ecosystem" className="ecosystem-preview" aria-labelledby="ecosystem-preview-heading">
       <div className="ecosystem-preview__inner">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-end">
           <div>
@@ -27,10 +27,10 @@ export default function EcosystemPreview() {
               inventing release dates or checkout availability.
             </p>
             <a
-              href="/apps"
+              href="/hub"
               className="mt-5 inline-flex items-center gap-2 font-bold text-electric-600 hover:text-electric-500"
             >
-              Explore every Arden product
+              Explore the public Arden Hub
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>
@@ -38,7 +38,7 @@ export default function EcosystemPreview() {
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {previewProducts.map((product) => (
-            <a key={product.productId} href="/apps" className="catalog-card group no-underline">
+            <a key={product.productId} href={`/hub?product=${encodeURIComponent(product.productId)}`} className="catalog-card group no-underline">
               <div className="flex items-start justify-between gap-3">
                 <CatalogArtwork iconKey={product.iconKey} size={64} />
                 <span className="catalog-status" data-status={product.releaseStatus}>

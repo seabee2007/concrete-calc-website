@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "verify:seo": "node scripts/verify-seo.mjs && node scripts/verify-apps-seo.mjs",
+    "verify:seo": "node scripts/verify-seo.mjs && node scripts/verify-hub-seo.mjs",
     "verify:pricing": "node scripts/verify-pricing-manifest.mjs",
     "verify:catalog": "node scripts/verify-public-catalog.mjs",
     "test": "vitest run"

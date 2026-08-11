@@ -60,7 +60,7 @@ function ModeToggle({
     <div
       className="inline-flex rounded-full border border-white/10 bg-white/5 p-1 backdrop-blur-sm"
       role="group"
-      aria-label="Screenshot theme"
+      aria-label="Interface preview"
     >
       <button
         type="button"
@@ -73,7 +73,7 @@ function ModeToggle({
         aria-pressed={mode === 'dark'}
       >
         <Moon className="h-4 w-4" />
-        Dark Mode
+        Dark
       </button>
       <button
         type="button"
@@ -86,7 +86,7 @@ function ModeToggle({
         aria-pressed={mode === 'light'}
       >
         <Sun className="h-4 w-4" />
-        Light Mode
+        Light
       </button>
     </div>
   )
@@ -114,6 +114,9 @@ function ScreenshotCard({
             isContain ? 'aspect-[16/9] sm:aspect-[21/9]' : 'aspect-video'
           }`}
         >
+          <div className="screenshot-fallback" aria-hidden="true">
+            Preview unavailable
+          </div>
           <AnimatePresence mode="wait">
             <motion.img
               key={src}
@@ -124,7 +127,10 @@ function ScreenshotCard({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${
+              onError={(event) => {
+                event.currentTarget.style.display = 'none'
+              }}
+              className={`relative h-full w-full transition-transform duration-500 group-hover:scale-105 ${
                 isContain ? 'object-contain object-center' : 'object-cover object-top'
               }`}
             />
@@ -158,7 +164,7 @@ export default function ScreenshotShowcase() {
               A clearer way to manage construction work
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-concrete-400">
-              Explore the product in dark or light mode — the same professional workspace, styled
+              Choose an interface preview in dark or light mode — the same professional workspace, styled
               the way your team prefers.
             </p>
           </div>

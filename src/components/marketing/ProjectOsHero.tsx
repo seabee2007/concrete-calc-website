@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight, LayoutGrid, TrendingUp, Zap } from 'lucide-react'
-import { APP_SIGNUP } from '../../constants/marketing'
+import { appLoginHref } from '../../constants/marketing'
 
 const proofPoints = [
   { icon: Zap, label: 'Estimate faster', detail: 'Build detailed bids in minutes' },
@@ -10,6 +10,7 @@ const proofPoints = [
 
 export default function ProjectOsHero() {
   const reducedMotion = Boolean(useReducedMotion())
+  const projectOsLogin = appLoginHref('/dashboard')
 
   return (
     <section className="project-os-hero" aria-labelledby="project-os-hero-heading">
@@ -37,26 +38,21 @@ export default function ProjectOsHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: reducedMotion ? 0 : 0.7, delay: reducedMotion ? 0 : 0.08 }}
         >
-          <p className="project-os-hero__eyebrow">Arden Project OS</p>
-          <h1 id="project-os-hero-heading">
-            Construction Project Management Software for Contractors
-          </h1>
+          <p className="project-os-hero__eyebrow">Arden Systems</p>
+          <h1 id="project-os-hero-heading">One launch point for every stage of the work.</h1>
           <p className="project-os-hero__lede">
-            Build estimates, proposals, schedules, logic networks, change orders, and field records
-            from one calm, professional workspace—then keep every project moving with clearer cost
-            and progress control.
+            Arden Project OS gives contractors one professional construction project management
+            workspace for estimates, proposals, schedules, logic networks, change orders, field
+            records, costs, and progress.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href="/pricing" className="btn-primary gap-2 px-6 py-3 text-base">
-              View Project OS pricing
+            <a href={projectOsLogin} className="btn-primary gap-2 px-6 py-3 text-base">
+              Open Project OS
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>
-            <a href="/apps" className="btn-secondary gap-2 px-6 py-3 text-base">
-              Explore Arden Systems
-            </a>
-            <a href={APP_SIGNUP} className="sr-only">
-              Create an Arden account
+            <a href="/hub" className="btn-secondary gap-2 px-6 py-3 text-base">
+              Explore Arden apps
             </a>
           </div>
 

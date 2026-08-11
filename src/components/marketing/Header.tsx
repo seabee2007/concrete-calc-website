@@ -1,15 +1,17 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowUpRight, LayoutGrid, Menu, X } from 'lucide-react'
-import { APP_LOGIN } from '../../constants/marketing'
+import { appLoginHref } from '../../constants/marketing'
 import '../../marketing-refresh.css'
 
 const navLinks = [
-  { label: 'Project OS', href: '/#features' },
-  { label: 'Screenshots', href: '/#screenshots' },
-  { label: 'Arden Apps', href: '/apps' },
-  { label: 'Pricing', href: '/pricing' },
+  { label: 'Workflow', href: '/#workflow' },
+  { label: 'Arden Hub', href: '/hub' },
+  { label: 'Pricing', href: '/#pricing' },
+  { label: 'FAQ', href: '/#faq' },
 ]
+
+const projectOsLogin = appLoginHref('/dashboard')
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -17,13 +19,13 @@ export default function Header() {
   return (
     <header className="arden-site-header">
       <div className="arden-site-header__inner">
-        <a href="/" className="arden-site-header__brand" aria-label="Arden Project OS home">
+        <a href="/" className="arden-site-header__brand" aria-label="Arden Systems home">
           <span className="arden-site-header__mark">
             <LayoutGrid className="h-5 w-5" aria-hidden="true" />
           </span>
           <span>
             <strong className="block text-[0.68rem] uppercase tracking-[0.22em] text-cyan-700">Arden</strong>
-            <span className="block text-sm font-bold tracking-tight">Project OS</span>
+            <span className="block text-sm font-bold tracking-tight">Systems</span>
           </span>
         </a>
 
@@ -36,12 +38,12 @@ export default function Header() {
         </nav>
 
         <div className="ml-auto hidden items-center gap-2 lg:flex">
-          <a href={APP_LOGIN} className="arden-site-header__link inline-flex items-center gap-1.5">
+          <a href={projectOsLogin} className="arden-site-header__link inline-flex items-center gap-1.5">
             Sign in
             <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
           </a>
-          <a href="/pricing" className="arden-site-header__cta">
-            View pricing
+          <a href={projectOsLogin} className="arden-site-header__cta">
+            Open Project OS
           </a>
         </div>
 
@@ -79,11 +81,11 @@ export default function Header() {
                   {link.label}
                 </a>
               ))}
-              <a href={APP_LOGIN} className="arden-site-header__link" onClick={() => setMobileOpen(false)}>
+              <a href={projectOsLogin} className="arden-site-header__link" onClick={() => setMobileOpen(false)}>
                 Sign in to Arden
               </a>
-              <a href="/pricing" className="arden-site-header__cta mt-2" onClick={() => setMobileOpen(false)}>
-                View pricing
+              <a href={projectOsLogin} className="arden-site-header__cta mt-2" onClick={() => setMobileOpen(false)}>
+                Open Project OS
               </a>
             </div>
           </motion.nav>
