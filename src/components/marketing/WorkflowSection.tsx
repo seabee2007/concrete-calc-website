@@ -36,7 +36,7 @@ const steps = [
 
 export default function WorkflowSection() {
   return (
-    <section className="py-20 lg:py-28">
+    <section className="marketing-section marketing-section--from-dark py-20 lg:py-28">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

@@ -1,20 +1,13 @@
 import type { ReactNode } from 'react'
-import Header from './Header'
 import Footer from './Footer'
+import Header from './Header'
 
-interface MarketingPageShellProps {
-  children: ReactNode
-}
-
-export default function MarketingPageShell({ children }: MarketingPageShellProps) {
+export default function MarketingPageShell({ children }: { children: ReactNode }) {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#050b13]">
-      <div className="marketing-page-bg" aria-hidden="true" />
-      <div className="relative z-10 min-h-screen text-white">
-        <Header />
-        <main>{children}</main>
-        <Footer />
-      </div>
+    <div className="marketing-refresh">
+      <Header />
+      <main>{children}</main>
+      <Footer />
     </div>
   )
 }

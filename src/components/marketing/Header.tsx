@@ -1,111 +1,93 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
-import { APP_LOGIN, SECTION_IDS, scrollToSection } from '../../constants/marketing'
+import { AnimatePresence, motion } from 'framer-motion'
+import { ArrowUpRight, LayoutGrid, Menu, X } from 'lucide-react'
+import { APP_LOGIN } from '../../constants/marketing'
+import '../../marketing-refresh.css'
 
 const navLinks = [
-  { label: 'Features', id: SECTION_IDS.features },
-  { label: 'Screenshots', id: SECTION_IDS.screenshots },
-  { label: 'Pricing', id: SECTION_IDS.pricing },
-  { label: 'FAQ', id: SECTION_IDS.faq },
+  { label: 'Project OS', href: '/#features' },
+  { label: 'Screenshots', href: '/#screenshots' },
+  { label: 'Arden Apps', href: '/apps' },
+  { label: 'Pricing', href: '/pricing' },
 ]
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
-  const handleNavClick = (id: string) => {
-    scrollToSection(id)
-    setMobileOpen(false)
-  }
-
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050b13]/90 backdrop-blur-xl">
-      <div className="mx-auto flex min-h-[72px] max-w-7xl items-center justify-between px-6 lg:px-8">
-        <a href="#" className="flex shrink-0 items-center">
-          <img
-            src="/images/ARDEN-removebg-preview.png"
-            alt="Arden Project OS"
-            className="h-auto max-h-9 w-[150px] object-contain sm:max-h-10 sm:w-[170px] lg:w-[210px]"
-          />
+    <header className="arden-site-header">
+      <div className="arden-site-header__inner">
+        <a href="/" className="arden-site-header__brand" aria-label="Arden Project OS home">
+          <span className="arden-site-header__mark">
+            <LayoutGrid className="h-5 w-5" aria-hidden="true" />
+          </span>
+          <span>
+            <strong className="block text-[0.68rem] uppercase tracking-[0.22em] text-cyan-700">Arden</strong>
+            <span className="block text-sm font-bold tracking-tight">Project OS</span>
+          </span>
         </a>
 
-        <nav className="hidden flex-1 items-center justify-center gap-8 lg:flex">
+        <nav className="arden-site-header__nav" aria-label="Primary navigation">
           {navLinks.map((link) => (
-            <button
-              key={link.id}
-              type="button"
-              onClick={() => handleNavClick(link.id)}
-              className="text-sm font-semibold text-slate-300 transition hover:text-white"
-            >
+            <a key={link.href} href={link.href} className="arden-site-header__link">
               {link.label}
-            </button>
+            </a>
           ))}
         </nav>
 
-        <div className="hidden shrink-0 items-center gap-5 lg:flex">
-          <a
-            href={APP_LOGIN}
-            className="text-sm font-semibold text-slate-300 transition hover:text-white"
-          >
-            Login
+        <div className="ml-auto hidden items-center gap-2 lg:flex">
+          <a href={APP_LOGIN} className="arden-site-header__link inline-flex items-center gap-1.5">
+            Sign in
+            <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
           </a>
-          <a
-            href="/pricing"
-            className="inline-flex h-11 items-center justify-center rounded-2xl bg-cyan-500 px-6 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-cyan-400"
-          >
+          <a href="/pricing" className="arden-site-header__cta">
             View pricing
           </a>
         </div>
 
         <button
           type="button"
-          className="rounded-lg p-2 text-slate-300 transition hover:bg-white/5 hover:text-white lg:hidden"
-          onClick={() => setMobileOpen(!mobileOpen)}
+          className="arden-site-header__menu-button ml-auto rounded-xl border border-slate-200 bg-white p-2 text-slate-700 lg:hidden"
+          onClick={() => setMobileOpen((open) => !open)}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-marketing-navigation"
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
         >
-          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
+      <AnimatePresence initial={false}>
+        {mobileOpen ? (
+          <motion.nav
+            id="mobile-marketing-navigation"
+            aria-label="Mobile navigation"
+            className="arden-site-header__mobile lg:hidden"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden border-t border-white/10 lg:hidden"
+            transition={{ duration: 0.18 }}
           >
-            <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-4 lg:px-8">
-              <span className="w-fit rounded-full border border-electric-500/30 bg-electric-500/10 px-2.5 py-0.5 text-xs font-medium text-electric-400">
-                Construction Management Software
-              </span>
+            <div className="mx-auto flex max-w-[96rem] flex-col gap-1">
               {navLinks.map((link) => (
-                <button
-                  key={link.id}
-                  type="button"
-                  onClick={() => handleNavClick(link.id)}
-                  className="text-left text-sm font-semibold text-slate-300 transition hover:text-white"
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="arden-site-header__link"
+                  onClick={() => setMobileOpen(false)}
                 >
                   {link.label}
-                </button>
+                </a>
               ))}
-              <div className="flex flex-col gap-3 pt-2">
-                <a
-                  href={APP_LOGIN}
-                  className="btn-secondary text-center text-sm font-semibold"
-                >
-                  Login
-                </a>
-                <a
-                  href="/pricing"
-                  className="inline-flex h-11 items-center justify-center rounded-2xl bg-cyan-500 px-6 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition hover:bg-cyan-400"
-                >
-                  View pricing
-                </a>
-              </div>
+              <a href={APP_LOGIN} className="arden-site-header__link" onClick={() => setMobileOpen(false)}>
+                Sign in to Arden
+              </a>
+              <a href="/pricing" className="arden-site-header__cta mt-2" onClick={() => setMobileOpen(false)}>
+                View pricing
+              </a>
             </div>
-          </motion.div>
-        )}
+          </motion.nav>
+        ) : null}
       </AnimatePresence>
     </header>
   )

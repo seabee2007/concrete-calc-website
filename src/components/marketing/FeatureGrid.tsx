@@ -88,7 +88,7 @@ const features: Feature[] = [
 
 export default function FeatureGrid() {
   return (
-    <section id={SECTION_IDS.features} className="py-20 lg:py-28">
+    <section id={SECTION_IDS.features} className="marketing-section marketing-section--capabilities py-20 lg:py-28">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

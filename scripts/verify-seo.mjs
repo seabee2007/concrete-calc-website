@@ -51,7 +51,16 @@ const EXPECTED_PAGES = [
     description:
       'Plan estimates, proposals, schedules, change orders, field work, and client approvals in one construction project management workspace built for contractors.',
     canonical: `${MARKETING_URL}/`,
-    h1Files: ['src/components/marketing/Hero.tsx'],
+    h1Files: ['src/components/marketing/ProjectOsHero.tsx'],
+    h1Pattern: /<h1\b/,
+  },
+  {
+    path: '/apps',
+    title: 'Arden Systems Apps | Construction Software Catalog',
+    description:
+      'Explore Arden Project OS and the approved Arden Systems catalog for estimating, proposals, field work, safety, cost control, and connected construction workflows.',
+    canonical: `${MARKETING_URL}/apps`,
+    h1Files: ['src/pages/AppsPage.tsx'],
     h1Pattern: /<h1\b/,
   },
   {
@@ -229,12 +238,12 @@ function checkSpaShellLimitation() {
     if (!html.includes('meta name="description"') && html.includes('<title>Arden Project OS</title>')) {
       pass('dist/index.html is SPA shell with generic fallback title only (expected before prerender)')
     } else if (html.includes('meta name="description"')) {
-      warn('dist/index.html contains route-specific description — prerender may already be active')
+      warn('dist/index.html contains route-specific description ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â prerender may already be active')
     } else {
       warn('dist/index.html title/meta pattern differs from expected SPA shell')
     }
   } else {
-    warn('dist/index.html not found — run npm run build for SPA shell verification')
+    warn('dist/index.html not found ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â run npm run build for SPA shell verification')
   }
 
   if (!sourceIndex.includes('react-helmet-async')) {
@@ -268,17 +277,17 @@ async function checkRemote(base) {
       pass(`${path} returns 200 with valid XML sitemap body`)
     } else if (response.status === 200) {
       warn(
-        `${path} returns 200 but body is SPA HTML — production has not deployed Phase 1 static files yet`,
+        `${path} returns 200 but body is SPA HTML ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â production has not deployed Phase 1 static files yet`,
       )
     } else {
       fail(`${path} returned ${response.status}`)
     }
 
     if (path === '/robots.txt' && !body.startsWith('User-agent:')) {
-      fail(`${path} body is not robots.txt — deploy dist/robots.txt (from public/robots.txt) to production`)
+      fail(`${path} body is not robots.txt ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â deploy dist/robots.txt (from public/robots.txt) to production`)
     }
     if (path === '/sitemap.xml' && !body.includes('<urlset')) {
-      fail(`${path} body is not XML sitemap — deploy dist/sitemap.xml (from public/sitemap.xml) to production`)
+      fail(`${path} body is not XML sitemap ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â deploy dist/sitemap.xml (from public/sitemap.xml) to production`)
     }
   }
 
@@ -315,7 +324,7 @@ async function checkRemote(base) {
       fail(`/privacy-policy redirect location unexpected: ${location ?? 'none'}`)
     }
   } else if (privacyPolicy.status === 200) {
-    warn('/privacy-policy returns 200 — deploy _redirects or confirm host redirect rules are live')
+    warn('/privacy-policy returns 200 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â deploy _redirects or confirm host redirect rules are live')
   } else {
     fail(`/privacy-policy returned ${privacyPolicy.status}`)
   }
@@ -330,10 +339,10 @@ async function checkRemote(base) {
 
   if (genericOnly && homepageHtml === pricingHtml) {
     warn(
-      'raw HTML responses appear identical across routes — route metadata likely only appears after JavaScript (SPA limitation)',
+      'raw HTML responses appear identical across routes ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â route metadata likely only appears after JavaScript (SPA limitation)',
     )
   } else if (pricingHtml.includes('Pricing | Arden Project OS')) {
-    pass('raw /pricing HTML includes route-specific title — prerender/SSR may be active')
+    pass('raw /pricing HTML includes route-specific title ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â prerender/SSR may be active')
   }
 
   if (homepageHtml.includes('noindex')) {
@@ -352,12 +361,12 @@ async function main() {
   if (baseUrl) {
     await checkRemote(baseUrl)
   } else {
-    warn('skipped remote checks — pass --base-url https://ardenprojectos.com after deploy')
+    warn('skipped remote checks ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â pass --base-url https://ardenprojectos.com after deploy')
   }
 
   console.log('\nSEO Phase 1 verification\n')
   console.log(`Passed: ${passes.length}`)
-  passes.forEach((message) => console.log(`  ✓ ${message}`))
+  passes.forEach((message) => console.log(`  ÃƒÂ¢Ã…â€œÃ¢â‚¬Å“ ${message}`))
 
   if (warnings.length) {
     console.log(`\nWarnings: ${warnings.length}`)
@@ -366,7 +375,7 @@ async function main() {
 
   if (failures.length) {
     console.log(`\nFailed: ${failures.length}`)
-    failures.forEach((message) => console.log(`  ✗ ${message}`))
+    failures.forEach((message) => console.log(`  ÃƒÂ¢Ã…â€œÃ¢â‚¬â€ ${message}`))
 
     const productionNotDeployed = failures.some((message) =>
       message.includes('body is not robots.txt') || message.includes('body is not XML sitemap'),

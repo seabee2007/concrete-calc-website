@@ -4,7 +4,7 @@ import { fadeUp, viewportOnce } from './motion'
 
 export default function FinalCTA() {
   return (
-    <section className="py-20 lg:py-28">
+    <section className="marketing-section marketing-final-cta-section py-20 lg:py-28">
       <div className="section-container">
         <motion.div
           initial="hidden"
@@ -12,7 +12,7 @@ export default function FinalCTA() {
           viewport={viewportOnce}
           variants={fadeUp}
           transition={{ duration: 0.6 }}
-          className="relative overflow-hidden rounded-3xl border border-electric-500/20 bg-gradient-to-br from-electric-500/10 via-navy-900 to-navy-950 p-8 text-center shadow-glow-lg lg:p-16"
+          className="marketing-final-cta relative overflow-hidden rounded-3xl border border-electric-500/20 p-8 text-center shadow-glow-lg lg:p-16"
         >
           <div className="absolute inset-0 grid-bg opacity-30" aria-hidden />
           <div className="relative">

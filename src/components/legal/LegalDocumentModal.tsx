@@ -25,7 +25,10 @@ export default function LegalDocumentModal({
 }: LegalDocumentModalProps) {
   const titleId = useId()
   const onCloseRef = useRef(onClose)
-  onCloseRef.current = onClose
+
+  useEffect(() => {
+    onCloseRef.current = onClose
+  }, [onClose])
 
   useEffect(() => {
     if (!open) return
