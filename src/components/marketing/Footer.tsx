@@ -1,5 +1,6 @@
-import { ArrowUpRight, LayoutGrid } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { appLoginHref, BRAND_NAME } from '../../constants/marketing'
+import ProjectOsLogo from './ProjectOsLogo'
 
 const dashboardLogin = appLoginHref('/dashboard')
 
@@ -8,11 +9,8 @@ export default function Footer() {
     <footer className="arden-site-footer">
       <div className="arden-site-footer__main">
         <div className="arden-site-footer__brand">
-          <a href="/" aria-label="Arden Systems home">
-            <span className="arden-site-header__mark">
-              <LayoutGrid className="h-5 w-5" aria-hidden="true" />
-            </span>
-            <strong>Arden Systems</strong>
+          <a href="/" aria-label="Project OS home">
+            <ProjectOsLogo className="arden-site-footer__logo" />
           </a>
           <p>
             Construction technology that grows from one professional operating system into a connected Arden suite.

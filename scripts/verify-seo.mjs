@@ -148,7 +148,7 @@ function checkStaticFiles() {
     fail('/privacy-policy 301 redirect missing from public/_redirects')
   }
 
-  for (const asset of ['public/images/Favicon_sqoosh.png', 'public/images/logo_dark_banner.jpg']) {
+  for (const asset of ['public/images/brand/favicon-32.png', 'public/images/brand/project-os-social.png']) {
     if (existsSync(join(root, asset))) {
       pass(`${asset} exists`)
     } else {
@@ -156,13 +156,13 @@ function checkStaticFiles() {
     }
   }
 
-  if (read('index.html').includes('/images/Favicon_sqoosh.png')) {
+  if (read('index.html').includes('/images/brand/favicon-32.png')) {
     pass('index.html references existing favicon asset')
   } else {
     fail('index.html favicon path may 404 in local builds')
   }
 
-  if (read('src/components/seo/SeoHead.tsx').includes('/images/logo_dark_banner.jpg')) {
+  if (read('src/components/seo/SeoHead.tsx').includes('/images/brand/project-os-social.png')) {
     pass('SeoHead default OG image references existing asset')
   } else {
     fail('SeoHead OG image path may 404 in local builds')
@@ -291,7 +291,7 @@ async function checkRemote(base) {
     }
   }
 
-  for (const asset of ['/images/Favicon_sqoosh.png', '/images/logo_dark_banner.jpg']) {
+  for (const asset of ['/images/brand/favicon-32.png', '/images/brand/project-os-social.png']) {
     const { status } = await fetchStatus(`${base}${asset}`, { follow: true })
     if (status === 200) {
       pass(`${asset} returns 200`)

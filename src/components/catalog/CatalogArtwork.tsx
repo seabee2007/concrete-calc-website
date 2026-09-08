@@ -41,10 +41,13 @@ export default function CatalogArtwork({
   size?: 48 | 56 | 64 | 72 | 96 | 120
 }) {
   const artwork = getPublicArtwork(iconKey)
+  const source = iconKey === 'project_os'
+    ? '/images/brand/project-os-icon.webp'
+    : artwork ? `/images/arden-products/${artwork.fileName}` : null
   const Icon = ICONS[iconKey] ?? LayoutGrid
   const [loaded, setLoaded] = useState(false)
   const [failed, setFailed] = useState(false)
-  const state = artwork === null || failed ? 'fallback' : loaded ? 'loaded' : 'loading'
+  const state = source === null || failed ? 'fallback' : loaded ? 'loaded' : 'loading'
   const style = { '--catalog-art-size': `${size / 16}rem` } as CSSProperties
 
   return (
@@ -58,9 +61,9 @@ export default function CatalogArtwork({
       <span className="catalog-artwork__fallback">
         <Icon className="h-1/2 w-1/2" strokeWidth={1.7} />
       </span>
-      {artwork && !failed ? (
+      {source && !failed ? (
         <img
-          src={`/images/arden-products/${artwork.fileName}`}
+          src={source}
           alt=""
           aria-hidden="true"
           width={256}

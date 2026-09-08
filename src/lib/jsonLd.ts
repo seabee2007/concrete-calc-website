@@ -6,7 +6,7 @@ export const organizationJsonLd = {
   '@type': 'Organization',
   name: 'Arden Project OS',
   url: MARKETING_URL,
-  logo: `${MARKETING_URL}/images/ARDEN-removebg-preview.png`,
+  logo: `${MARKETING_URL}/images/brand/project-os-icon-512.png`,
   contactPoint: {
     '@type': 'ContactPoint',
     email: 'support@ardenprojectos.com',

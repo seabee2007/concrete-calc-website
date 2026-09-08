@@ -17,28 +17,28 @@ interface ScreenshotItem {
 const screenshots: ScreenshotItem[] = [
   {
     title: 'Dashboard',
-    description: 'Track active projects, field activity, proposals, QC alerts, and placement conditions.',
+    description: 'A new workspace showing project, proposal, schedule, and business summary cards.',
     darkImage: '/images/dashboard-dark.png',
     lightImage: '/images/dashboard-light.png',
-    fit: 'cover',
+    fit: 'contain',
   },
   {
     title: 'Estimate Builder',
-    description: 'Review project pricing, labor hours, cost breakdowns, and final sell price.',
+    description: 'Sample concrete and masonry activities with labor hours, costs, and a calculated sell price.',
     darkImage: '/images/estimate-builder-dark.png',
     lightImage: '/images/estimate-builder-light.png',
-    fit: 'cover',
+    fit: 'contain',
   },
   {
     title: 'Level III Gantt',
-    description: 'View project activities, critical path, crew loading, and schedule flow.',
+    description: 'A two-activity example showing the calculated schedule and critical path.',
     darkImage: '/images/gantt-dark.png',
     lightImage: '/images/gantt-light.png',
     fit: 'contain',
   },
   {
     title: 'Logic Network',
-    description: 'Build and review activity relationships before running CPM calculations.',
+    description: 'A simple finish-to-start relationship between two sample activities.',
     darkImage: '/images/logic-network-dark.png',
     lightImage: '/images/logic-network-light.png',
     fit: 'contain',
@@ -93,9 +93,9 @@ function ScreenshotCard({
           <motion.img
             key={src}
             src={src}
-            alt={`${item.title} — ${BRAND_NAME} ${screenshotMode} interface`}
+            alt={`${item.title} — ${BRAND_NAME} ${screenshotMode} demonstration with sample data`}
             width={1440}
-            height={810}
+            height={1000}
             loading="lazy"
             decoding="async"
             initial={reducedMotion ? false : { opacity: 0 }}
@@ -133,8 +133,8 @@ export default function ScreenshotShowcase() {
             <p className="interface-preview-section__eyebrow">See it in action</p>
             <h2>A clearer way to manage construction work</h2>
             <p>
-              Explore the product in dark or light mode — the same professional workspace,
-              styled the way your team prefers.
+              Explore current product components in dark or light mode.
+              These demonstrations use sample data, not customer projects.
             </p>
           </div>
           <ModeToggle mode={screenshotMode} onChange={setScreenshotMode} />

@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async'
 import { MARKETING_URL } from '../../constants/marketing'
 
-const DEFAULT_OG_IMAGE = `${MARKETING_URL}/images/logo_dark_banner.jpg`
+const DEFAULT_OG_IMAGE = `${MARKETING_URL}/images/brand/project-os-social.png`
 
 interface SeoHeadProps {
   title: string
