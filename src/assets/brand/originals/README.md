@@ -1,6 +1,6 @@
 # Project OS supplied artwork
 
-Owner-supplied transparent PNGs are retained here byte-for-byte. No redraw, recoloring, flattening, trimming or scene editing was performed. Motto: **estimate, schedule, deliver**.
+Owner-supplied transparent PNGs are retained here byte-for-byte. The originals are not redrawn, recolored, flattened, trimmed or scene-edited. Motto: **estimate, schedule, deliver**.
 
 | Original | Owner filename | SHA-256 |
 |---|---|---|
@@ -9,7 +9,7 @@ Owner-supplied transparent PNGs are retained here byte-for-byte. No redraw, reco
 | project-os-horizontal.png | 495F83E3-44AD-4949-924A-6110BD3FF919.png | b43457ff3072cbef881da36253964bd4a500920223b59cdb14df9040a0d35436 |
 | project-os-stacked-inverse.png | 17D6FBB7-6570-4125-BE12-44EBB96436CF.png | 42ab1524ffd88fffc15b237b1bbfd079cb7ca2770090350386cb382fe3259cd2 |
 
-Runtime assets under `public/images/brand/` are ordinary aspect-preserving width resizes (no enlargement) using Sharp 0.35.4, WebP lossless/effort 6 or PNG compressionLevel 9. Alpha is retained. `public/favicon.ico` contains the same 32px PNG in a standard single-image ICO container.
+Runtime assets under `public/images/brand/` are ordinary aspect-preserving width resizes (no enlargement) using Sharp 0.35.4, WebP lossless/effort 6 or PNG compressionLevel 9. Alpha is retained except for `apple-touch-icon.png`: that 180px Apple platform derivative is flattened onto an opaque white (`#ffffff`) canvas. Page logos and browser favicons retain alpha. `public/favicon.ico` contains the same transparent 32px PNG in a standard single-image ICO container.
 
 | Runtime output | Source stem | Width |
 |---|---|---:|
