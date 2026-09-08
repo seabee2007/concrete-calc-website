@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { ArrowUpRight, LayoutGrid, Menu, X } from 'lucide-react'
+import { ArrowUpRight, Menu, X } from 'lucide-react'
 import { appLoginHref } from '../../constants/marketing'
+import ProjectOsLogo from './ProjectOsLogo'
 import '../../marketing-refresh.css'
 import '../../marketing-deck.css'
 
@@ -23,11 +24,8 @@ export default function Header() {
   return (
     <header className="arden-site-header">
       <div className="arden-site-header__inner">
-        <a href="/" className="arden-site-header__brand" aria-label="Arden Systems home">
-          <span className="arden-site-header__mark">
-            <LayoutGrid className="h-5 w-5" aria-hidden="true" />
-          </span>
-          <strong>Arden Systems</strong>
+        <a href="/" className="arden-site-header__brand" aria-label="Project OS home">
+          <ProjectOsLogo className="arden-site-header__logo" />
         </a>
 
         <span className="arden-site-header__divider" aria-hidden="true" />

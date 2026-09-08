@@ -47,6 +47,20 @@
   color: var(--deck-ink);
   font-size: 0.93rem;
   white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.arden-site-header__logo {
+  display: block;
+  width: 13.5rem;
+  height: auto;
+}
+
+.arden-site-footer__logo {
+  display: block;
+  width: 16.5rem;
+  max-width: 100%;
+  height: auto;
 }
 
 .arden-site-header__mark {
@@ -131,8 +145,8 @@
 }
 
 .project-os-hero {
-  min-height: max(47rem, calc(100svh - 3.8rem));
-  background: #edf5f6;
+  min-height: max(42rem, calc(100svh - 4.5rem));
+  background: linear-gradient(135deg, #f8fbfc, #e6f3f5);
 }
 
 .project-os-hero__photo {
@@ -146,12 +160,22 @@
 }
 
 .project-os-hero__content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(2rem, 4vw, 5rem);
   max-width: 120rem;
   padding: clamp(5rem, 9vw, 9rem) clamp(1.5rem, 4vw, 5rem) clamp(5rem, 8vw, 8rem);
 }
 
 .project-os-hero__copy {
-  max-width: min(48rem, 52vw);
+  max-width: 48rem;
+}
+
+.project-os-hero__logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .project-os-hero__eyebrow,
@@ -508,7 +532,7 @@
 
 .interface-preview-card__frame {
   position: relative;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 36 / 25;
   overflow: hidden;
   border: 1px solid rgba(198, 225, 231, 0.7);
   border-radius: 1.15rem;
@@ -1075,13 +1099,28 @@
 }
 
 @media (max-width: 760px) {
+  .arden-site-header__logo {
+    width: 12rem;
+  }
+
   .arden-site-header__divider,
   .arden-site-header__hub-link {
     display: none;
   }
 
   .project-os-hero {
-    min-height: 44rem;
+    min-height: 0;
+  }
+
+  .project-os-hero__content {
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .project-os-hero__artwork {
+    width: min(100%, 28rem);
+    margin: 0 auto;
   }
 
   .project-os-hero__photo {

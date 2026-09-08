@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { BRAND_NAME } from '../../constants/marketing'
+import ProjectOsLogo from '../marketing/ProjectOsLogo'
 
 const legalLinkClassName =
   'text-slate-400 transition-colors hover:text-cyan-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07111d]'
@@ -12,15 +13,11 @@ export default function LegalPageLayout({ children }: LegalPageLayoutProps) {
   return (
     <div className="relative min-h-screen bg-[#050b13] text-white">
       <header className="border-b border-white/10 bg-[#050b13]/90 backdrop-blur-xl">
-        <div className="mx-auto flex min-h-[72px] max-w-7xl items-center justify-between px-6 lg:px-8">
-          <a href="/" className="flex shrink-0 items-center">
-            <img
-              src="/images/ARDEN-removebg-preview.png"
-              alt={BRAND_NAME}
-              className="h-auto max-h-9 w-[150px] object-contain sm:max-h-10 sm:w-[170px] lg:w-[210px]"
-            />
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 py-4 sm:flex-row lg:px-8">
+          <a href="/" className="flex shrink-0 items-center" aria-label="Project OS home">
+            <ProjectOsLogo variant="inverse" className="h-auto w-40 object-contain" />
           </a>
-          <nav className="flex items-center gap-6 text-sm" aria-label="Legal">
+          <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm" aria-label="Legal">
             <a href="/terms" className={legalLinkClassName}>
               Terms of Service
             </a>
