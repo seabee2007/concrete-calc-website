@@ -1,11 +1,14 @@
 import manifest from '../../shared/pricing-manifest.json'
 import { APP_URL } from '../constants/marketing'
+import {
+  PAID_PLAN_IDS,
+  parseProjectOsCommercialTerms,
+  type PaidPlanId,
+  type ProjectOsPlanTerms,
+} from './projectOsPricingContract'
 
-export type PaidPlanId = 'starter' | 'professional' | 'business'
-
+export type { PaidPlanId }
 export type BillingInterval = 'month' | 'year'
-
-type ManifestPlan = (typeof manifest.plans)[number] & { planId: PaidPlanId }
 
 export interface PublicPlanCatalogEntry {
   planId: PaidPlanId
@@ -55,8 +58,9 @@ const MARKETABLE_FEATURE_LABELS: Record<string, string> = {
   global_planner_hub: 'Global Planner portfolio hub',
 }
 
-const NON_MARKETABLE = new Set(manifest.nonMarketableFeatureKeys)
-export const PAID_PLAN_ORDER: PaidPlanId[] = ['starter', 'professional', 'business']
+const PROJECT_OS = parseProjectOsCommercialTerms(manifest)
+const NON_MARKETABLE = new Set(PROJECT_OS.nonMarketableFeatureKeys)
+export const PAID_PLAN_ORDER: PaidPlanId[] = [...PAID_PLAN_IDS]
 
 export function formatUsd(amount: number): string {
   return `$${amount.toLocaleString('en-US')}`
@@ -83,7 +87,7 @@ function calculateAnnualSavings(monthlyPriceUsd: number, annualTotalUsd: number)
   return { annualSavingsUsd, annualSavingsPercent }
 }
 
-function buildHighlights(entry: ManifestPlan): string[] {
+function buildHighlights(entry: ProjectOsPlanTerms): string[] {
   const projectLimit = normalizeProjectLimit(entry.activeProjectLimit)
   const limitBullets = [formatProjectLimit(projectLimit), formatFieldSeatLimit(entry.includedFieldSeats)]
 
@@ -95,7 +99,7 @@ function buildHighlights(entry: ManifestPlan): string[] {
   return [...limitBullets, ...featureBullets].slice(0, 7)
 }
 
-function toCatalogEntry(raw: ManifestPlan): PublicPlanCatalogEntry {
+function toCatalogEntry(raw: ProjectOsPlanTerms): PublicPlanCatalogEntry {
   const { annualSavingsUsd, annualSavingsPercent } = calculateAnnualSavings(
     raw.monthlyPriceUsd,
     raw.annualTotalUsd,
@@ -110,8 +114,8 @@ function toCatalogEntry(raw: ManifestPlan): PublicPlanCatalogEntry {
     annualTotalUsd: raw.annualTotalUsd,
     annualSavingsUsd,
     annualSavingsPercent,
-    hasTrial: manifest.trial.hasTrial,
-    trialDays: manifest.trial.trialDays ?? undefined,
+    hasTrial: PROJECT_OS.trial.hasTrial,
+    trialDays: PROJECT_OS.trial.trialDays ?? undefined,
     activeProjectLimit: normalizeProjectLimit(raw.activeProjectLimit),
     includedFieldSeats: raw.includedFieldSeats,
     highlights: buildHighlights(raw),
@@ -121,9 +125,7 @@ function toCatalogEntry(raw: ManifestPlan): PublicPlanCatalogEntry {
   }
 }
 
-export const PUBLIC_PLAN_CATALOG: PublicPlanCatalogEntry[] = (manifest.plans as ManifestPlan[]).map(
-  toCatalogEntry,
-)
+export const PUBLIC_PLAN_CATALOG: PublicPlanCatalogEntry[] = PROJECT_OS.plans.map(toCatalogEntry)
 
 export function getPublicPlanCatalog(): PublicPlanCatalogEntry[] {
   return PUBLIC_PLAN_CATALOG
@@ -153,8 +155,8 @@ export function getPublicPlanCtaLabel(
 ): string {
   const plan = getPublicPlan(planId)
 
-  if (manifest.trial.hasTrial && manifest.trial.trialDays) {
-    return `Start ${manifest.trial.trialDays}-Day Trial`
+  if (PROJECT_OS.trial.hasTrial && PROJECT_OS.trial.trialDays) {
+    return `Start ${PROJECT_OS.trial.trialDays}-Day Trial`
   }
 
   if (currentPlanId === null) {
@@ -180,7 +182,7 @@ export function getJsonLdOffers() {
 }
 
 export function assertMarketableFeaturesOnly() {
-  for (const plan of manifest.plans) {
+  for (const plan of PROJECT_OS.plans) {
     for (const key of plan.marketableFeatureKeys) {
       if (NON_MARKETABLE.has(key)) {
         throw new Error(`Plan ${plan.planId} lists non-marketable feature: ${key}`)
