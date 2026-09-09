@@ -1,7 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { appLoginHref } from '../../constants/marketing'
-import ProjectOsLogo from './ProjectOsLogo'
 
 export default function ProjectOsHero() {
   const reducedMotion = Boolean(useReducedMotion())
@@ -9,6 +8,16 @@ export default function ProjectOsHero() {
 
   return (
     <section className="project-os-hero" aria-labelledby="project-os-hero-heading">
+      <img
+        className="project-os-hero__photo"
+        src="/images/project-os-hero-background.webp"
+        width={1672}
+        height={941}
+        alt=""
+        aria-hidden="true"
+        fetchPriority="high"
+      />
+      <div className="project-os-hero__wash" aria-hidden="true" />
       <div className="project-os-hero__content">
         <motion.div
           className="project-os-hero__copy"
@@ -32,14 +41,6 @@ export default function ProjectOsHero() {
               Explore apps
             </a>
           </div>
-        </motion.div>
-        <motion.div
-          className="project-os-hero__artwork"
-          initial={reducedMotion ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: reducedMotion ? 0 : 0.78 }}
-        >
-          <ProjectOsLogo variant="stacked" className="project-os-hero__logo" />
         </motion.div>
       </div>
     </section>
