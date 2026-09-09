@@ -16,7 +16,7 @@ export default function MarketingHome() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#050b13]">
       <SeoHead
-        title="Arden Project OS | Construction Project Management Software for Contractors"
+        title="Project OS | Construction Project Management Software for Contractors"
         description="Plan estimates, proposals, schedules, change orders, field work, and client approvals in one construction project management workspace built for contractors."
         canonical={`${MARKETING_URL}/`}
         jsonLd={[organizationJsonLd, softwareApplicationJsonLd]}

@@ -1,4 +1,4 @@
-export const BRAND_NAME = 'Arden Project OS'
+export const BRAND_NAME = 'Project OS'
 export const SYSTEMS_BRAND_NAME = 'Arden Systems'
 export const MARKETING_URL = 'https://ardenprojectos.com'
 export const APP_URL = 'https://app.ardenprojectos.com'

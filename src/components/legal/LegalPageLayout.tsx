@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { BRAND_NAME } from '../../constants/marketing'
+import { SYSTEMS_BRAND_NAME } from '../../constants/marketing'
 import ProjectOsLogo from '../marketing/ProjectOsLogo'
 
 const legalLinkClassName =
@@ -52,7 +52,7 @@ export default function LegalPageLayout({ children }: LegalPageLayoutProps) {
           </a>
         </nav>
         <p className="mt-6 text-xs text-slate-500">
-          © {new Date().getFullYear()} {BRAND_NAME}. All rights reserved.
+          © {new Date().getFullYear()} {SYSTEMS_BRAND_NAME} LLC. All rights reserved.
         </p>
       </footer>
     </div>

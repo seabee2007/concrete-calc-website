@@ -5,7 +5,7 @@ import {
   resolvePublicCatalogSelection,
 } from './publicCatalogRouting'
 
-describe('public Arden Hub routing', () => {
+describe('public Product Hub routing', () => {
   it('allowlists canonical public product and integration IDs', () => {
     expect(resolvePublicCatalogSelection('?product=proposals')).toMatchObject({
       kind: 'product',

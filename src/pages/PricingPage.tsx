@@ -8,7 +8,7 @@ export default function PricingPage() {
   return (
     <MarketingPageShell>
       <SeoHead
-        title="Pricing | Arden Project OS"
+        title="Pricing | Project OS"
         description="Starter, Professional, and Business plans for construction estimating, field work, schedules, and portfolio control. Prices match in-app Billing."
         canonical={`${MARKETING_URL}/pricing`}
         jsonLd={[organizationJsonLd, softwareApplicationJsonLd]}

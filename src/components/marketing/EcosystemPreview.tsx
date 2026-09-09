@@ -46,12 +46,12 @@ export default function EcosystemPreview() {
             transition={{ duration: reducedMotion ? 0 : 0.62, delay: reducedMotion ? 0 : 0.08 }}
           >
             <p>
-              Arden Project OS is available today. The broader Arden catalog shows the approved
+              Project OS is available today. The broader Arden Systems catalog shows the approved
               direction for focused estimating, field, safety, and business tools—without inventing
               release dates or checkout availability.
             </p>
             <a href="/hub">
-              Explore every Arden product
+              Explore every Arden Systems product
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>
           </motion.div>

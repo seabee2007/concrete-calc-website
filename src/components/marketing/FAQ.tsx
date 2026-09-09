@@ -11,14 +11,14 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: 'What is Arden Hub?',
+    question: 'What is Product Hub?',
     answer:
-      'Arden Hub is the public launch point for the Arden product suite. Visitors can explore the approved roadmap, plans, and provider registry; signed-in teams also receive their secure Project OS launch route and account actions.',
+      'Product Hub is the public launch point for the Arden Systems product suite. Visitors can explore the approved roadmap, plans, and provider registry; signed-in teams also receive their secure Project OS launch route and account actions.',
   },
   {
-    question: 'Which Arden products are available today?',
+    question: 'Which Arden Systems products are available today?',
     answer:
-      'Arden Project OS is available today. Other products remain clearly labeled Coming Soon or Planned from the canonical Arden registry.',
+      'Project OS is available today. Other products remain clearly labeled Coming Soon or Planned from the canonical Arden Systems registry.',
   },
   {
     question: 'What do Planned and Coming Soon mean?',
@@ -36,7 +36,7 @@ const faqs: FAQItem[] = [
       'Compare the verified Starter, Professional, and Business plan limits below. The same pricing and included capabilities appear in Project OS Billing.',
   },
   {
-    question: 'Can employees use Arden Project OS?',
+    question: 'Can employees use Project OS?',
     answer:
       'Yes. Eligible employees can use the field portal and assigned project workflows available through their organization’s plan and access settings.',
   },
@@ -92,7 +92,7 @@ export default function FAQ() {
         >
           <p className="arden-eyebrow">Frequently asked</p>
           <h2>Clear answers before you choose the next tool.</h2>
-          <p>Availability, status, and provider claims stay anchored to Arden&apos;s canonical registries.</p>
+          <p>Availability, status, and provider claims stay anchored to Arden Systems&apos; canonical registries.</p>
         </motion.div>
 
         <motion.div

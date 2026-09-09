@@ -23,7 +23,7 @@ export default function PricingPreview() {
           </p>
           <h2>Start focused. Grow without changing systems.</h2>
           <p>
-            Every paid plan starts with Arden Project OS. Choose the operating depth your team needs today.
+            Every paid plan starts with Project OS. Choose the operating depth your team needs today.
           </p>
         </motion.div>
 

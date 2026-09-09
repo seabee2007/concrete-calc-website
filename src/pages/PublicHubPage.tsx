@@ -37,7 +37,7 @@ const PUBLIC_CATALOG_ORBIT_SLOTS = Object.freeze([
 
 function requirePublicProjectOs(): PublicArdenProductV1 {
   const product = PUBLIC_ARDEN_CATALOG.products.find(({ productId }) => productId === 'project_os')
-  if (!product) throw new Error('Public catalog is missing Arden Project OS.')
+  if (!product) throw new Error('Public catalog is missing Project OS.')
   return product
 }
 
@@ -196,7 +196,7 @@ function CatalogDialog({
             </div>
           ) : (
             <p className="text-sm leading-6 text-slate-600">
-              Status comes from the Arden integration registry. This public Hub does not show
+              Status comes from the Arden Systems integration registry. This public Hub does not show
               account connection state and does not provide a live connection action.
             </p>
           )}
@@ -258,8 +258,8 @@ export default function PublicHubPage() {
   return (
     <div className="marketing-refresh">
       <SeoHead
-        title="Arden Hub | Construction Software Catalog"
-        description="Explore Arden Project OS and the approved Arden Systems catalog for estimating, proposals, field work, safety, cost control, and connected construction workflows."
+        title="Product Hub | Construction Software Catalog"
+        description="Explore Project OS and the approved Arden Systems catalog for estimating, proposals, field work, safety, cost control, and connected construction workflows."
         canonical={`${MARKETING_URL}/hub`}
         jsonLd={organizationJsonLd}
       />
@@ -269,18 +269,18 @@ export default function PublicHubPage() {
           <div className="public-hub-section__inner">
             <div className="public-hub-intro">
               <div>
-                <p className="arden-eyebrow">Public Arden Hub</p>
+                <p className="arden-eyebrow">Public Product Hub</p>
                 <h1 id="public-hub-heading">One system, organized around the work.</h1>
               </div>
               <p>
-                Project OS is available today. Explore the approved Arden product family and
+                Project OS is available today. Explore the approved Arden Systems product family and
                 customer-provider integrations with every availability status kept explicit.
               </p>
             </div>
 
             <div className="public-hub-toolbar">
               <div>
-                <p className="font-semibold text-slate-900">Discover Arden</p>
+                <p className="font-semibold text-slate-900">Discover Arden Systems</p>
                 <p className="mt-1 text-sm text-slate-600">Select any product for approved details and its next available action.</p>
               </div>
               <div className="hidden items-center rounded-xl border border-slate-200 bg-white p-1 shadow-sm xl:inline-flex" role="group" aria-label="Product layout">

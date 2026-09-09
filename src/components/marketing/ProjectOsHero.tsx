@@ -28,7 +28,7 @@ export default function ProjectOsHero() {
           <p className="project-os-hero__eyebrow">Arden Systems</p>
           <h1 id="project-os-hero-heading">One launch point for every stage of the work.</h1>
           <p className="project-os-hero__lede">
-            Start with Arden Project OS today, then grow into a connected suite for estimating,
+            Start with Project OS today, then grow into a connected suite for estimating,
             planning, field execution, and business operations.
           </p>
 

@@ -82,27 +82,27 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 function assertStringArray(value: unknown, field: string): asserts value is string[] {
   if (!Array.isArray(value) || value.some((item) => typeof item !== 'string')) {
-    throw new Error(`Public Arden catalog field ${field} must be an array of strings.`)
+    throw new Error(`Public Arden Systems catalog field ${field} must be an array of strings.`)
   }
 }
 
 function assertSorted<T>(values: readonly T[], getOrder: (value: T) => number, field: string) {
   for (let index = 1; index < values.length; index += 1) {
     if (getOrder(values[index]) <= getOrder(values[index - 1])) {
-      throw new Error(`Public Arden catalog ${field} must use strictly increasing sortOrder.`)
+      throw new Error(`Public Arden Systems catalog ${field} must use strictly increasing sortOrder.`)
     }
   }
 }
 
 export function validatePublicArdenCatalogV1(input: unknown): PublicArdenCatalogV1 {
   if (!isRecord(input) || input.schemaVersion !== 'public-arden-catalog.v1') {
-    throw new Error('Unsupported public Arden catalog schema version.')
+    throw new Error('Unsupported public Arden Systems catalog schema version.')
   }
   if (typeof input.contentDigest !== 'string' || !SHA256_PATTERN.test(input.contentDigest)) {
-    throw new Error('Public Arden catalog contentDigest must be a SHA-256 digest.')
+    throw new Error('Public Arden Systems catalog contentDigest must be a SHA-256 digest.')
   }
   if (!Array.isArray(input.products) || !Array.isArray(input.integrations) || !Array.isArray(input.artwork)) {
-    throw new Error('Public Arden catalog collections are missing.')
+    throw new Error('Public Arden Systems catalog collections are missing.')
   }
 
   for (const [index, product] of input.products.entries()) {

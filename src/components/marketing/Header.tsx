@@ -6,7 +6,7 @@ import ProjectOsLogo from './ProjectOsLogo'
 import '../../marketing-refresh.css'
 import '../../marketing-deck.css'
 
-const hubLink = { label: 'Arden Hub', href: '/hub' }
+const hubLink = { label: 'Product Hub', href: '/hub' }
 
 const navLinks = [
   { label: 'Apps', href: '/#apps' },

@@ -1,5 +1,5 @@
 import { ArrowUpRight } from 'lucide-react'
-import { appLoginHref, BRAND_NAME } from '../../constants/marketing'
+import { appLoginHref, SYSTEMS_BRAND_NAME } from '../../constants/marketing'
 import ProjectOsLogo from './ProjectOsLogo'
 
 const dashboardLogin = appLoginHref('/dashboard')
@@ -13,7 +13,7 @@ export default function Footer() {
             <ProjectOsLogo className="arden-site-footer__logo" />
           </a>
           <p>
-            Construction technology that grows from one professional operating system into a connected Arden suite.
+            Construction technology that grows from one professional operating system into a connected Arden Systems suite.
           </p>
         </div>
 
@@ -37,7 +37,7 @@ export default function Footer() {
       </div>
 
       <div className="arden-site-footer__legal">
-        <span>© {new Date().getFullYear()} {BRAND_NAME} LLC</span>
+        <span>© {new Date().getFullYear()} {SYSTEMS_BRAND_NAME} LLC</span>
       </div>
     </footer>
   )

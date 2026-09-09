@@ -59,11 +59,11 @@ export default function ConnectedAppsSection({
             transition={{ duration: reducedMotion ? 0 : 0.62, delay: reducedMotion ? 0 : 0.08 }}
           >
             <p>
-              Explore Arden&apos;s customer-facing providers in a dedicated integration layer, with
+              Explore Arden Systems&apos; customer-facing providers in a dedicated integration layer, with
               release status kept clear before any connection is available.
             </p>
             <p className="connected-apps-section__registry-note">
-              Availability comes from the Arden registry. No live connection state is inferred in this release.
+              Availability comes from the Arden Systems registry. No live connection state is inferred in this release.
             </p>
           </motion.div>
         </div>
@@ -123,7 +123,7 @@ export default function ConnectedAppsSection({
         </div>
 
         <p className="connected-apps-section__disclaimer">
-          Provider names identify intended compatibility only. No provider endorses Arden, and no
+          Provider names identify intended compatibility only. No provider endorses Arden Systems, and no
           live connection or synchronization is implied.
         </p>
       </div>

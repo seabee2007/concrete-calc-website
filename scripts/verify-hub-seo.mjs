@@ -19,7 +19,7 @@ requireSource('src/App.tsx', /'\/hub': PublicHubPage/, 'App route map is missing
 requireSource('public/_redirects', /^\/apps \/hub 301$/m, '/apps -> /hub permanent redirect is missing')
 requireSource(
   'src/pages/PublicHubPage.tsx',
-  /title="Arden Hub \| Construction Software Catalog"/,
+  /title="Product Hub \| Construction Software Catalog"/,
   '/hub title metadata is missing or changed',
 )
 requireSource(
