@@ -1,13 +1,13 @@
 {
   "schemaVersion": "public-arden-catalog.v1",
-  "contentDigest": "sha256:720085275f68b13b081de28f9c726604a703a9f0f79c8204d38903c90a727bb6",
+  "contentDigest": "sha256:85ce1ab7aabadbc0a9e2ab450f291a4337a5305eaedb21e216d3f1c2cb926f1e",
   "products": [
     {
       "productId": "project_os",
       "slug": "project-os",
-      "displayName": "Arden Project OS",
+      "displayName": "Project OS",
       "shortName": "Project OS",
-      "summary": "Estimate, plan, schedule, track, and deliver construction work from one professional workspace.",
+      "summary": "Construction estimating, planning, scheduling, and project controls.",
       "description": "Estimate, plan, schedule, track, and deliver construction work from one professional workspace.",
       "audience": [
         "Construction contractors and project teams"
@@ -28,9 +28,9 @@
     {
       "productId": "proposals",
       "slug": "proposals",
-      "displayName": "Arden Proposals",
+      "displayName": "Proposals",
       "shortName": "Proposals",
-      "summary": "Create professional contractor proposals, price the work, send a secure client link, and track the decision.",
+      "summary": "Create, send, and track contractor proposals.",
       "description": "Create professional contractor proposals, price the work, send a secure client link, and track the decision.",
       "audience": [
         "Construction contractors"
@@ -51,9 +51,9 @@
     {
       "productId": "crm",
       "slug": "crm",
-      "displayName": "Arden CRM",
-      "shortName": "CRM",
-      "summary": "Organize leads, clients, opportunities, and follow-ups before the job becomes a project.",
+      "displayName": "Contractor CRM",
+      "shortName": "Contractor CRM",
+      "summary": "Manage leads, clients, opportunities, and follow-ups.",
       "description": "Organize leads, clients, opportunities, and follow-ups before the job becomes a project.",
       "audience": [
         "Construction contractors"
@@ -67,9 +67,9 @@
     {
       "productId": "invoicing",
       "slug": "invoicing",
-      "displayName": "Arden Invoicing",
+      "displayName": "Invoicing",
       "shortName": "Invoicing",
-      "summary": "Create and track contractor invoices from accepted work, projects, and approved changes.",
+      "summary": "Create and track contractor invoices and payments.",
       "description": "Create and track contractor invoices from accepted work, projects, and approved changes.",
       "audience": [
         "Construction contractors"
@@ -83,9 +83,9 @@
     {
       "productId": "calc",
       "slug": "calc",
-      "displayName": "Arden Calc",
-      "shortName": "Calc",
-      "summary": "Field-ready construction calculators with saved work, material planning, and professional reports.",
+      "displayName": "Construction Calc",
+      "shortName": "Construction Calc",
+      "summary": "Calculate quantities, labor, materials, and costs.",
       "description": "Field-ready construction calculators with saved work, material planning, and professional reports.",
       "audience": [
         "Construction contractors"
@@ -99,9 +99,9 @@
     {
       "productId": "change_orders",
       "slug": "change-orders",
-      "displayName": "Arden Change Orders",
+      "displayName": "Change Orders",
       "shortName": "Change Orders",
-      "summary": "Price, document, send, and track construction change orders before extra work is lost.",
+      "summary": "Price, document, send, and track scope changes.",
       "description": "Price, document, send, and track construction change orders before extra work is lost.",
       "audience": [
         "Construction contractors"
@@ -115,9 +115,9 @@
     {
       "productId": "field_log",
       "slug": "field-log",
-      "displayName": "Arden Field Log",
-      "shortName": "Field Log",
-      "summary": "Complete daily reports with manpower, weather, work, equipment, delays, and photos.",
+      "displayName": "Daily Field Logs",
+      "shortName": "Daily Field Logs",
+      "summary": "Record manpower, work, weather, delays, and photos.",
       "description": "Complete daily reports with manpower, weather, work, equipment, delays, and photos.",
       "audience": [
         "Construction contractors"
@@ -131,9 +131,9 @@
     {
       "productId": "subtracker",
       "slug": "subtracker",
-      "displayName": "Arden SubTracker",
+      "displayName": "SubTracker",
       "shortName": "SubTracker",
-      "summary": "Track subcontractor insurance, W-9s, licenses, workers compensation, and expiration dates.",
+      "summary": "Track insurance, licenses, W-9s, and expirations.",
       "description": "Track subcontractor insurance, W-9s, licenses, workers compensation, and expiration dates.",
       "audience": [
         "Construction contractors"
@@ -147,9 +147,9 @@
     {
       "productId": "quote_leveler",
       "slug": "quote-leveler",
-      "displayName": "Arden Quote Leveler",
-      "shortName": "Quote Leveler",
-      "summary": "Compare subcontractor and vendor quotes on an equal-scope basis instead of relying on the lowest raw number.",
+      "displayName": "Quote Comparison",
+      "shortName": "Quote Comparison",
+      "summary": "Normalize vendor and subcontractor quotes for equal-scope comparison.",
       "description": "Compare subcontractor and vendor quotes on an equal-scope basis instead of relying on the lowest raw number.",
       "audience": [
         "Construction contractors"
@@ -163,9 +163,9 @@
     {
       "productId": "safety",
       "slug": "safety",
-      "displayName": "Arden Safety",
-      "shortName": "Safety",
-      "summary": "Manage JHAs, toolbox talks, attendance, inspections, incidents, and compliance records.",
+      "displayName": "Safety Management",
+      "shortName": "Safety Management",
+      "summary": "Manage JHAs, toolbox talks, inspections, and incidents.",
       "description": "Manage JHAs, toolbox talks, attendance, inspections, incidents, and compliance records.",
       "audience": [
         "Construction contractors"
@@ -179,9 +179,9 @@
     {
       "productId": "crew_cost",
       "slug": "crew-cost",
-      "displayName": "Arden Crew Cost",
-      "shortName": "Crew Cost",
-      "summary": "Calculate fully burdened labor, crew cost, production cost, billing rates, and target margin.",
+      "displayName": "Crew Cost Calculator",
+      "shortName": "Crew Cost Calculator",
+      "summary": "Calculate burdened labor cost, billing rates, and margin.",
       "description": "Calculate fully burdened labor, crew cost, production cost, billing rates, and target margin.",
       "audience": [
         "Construction contractors"
@@ -265,6 +265,11 @@
   ],
   "artwork": [
     {
+      "iconKey": "project_os",
+      "fileName": "project_os.webp",
+      "sha256": "sha256:234a49e4f8a8230eb17f5b23f911d1d817f8773ba082c37d4dfaddb44b3b7b5d"
+    },
+    {
       "iconKey": "proposals",
       "fileName": "proposals.webp",
       "sha256": "sha256:185dc34b3c348b37ca544807a312172541f2313c23dafdb70d1c381cda69ae3b"
@@ -313,6 +318,11 @@
       "iconKey": "crew_cost",
       "fileName": "crew_cost.webp",
       "sha256": "sha256:acb71af1c7054c09798dd7940e246dbe5b44d37d2dc250d649b2e0294fced037"
+    },
+    {
+      "iconKey": "arden_signal",
+      "fileName": "arden_signal.webp",
+      "sha256": "sha256:9c44e8313dcb84a9e1eb8cb6cdf9d3b58d47c3bddceb6a813e5f5791b10d7410"
     }
   ]
 }

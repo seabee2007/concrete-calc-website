@@ -16,6 +16,7 @@ describe('public Product Hub routing', () => {
       item: { integrationId: 'microsoft_365' },
     })
     expect(resolvePublicCatalogSelection('?product=forms')).toBeNull()
+    expect(resolvePublicCatalogSelection('?product=arden_signal')).toBeNull()
     expect(resolvePublicCatalogSelection('?integration=stripe_connect')).toBeNull()
     expect(resolvePublicCatalogSelection('?product=https://example.com')).toBeNull()
   })

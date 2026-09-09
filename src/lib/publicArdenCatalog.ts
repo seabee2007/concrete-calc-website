@@ -146,19 +146,37 @@ export function validatePublicArdenCatalogV1(input: unknown): PublicArdenCatalog
     }
   }
 
+  const artworkIconKeys = new Set<string>()
+  const artworkFileNames = new Set<string>()
   for (const [index, artwork] of input.artwork.entries()) {
     if (
       !isRecord(artwork) ||
       typeof artwork.iconKey !== 'string' ||
+      !/^[a-z][a-z0-9_]*$/.test(artwork.iconKey) ||
       typeof artwork.fileName !== 'string' ||
+      !/^[a-z0-9][a-z0-9_-]*\.webp$/.test(artwork.fileName) ||
       typeof artwork.sha256 !== 'string' ||
       !SHA256_PATTERN.test(artwork.sha256)
     ) {
       throw new Error(`Artwork ${index} is invalid.`)
     }
+    if (artworkIconKeys.has(artwork.iconKey) || artworkFileNames.has(artwork.fileName)) {
+      throw new Error(`Artwork ${index} duplicates an icon key or filename.`)
+    }
+    artworkIconKeys.add(artwork.iconKey)
+    artworkFileNames.add(artwork.fileName)
   }
 
   const catalog = input as unknown as PublicArdenCatalogV1
+  const publicArtworkKeys = catalog.products.map(({ iconKey }) => iconKey)
+  for (const iconKey of publicArtworkKeys) {
+    if (!artworkIconKeys.has(iconKey)) throw new Error(`Public product artwork ${iconKey} is missing.`)
+  }
+  // Signal artwork is approved independently of its nonpublic product listing.
+  const expectedArtworkKeys = [...publicArtworkKeys, 'arden_signal'].filter(key => artworkIconKeys.has(key))
+  if (JSON.stringify([...artworkIconKeys]) !== JSON.stringify(expectedArtworkKeys)) {
+    throw new Error('Artwork must follow public product order with only the approved Signal extra.')
+  }
   assertSorted(catalog.products, ({ sortOrder }) => sortOrder, 'products')
   assertSorted(catalog.integrations, ({ sortOrder }) => sortOrder, 'integrations')
   return catalog

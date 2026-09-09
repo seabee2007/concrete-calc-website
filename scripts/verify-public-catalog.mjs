@@ -106,7 +106,7 @@ strictlyOrdered(artifact.integrations, 'integrations')
 
 const productIds = artifact.products.map(({ productId }) => productId)
 const integrationIds = artifact.integrations.map(({ integrationId }) => integrationId)
-for (const hiddenId of ['hub', 'forms', 'schedule']) {
+for (const hiddenId of ['hub', 'forms', 'schedule', 'arden_signal']) {
   if (!productIds.includes(hiddenId)) pass(`noncatalog product ${hiddenId} is excluded`)
   else fail(`noncatalog product ${hiddenId} leaked into the artifact`)
 }
@@ -132,16 +132,32 @@ for (const forbidden of [
 }
 
 const artworkIconKeys = artifact.artwork.map(({ iconKey }) => iconKey)
-const expectedArtworkIconKeys = artifact.products
-  .filter(({ productId }) => productId !== 'project_os')
-  .map(({ iconKey }) => iconKey)
+const artworkFileNames = artifact.artwork.map(({ fileName }) => fileName)
+if (new Set(artworkIconKeys).size === artworkIconKeys.length) pass('artwork icon keys are unique')
+else fail('artwork contains duplicate icon keys')
+if (new Set(artworkFileNames).size === artworkFileNames.length) pass('artwork filenames are unique')
+else fail('artwork contains duplicate filenames')
+const publicArtworkIconKeys = artifact.products.map(({ iconKey }) => iconKey)
+for (const iconKey of publicArtworkIconKeys) {
+  if (artworkIconKeys.includes(iconKey)) pass(`public product artwork ${iconKey} is present`)
+  else fail(`public product artwork ${iconKey} is missing`)
+}
+// Approved Signal artwork does not authorize a public Signal product entry.
+const expectedArtworkIconKeys = [...publicArtworkIconKeys, 'arden_signal']
+  .filter(iconKey => artworkIconKeys.includes(iconKey))
 if (JSON.stringify(artworkIconKeys) === JSON.stringify(expectedArtworkIconKeys)) {
-  pass('artwork covers every illustrated public product in canonical order')
+  pass('artwork follows canonical product order with only the approved Signal extra')
 } else {
-  fail('artwork coverage does not match illustrated public products')
+  fail('artwork order or extra keys do not match the approved catalog')
 }
 
 for (const artwork of artifact.artwork) {
+  if (typeof artwork.fileName !== 'string' || !/^[a-z0-9][a-z0-9_-]*\.webp$/.test(artwork.fileName) ||
+      typeof artwork.iconKey !== 'string' || !/^[a-z][a-z0-9_]*$/.test(artwork.iconKey) ||
+      typeof artwork.sha256 !== 'string' || !/^sha256:[a-f0-9]{64}$/.test(artwork.sha256)) {
+    fail(`invalid artwork filename, icon key or hash: ${artwork.iconKey}`)
+    continue
+  }
   const imagePath = join(root, 'public/images/arden-products', artwork.fileName)
   if (!existsSync(imagePath)) {
     fail(`missing artwork file ${artwork.fileName}`)
