@@ -1,3 +1,5 @@
+/// <reference types="node" />
+
 import { appendFileSync, copyFileSync, mkdirSync, mkdtempSync, rmSync, unlinkSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
