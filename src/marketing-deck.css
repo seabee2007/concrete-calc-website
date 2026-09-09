@@ -150,13 +150,12 @@
 }
 
 .project-os-hero__photo {
-  object-position: center center;
+  opacity: 1;
+  object-position: right center;
 }
 
 .project-os-hero__wash {
-  background:
-    linear-gradient(90deg, #f8fbfc 0%, rgba(248, 251, 252, 0.985) 29%, rgba(248, 251, 252, 0.82) 43%, rgba(248, 251, 252, 0.25) 60%, transparent 76%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(239, 247, 248, 0.08));
+  background: linear-gradient(90deg, rgba(248, 251, 252, 0.88) 0%, rgba(248, 251, 252, 0.8) 30%, rgba(248, 251, 252, 0.58) 47%, transparent 72%);
 }
 
 .project-os-hero__content {
@@ -169,13 +168,6 @@
 
 .project-os-hero__copy {
   max-width: 48rem;
-}
-
-.project-os-hero__logo {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
 }
 
 .project-os-hero__eyebrow,
@@ -1118,18 +1110,12 @@
     padding-bottom: 3.5rem;
   }
 
-  .project-os-hero__artwork {
-    width: min(100%, 28rem);
-    margin: 0 auto;
-  }
-
   .project-os-hero__photo {
-    opacity: 0.36;
-    object-position: 66% center;
+    object-position: left center;
   }
 
   .project-os-hero__wash {
-    background: linear-gradient(180deg, rgba(248, 251, 252, 0.9), #f8fbfc 78%);
+    background: linear-gradient(90deg, rgba(248, 251, 252, 0.88), rgba(248, 251, 252, 0.72));
   }
 
   .project-os-hero__copy {
