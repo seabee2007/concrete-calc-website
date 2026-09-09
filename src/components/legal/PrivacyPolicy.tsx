@@ -13,12 +13,12 @@ export default function PrivacyPolicy() {
   return (
     <div className={LEGAL_MODAL_ROOT}>
       <section className={LEGAL_MODAL_SECTION}>
-        <h1 className={`${LEGAL_MODAL_H3} text-xl`}>Arden Project OS Privacy Policy</h1>
+        <h1 className={`${LEGAL_MODAL_H3} text-xl`}>Project OS Privacy Policy</h1>
         <p className={LEGAL_MODAL_META}>Last Updated: 12 June 2026</p>
         <p>
-          This Privacy Policy explains how <strong>[Insert Legal Entity Name]</strong> (&ldquo;Arden Project OS,&rdquo;
+          This Privacy Policy explains how <strong>[Insert Legal Entity Name]</strong> (&ldquo;Project OS,&rdquo;
           &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) collects, uses, stores, shares, and protects
-          information when you access or use Arden Project OS, including our websites, web application, mobile or
+          information when you access or use Project OS, including our websites, web application, mobile or
           progressive web application, calculators, estimating tools, proposal tools, scheduling tools, project
           management tools, client portal features, email features, accounting and tax export tools, integrations,
           and related services (collectively, the &ldquo;Service&rdquo;).
@@ -771,7 +771,7 @@ export default function PrivacyPolicy() {
         </p>
         <address className="not-italic mt-2 space-y-1">
           <p>
-            <strong>Arden Project OS</strong>
+            <strong>Project OS</strong>
           </p>
           <p>
             Email:{' '}

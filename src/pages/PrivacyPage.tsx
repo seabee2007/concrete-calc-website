@@ -8,8 +8,8 @@ export default function PrivacyPage() {
   return (
     <>
       <SeoHead
-        title="Privacy Policy | Arden Project OS"
-        description="Read the Arden Project OS Privacy Policy for information about how we collect, use, and protect your data."
+        title="Privacy Policy | Project OS"
+        description="Read the Project OS Privacy Policy for information about how we collect, use, and protect your data."
         canonical={`${MARKETING_URL}/privacy`}
         jsonLd={organizationJsonLd}
       />

@@ -5,7 +5,7 @@ import {
   resolvePublicCatalogSelection,
 } from './publicCatalogRouting'
 
-describe('public Arden Hub routing', () => {
+describe('public Product Hub routing', () => {
   it('allowlists canonical public product and integration IDs', () => {
     expect(resolvePublicCatalogSelection('?product=proposals')).toMatchObject({
       kind: 'product',
@@ -16,6 +16,7 @@ describe('public Arden Hub routing', () => {
       item: { integrationId: 'microsoft_365' },
     })
     expect(resolvePublicCatalogSelection('?product=forms')).toBeNull()
+    expect(resolvePublicCatalogSelection('?product=arden_signal')).toBeNull()
     expect(resolvePublicCatalogSelection('?integration=stripe_connect')).toBeNull()
     expect(resolvePublicCatalogSelection('?product=https://example.com')).toBeNull()
   })

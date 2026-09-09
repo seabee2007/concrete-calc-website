@@ -12,10 +12,10 @@ export default function TermsOfService() {
   return (
     <div className={LEGAL_MODAL_ROOT}>
       <section className={LEGAL_MODAL_SECTION}>
-        <h1 className={`${LEGAL_MODAL_H3} text-xl`}>Arden Project OS Terms of Service</h1>
+        <h1 className={`${LEGAL_MODAL_H3} text-xl`}>Project OS Terms of Service</h1>
         <p className={LEGAL_MODAL_META}>Last Updated: 12 June 2026</p>
         <p>
-          These Terms of Service (&ldquo;Terms&rdquo;) govern your access to and use of Arden Project OS,
+          These Terms of Service (&ldquo;Terms&rdquo;) govern your access to and use of Project OS,
           including our websites, web application, mobile or progressive web application, calculators,
           estimating tools, proposal tools, scheduling tools, project management tools, client portal
           features, accounting and tax export tools, emails, APIs, and any related services we provide
@@ -23,7 +23,7 @@ export default function TermsOfService() {
         </p>
         <p>
           These Terms form a legally binding agreement between you and{' '}
-          <strong>[Insert Legal Entity Name]</strong> doing business as Arden Project OS (&ldquo;we,&rdquo;
+          <strong>[Insert Legal Entity Name]</strong> doing business as Project OS (&ldquo;we,&rdquo;
           &ldquo;us,&rdquo; or &ldquo;our&rdquo;).
         </p>
         <p>
@@ -53,7 +53,7 @@ export default function TermsOfService() {
       <section className={LEGAL_MODAL_SECTION}>
         <h3 className={`${LEGAL_MODAL_H3} mb-2`}>2. Description of the Service</h3>
         <p>
-          Arden Project OS provides software tools for contractors and construction professionals, including
+          Project OS provides software tools for contractors and construction professionals, including
           some or all of the following:
         </p>
         <ul className={LEGAL_MODAL_LIST}>
@@ -79,7 +79,7 @@ export default function TermsOfService() {
 
       <section className={LEGAL_MODAL_SECTION}>
         <h3 className={`${LEGAL_MODAL_H3} mb-2`}>3. No Professional, Engineering, Legal, Tax, or Financial Advice</h3>
-        <p>Arden Project OS is a software tool. It does not provide professional advice.</p>
+        <p>Project OS is a software tool. It does not provide professional advice.</p>
         <p>
           The Service may generate calculations, estimates, schedules, production-rate outputs, proposal
           documents, risk indicators, tax summaries, accounting exports, weather-related suggestions, or other
@@ -90,7 +90,7 @@ export default function TermsOfService() {
           for bids, contracts, schedules, purchases, construction activities, safety planning, tax filings,
           accounting records, client communications, or business decisions.
         </p>
-        <p>Arden Project OS does not replace:</p>
+        <p>Project OS does not replace:</p>
         <ul className={LEGAL_MODAL_LIST}>
           <li>Licensed contractors</li>
           <li>Engineers</li>
@@ -129,7 +129,7 @@ export default function TermsOfService() {
           subcontractor pricing, supplier pricing, permit requirements, inspection requirements, and market
           conditions may differ significantly from software-generated estimates.
         </p>
-        <p>Arden Project OS does not guarantee:</p>
+        <p>Project OS does not guarantee:</p>
         <ul className={LEGAL_MODAL_LIST}>
           <li>Accuracy of any estimate</li>
           <li>Suitability of any production rate for your project</li>
@@ -159,7 +159,7 @@ export default function TermsOfService() {
         </p>
         <p>
           Scheduling outputs depend on user-entered durations, logic links, crew assumptions, activity
-          selections, calendars, constraints, and project data. Arden Project OS does not guarantee that a
+          selections, calendars, constraints, and project data. Project OS does not guarantee that a
           generated schedule is feasible, contract-compliant, resource-loaded, risk-adjusted, or suitable for
           submission to an owner, general contractor, government entity, or any other party.
         </p>
@@ -270,7 +270,7 @@ export default function TermsOfService() {
           <li>Consulting qualified professionals</li>
         </ul>
         <p>
-          Arden Project OS does not guarantee tax savings, tax compliance, audit protection, accounting
+          Project OS does not guarantee tax savings, tax compliance, audit protection, accounting
           accuracy, or acceptance by any third-party software or tax authority.
         </p>
       </section>
@@ -563,7 +563,7 @@ export default function TermsOfService() {
         <p>
           The Service, including software, design, user interface, workflows, templates, documentation,
           graphics, logos, trademarks, trade names, data structures, and other materials we provide, is owned
-          by Arden Project OS or its licensors and is protected by intellectual property laws.
+          by Project OS or its licensors and is protected by intellectual property laws.
         </p>
         <p>
           You may not copy, modify, distribute, sell, lease, sublicense, reverse engineer, or create
@@ -663,7 +663,7 @@ export default function TermsOfService() {
       <section className={LEGAL_MODAL_SECTION}>
         <h3 className={`${LEGAL_MODAL_H3} mb-2`}>31. Limitation of Liability</h3>
         <p>
-          TO THE MAXIMUM EXTENT PERMITTED BY LAW, ARDEN PROJECT OS AND ITS OWNERS, OFFICERS, DIRECTORS, EMPLOYEES,
+          TO THE MAXIMUM EXTENT PERMITTED BY LAW, PROJECT OS AND ITS OWNERS, OFFICERS, DIRECTORS, EMPLOYEES,
           CONTRACTORS, AFFILIATES, AGENTS, SUPPLIERS, AND LICENSORS WILL NOT BE LIABLE FOR ANY INDIRECT,
           INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, PUNITIVE, OR SIMILAR DAMAGES, INCLUDING LOST
           PROFITS, LOST REVENUE, LOST BUSINESS, LOST DATA, LOST GOODWILL, BUSINESS INTERRUPTION, PROJECT
@@ -687,7 +687,7 @@ export default function TermsOfService() {
       <section className={LEGAL_MODAL_SECTION}>
         <h3 className={`${LEGAL_MODAL_H3} mb-2`}>32. Indemnification</h3>
         <p>
-          You agree to defend, indemnify, and hold harmless Arden Project OS and its owners, officers, directors,
+          You agree to defend, indemnify, and hold harmless Project OS and its owners, officers, directors,
           employees, contractors, affiliates, agents, suppliers, and licensors from and against all claims,
           damages, losses, liabilities, costs, and expenses, including reasonable attorneys&rsquo; fees, arising
           out of or related to:
@@ -725,7 +725,7 @@ export default function TermsOfService() {
           party may bring an individual claim in small claims court if eligible.
         </p>
         <p>
-          You and Arden Project OS waive any right to a jury trial and waive any right to participate in a class
+          You and Project OS waive any right to a jury trial and waive any right to participate in a class
           action, class arbitration, collective action, private attorney general action, or representative
           proceeding.
         </p>
@@ -829,7 +829,7 @@ export default function TermsOfService() {
         <h3 className={`${LEGAL_MODAL_H3} mb-2`}>41. Entire Agreement</h3>
         <p>
           These Terms, together with the Privacy Policy, any applicable order form, subscription terms, plan
-          terms, or written agreement between you and us, make up the entire agreement between you and Arden
+          terms, or written agreement between you and us, make up the entire agreement between you and
           Project OS regarding the Service.
         </p>
         <p>
@@ -843,7 +843,7 @@ export default function TermsOfService() {
         <p>If you have questions about these Terms, contact us at:</p>
         <address className="not-italic mt-2 space-y-1">
           <p>
-            <strong>Arden Project OS</strong>
+            <strong>Project OS</strong>
           </p>
           <p>
             Email:{' '}

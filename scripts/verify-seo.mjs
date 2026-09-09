@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * SEO Phase 1 verification for Arden Project OS marketing site.
+ * SEO Phase 1 verification for Project OS marketing site.
  *
  * Usage:
  *   node scripts/verify-seo.mjs                 # static + dist checks
@@ -47,7 +47,7 @@ function parseSitemapUrls(xml) {
 const EXPECTED_PAGES = [
   {
     path: '/',
-    title: 'Arden Project OS | Construction Project Management Software for Contractors',
+    title: 'Project OS | Construction Project Management Software for Contractors',
     description:
       'Plan estimates, proposals, schedules, change orders, field work, and client approvals in one construction project management workspace built for contractors.',
     canonical: `${MARKETING_URL}/`,
@@ -56,16 +56,16 @@ const EXPECTED_PAGES = [
   },
   {
     path: '/hub',
-    title: 'Arden Hub | Construction Software Catalog',
+    title: 'Product Hub | Construction Software Catalog',
     description:
-      'Explore Arden Project OS and the approved Arden Systems catalog for estimating, proposals, field work, safety, cost control, and connected construction workflows.',
+      'Explore Project OS and the approved Arden Systems catalog for estimating, proposals, field work, safety, cost control, and connected construction workflows.',
     canonical: `${MARKETING_URL}/hub`,
     h1Files: ['src/pages/PublicHubPage.tsx'],
     h1Pattern: /<h1\b/,
   },
   {
     path: '/pricing',
-    title: 'Pricing | Arden Project OS',
+    title: 'Pricing | Project OS',
     description:
       'Simple, transparent pricing for construction project management. Starter, Professional, and Business plans.',
     canonical: `${MARKETING_URL}/pricing`,
@@ -74,26 +74,26 @@ const EXPECTED_PAGES = [
   },
   {
     path: '/terms',
-    title: 'Terms of Service | Arden Project OS',
+    title: 'Terms of Service | Project OS',
     description:
-      'Read the Arden Project OS Terms of Service governing use of our construction project management software.',
+      'Read the Project OS Terms of Service governing use of our construction project management software.',
     canonical: `${MARKETING_URL}/terms`,
     h1Files: ['src/components/legal/TermsOfService.tsx'],
     h1Pattern: /<h1\b/,
   },
   {
     path: '/privacy',
-    title: 'Privacy Policy | Arden Project OS',
+    title: 'Privacy Policy | Project OS',
     description:
-      'Read the Arden Project OS Privacy Policy for information about how we collect, use, and protect your data.',
+      'Read the Project OS Privacy Policy for information about how we collect, use, and protect your data.',
     canonical: `${MARKETING_URL}/privacy`,
     h1Files: ['src/components/legal/PrivacyPolicy.tsx'],
     h1Pattern: /<h1\b/,
   },
   {
     path: '/contact',
-    title: 'Contact Us | Arden Project OS',
-    description: 'Contact Arden Project OS for product questions, support, and partnership inquiries.',
+    title: 'Contact Us | Project OS',
+    description: 'Contact Project OS for product questions, support, and partnership inquiries.',
     canonical: `${MARKETING_URL}/contact`,
     h1Files: ['src/pages/ContactPage.tsx'],
     h1Pattern: /<h1\b/,
@@ -235,7 +235,7 @@ function checkSpaShellLimitation() {
 
   if (existsSync(distIndex)) {
     const html = readFileSync(distIndex, 'utf8')
-    if (!html.includes('meta name="description"') && html.includes('<title>Arden Project OS</title>')) {
+    if (!html.includes('meta name="description"') && html.includes('<title>Project OS</title>')) {
       pass('dist/index.html is SPA shell with generic fallback title only (expected before prerender)')
     } else if (html.includes('meta name="description"')) {
       warn('dist/index.html contains route-specific description ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â prerender may already be active')
@@ -335,13 +335,13 @@ async function checkRemote(base) {
   const genericOnly =
     homepageHtml.includes('<title>') &&
     homepageHtml.includes('<div id="root">') &&
-    !homepageHtml.includes('Pricing | Arden Project OS')
+    !homepageHtml.includes('Pricing | Project OS')
 
   if (genericOnly && homepageHtml === pricingHtml) {
     warn(
       'raw HTML responses appear identical across routes ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â route metadata likely only appears after JavaScript (SPA limitation)',
     )
-  } else if (pricingHtml.includes('Pricing | Arden Project OS')) {
+  } else if (pricingHtml.includes('Pricing | Project OS')) {
     pass('raw /pricing HTML includes route-specific title ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â prerender/SSR may be active')
   }
 

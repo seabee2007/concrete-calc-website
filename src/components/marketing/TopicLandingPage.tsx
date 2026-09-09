@@ -57,7 +57,7 @@ export default function TopicLandingPage({
         </div>
 
         <section className="mx-auto mt-16 max-w-3xl rounded-3xl border border-electric-500/20 bg-electric-500/5 p-8 text-center lg:p-12">
-          <h2 className="text-2xl font-bold text-white">Start with Arden Project OS</h2>
+          <h2 className="text-2xl font-bold text-white">Start with Project OS</h2>
           <p className="mx-auto mt-4 max-w-xl text-concrete-400">
             Bring estimates, schedules, field records, and client approvals into one workspace built for
             contractors.

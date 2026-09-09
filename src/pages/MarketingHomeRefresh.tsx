@@ -17,7 +17,7 @@ export default function MarketingHomeRefresh() {
   return (
     <div className="marketing-refresh" data-marketing-section-order={MARKETING_SECTION_ORDER.join(',')}>
       <SeoHead
-        title="Arden Project OS | Construction Project Management Software for Contractors"
+        title="Project OS | Construction Project Management Software for Contractors"
         description="Plan estimates, proposals, schedules, change orders, field work, and client approvals in one construction project management workspace built for contractors."
         canonical={`${MARKETING_URL}/`}
         jsonLd={[organizationJsonLd, softwareApplicationJsonLd]}

@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async'
-import { MARKETING_URL } from '../../constants/marketing'
+import { BRAND_NAME, MARKETING_URL } from '../../constants/marketing'
 
 const DEFAULT_OG_IMAGE = `${MARKETING_URL}/images/brand/project-os-social.png`
 
@@ -33,7 +33,7 @@ export default function SeoHead({
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />
       <meta property="og:image" content={ogImage} />
-      <meta property="og:site_name" content="Arden Project OS" />
+      <meta property="og:site_name" content={BRAND_NAME} />
       <meta property="og:type" content="website" />
 
       <meta name="twitter:card" content="summary_large_image" />
