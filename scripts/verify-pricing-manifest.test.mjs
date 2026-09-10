@@ -24,6 +24,15 @@ function run(args = [], extraEnv = {}) {
   })
 }
 
+function writeIndependentCanonical(mutate) {
+  const dir = mkdtempSync(join(tmpdir(), 'pricing-independent-'))
+  const path = join(dir, 'pricing-manifest.json')
+  const parsed = JSON.parse(readFileSync(websiteManifest, 'utf8'))
+  mutate(parsed)
+  writeFileSync(path, JSON.stringify(parsed))
+  return path
+}
+
 test('no-argument execution does not claim cross-repo parity', () => {
   const result = run([])
   assert.equal(result.status, 0)
@@ -121,12 +130,42 @@ test('schema-only fails closed when Project OS is not sale-enabled', () => {
   parsed.products[0].commercialState = 'decision_pending'
   parsed.products[0].billingAvailability = 'not_for_sale'
   writeFileSync(path, JSON.stringify(parsed))
-  const websiteCopy = join(dir, 'website.json')
-  writeFileSync(websiteCopy, JSON.stringify(parsed))
   const result = spawnSync(process.execPath, ['--experimental-strip-types', script, '--canonical', path], {
     encoding: 'utf8',
     env: isolatedEnv(),
   })
   assert.notEqual(result.status, 0)
   assert.match(result.stderr, /not sale-enabled|Canonical drift|failed Project OS/)
+})
+
+test('independent canonical extra grant is rejected instead of matching the first grant only', () => {
+  const path = writeIndependentCanonical((parsed) => {
+    parsed.products[0].plans[0].grants.push({
+      productId: 'project_os',
+      planId: 'starter',
+      rank: 99,
+    })
+  })
+  const result = run(['--canonical', path])
+  assert.notEqual(result.status, 0)
+  assert.match(result.stderr, /exactly one Project OS grant|failed Project OS/)
+  assert.doesNotMatch(result.stdout, /match canonical input/)
+})
+
+test('independent canonical malformed later grant is rejected', () => {
+  const path = writeIndependentCanonical((parsed) => {
+    parsed.products[0].plans[1].grants.push({ productId: 'project_os' })
+  })
+  const result = run(['--canonical', path])
+  assert.notEqual(result.status, 0)
+  assert.match(result.stderr, /must be a non-empty string|failed Project OS/)
+})
+
+test('independent canonical non-boolean recommended is rejected', () => {
+  const path = writeIndependentCanonical((parsed) => {
+    parsed.products[0].plans[0].recommended = 'false'
+  })
+  const result = run(['--canonical', path])
+  assert.notEqual(result.status, 0)
+  assert.match(result.stderr, /recommended must be a boolean|failed Project OS/)
 })

@@ -16,6 +16,16 @@ const APPROVED_DISPLAY_FIXTURE = {
   business: { monthly: 249, annualTotal: 2508, annualMonth: 209 },
 } as const
 
+function expectCode(execute: () => unknown, code: string) {
+  try {
+    execute()
+    throw new Error(`expected PricingContractError ${code}`)
+  } catch (error) {
+    expect(error).toBeInstanceOf(PricingContractError)
+    expect((error as PricingContractError).code).toBe(code)
+  }
+}
+
 describe('projectOsPricingContract', () => {
   it('accepts the committed v2 Project OS artifact and derives fixture display amounts', () => {
     const terms = parseProjectOsCommercialTerms(canonical)
@@ -71,13 +81,7 @@ describe('projectOsPricingContract', () => {
     const pending = structuredClone(canonical)
     pending.products[0].commercialState = 'decision_pending'
     pending.products[0].billingAvailability = 'not_for_sale'
-    try {
-      parseProjectOsCommercialTerms(pending)
-      throw new Error('expected sale-enabled rejection')
-    } catch (error) {
-      expect(error).toBeInstanceOf(PricingContractError)
-      expect((error as PricingContractError).code).toBe('NOT_SALE_ENABLED')
-    }
+    expectCode(() => parseProjectOsCommercialTerms(pending), 'NOT_SALE_ENABLED')
   })
 
   it('fingerprints name, grant rank, lookup keys, and eligibility so those drifts fail parity', () => {
@@ -94,5 +98,41 @@ describe('projectOsPricingContract', () => {
     const lookup = structuredClone(canonical)
     lookup.products[0].plans[0].stripeLookupKeys.month = 'arden_starter_monthly_v2'
     expect(projectOsCommercialFingerprint(parseProjectOsCommercialTerms(lookup))).not.toBe(base)
+  })
+
+  it('rejects an extra grant even when the original first grant is intact', () => {
+    const extra = structuredClone(canonical)
+    extra.products[0].plans[0].grants.push({
+      productId: 'project_os',
+      planId: 'starter',
+      rank: 99,
+    })
+    expectCode(() => parseProjectOsCommercialTerms(extra), 'UNSUPPORTED_GRANT')
+  })
+
+  it('rejects a malformed later grant instead of dropping it', () => {
+    const malformed = structuredClone(canonical)
+    malformed.products[0].plans[1].grants.push('not-a-grant')
+    expectCode(() => parseProjectOsCommercialTerms(malformed), 'INVALID_STRUCTURE')
+  })
+
+  it('rejects a later grant whose product or plan binding is unsupported', () => {
+    const altered = structuredClone(canonical)
+    altered.products[0].plans[2].grants.push({
+      productId: 'proposals',
+      planId: 'business',
+      rank: 3,
+    })
+    expectCode(() => parseProjectOsCommercialTerms(altered), 'UNSUPPORTED_GRANT')
+  })
+
+  it('requires recommended to be a real boolean before projection', () => {
+    const missing = structuredClone(canonical)
+    delete missing.products[0].plans[0].recommended
+    expectCode(() => parseProjectOsCommercialTerms(missing), 'INVALID_STRUCTURE')
+
+    const coerced = structuredClone(canonical)
+    coerced.products[0].plans[0].recommended = 'false'
+    expectCode(() => parseProjectOsCommercialTerms(coerced), 'INVALID_STRUCTURE')
   })
 })
