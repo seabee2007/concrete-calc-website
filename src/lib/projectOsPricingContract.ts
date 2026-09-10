@@ -1,11 +1,8 @@
 export const PROJECT_OS_PRODUCT_ID = 'project_os' as const
 export const PAID_PLAN_IDS = ['starter', 'professional', 'business'] as const
 export const USD_MINOR_UNITS = 100
-export const EXPECTED_DISPLAY = {
-  starter: { monthly: 49, annualTotal: 490, annualMonth: 41 },
-  professional: { monthly: 129, annualTotal: 1308, annualMonth: 109 },
-  business: { monthly: 249, annualTotal: 2508, annualMonth: 209 },
-} as const
+export const PROJECT_OS_SALE_COMMERCIAL_STATE = 'approved' as const
+export const PROJECT_OS_SALE_BILLING_AVAILABILITY = 'standalone' as const
 
 export type PaidPlanId = (typeof PAID_PLAN_IDS)[number]
 
@@ -65,22 +62,16 @@ function requireString(value: unknown, label: string): string {
   return value
 }
 
-function requireInteger(value: unknown, label: string): number {
-  if (typeof value !== 'number' || !Number.isInteger(value)) {
-    throw new PricingContractError('INVALID_AMOUNT', `${label} must be an integer`)
+function requireSafeInteger(value: unknown, label: string): number {
+  if (typeof value !== 'number' || !Number.isSafeInteger(value)) {
+    throw new PricingContractError('INVALID_AMOUNT', `${label} must be a finite safe integer`)
   }
   return value
 }
 
-function minorToUsdDisplay(minor: number, label: string): number {
+function minorToUsd(minor: number, label: string): number {
   if (minor < 0) {
     throw new PricingContractError('INVALID_AMOUNT', `${label} must be a non-negative integer`)
-  }
-  if (minor % USD_MINOR_UNITS !== 0) {
-    throw new PricingContractError(
-      'INVALID_AMOUNT',
-      `${label} must convert to a whole USD display amount`,
-    )
   }
   return minor / USD_MINOR_UNITS
 }
@@ -93,8 +84,8 @@ function parseTrial(value: unknown, label: string): ProjectOsTrial {
     throw new PricingContractError('INVALID_STRUCTURE', `${label}.hasTrial must be a boolean`)
   }
   const trialDays = value.trialDays
-  if (trialDays !== null && !Number.isInteger(trialDays)) {
-    throw new PricingContractError('INVALID_STRUCTURE', `${label}.trialDays must be null or an integer`)
+  if (trialDays !== null && !Number.isSafeInteger(trialDays)) {
+    throw new PricingContractError('INVALID_STRUCTURE', `${label}.trialDays must be null or a safe integer`)
   }
   return { hasTrial: value.hasTrial, trialDays: trialDays === null ? null : Number(trialDays) }
 }
@@ -127,9 +118,9 @@ function parsePlan(value: unknown, index: number): ProjectOsPlanTerms {
     throw new PricingContractError('INVALID_PLAN_IDENTITY', `plans[${index}] grant must bind project_os/${planId}`)
   }
 
-  const monthlyPriceMinor = requireInteger(value.monthlyPriceMinor, `${planId}.monthlyPriceMinor`)
-  const annualPriceMinor = requireInteger(value.annualPriceMinor, `${planId}.annualPriceMinor`)
-  const annualDisplayMonthlyMinor = requireInteger(
+  const monthlyPriceMinor = requireSafeInteger(value.monthlyPriceMinor, `${planId}.monthlyPriceMinor`)
+  const annualPriceMinor = requireSafeInteger(value.annualPriceMinor, `${planId}.annualPriceMinor`)
+  const annualDisplayMonthlyMinor = requireSafeInteger(
     value.annualDisplayMonthlyMinor,
     `${planId}.annualDisplayMonthlyMinor`,
   )
@@ -141,15 +132,15 @@ function parsePlan(value: unknown, index: number): ProjectOsPlanTerms {
     monthlyPriceMinor,
     annualPriceMinor,
     annualDisplayMonthlyMinor,
-    monthlyPriceUsd: minorToUsdDisplay(monthlyPriceMinor, `${planId}.monthlyPriceMinor`),
-    annualTotalUsd: minorToUsdDisplay(annualPriceMinor, `${planId}.annualPriceMinor`),
-    annualMonthlyUsd: minorToUsdDisplay(annualDisplayMonthlyMinor, `${planId}.annualDisplayMonthlyMinor`),
+    monthlyPriceUsd: minorToUsd(monthlyPriceMinor, `${planId}.monthlyPriceMinor`),
+    annualTotalUsd: minorToUsd(annualPriceMinor, `${planId}.annualPriceMinor`),
+    annualMonthlyUsd: minorToUsd(annualDisplayMonthlyMinor, `${planId}.annualDisplayMonthlyMinor`),
     recommended: value.recommended === true,
-    activeProjectLimit: requireInteger(marketing.activeProjectLimit, `${planId}.activeProjectLimit`),
-    includedFieldSeats: requireInteger(marketing.includedFieldSeats, `${planId}.includedFieldSeats`),
+    activeProjectLimit: requireSafeInteger(marketing.activeProjectLimit, `${planId}.activeProjectLimit`),
+    includedFieldSeats: requireSafeInteger(marketing.includedFieldSeats, `${planId}.includedFieldSeats`),
     marketableFeatureKeys: marketing.marketableFeatureKeys as string[],
     usageSummary: requireString(marketing.usageSummary, `${planId}.usageSummary`),
-    grantRank: requireInteger(grant.rank, `${planId}.grant.rank`),
+    grantRank: requireSafeInteger(grant.rank, `${planId}.grant.rank`),
     stripeLookupKeys: {
       month: requireString(lookups.month, `${planId}.stripeLookupKeys.month`),
       year: requireString(lookups.year, `${planId}.stripeLookupKeys.year`),
@@ -157,16 +148,7 @@ function parsePlan(value: unknown, index: number): ProjectOsPlanTerms {
   }
 }
 
-interface ProjectOsProductBody {
-  commercialState: string
-  billingAvailability: string
-  currencyCode: 'USD'
-  trial: ProjectOsTrial
-  nonMarketableFeatureKeys: string[]
-  plans: ProjectOsPlanTerms[]
-}
-
-function parseProjectOsProduct(value: unknown): ProjectOsProductBody {
+function parseProjectOsProduct(value: unknown) {
   if (!isRecord(value)) {
     throw new PricingContractError('INVALID_STRUCTURE', 'project_os product must be an object')
   }
@@ -183,6 +165,18 @@ function parseProjectOsProduct(value: unknown): ProjectOsProductBody {
     throw new PricingContractError('INVALID_STRUCTURE', 'project_os.plans must be an array')
   }
 
+  const commercialState = requireString(value.commercialState, 'project_os.commercialState')
+  const billingAvailability = requireString(value.billingAvailability, 'project_os.billingAvailability')
+  if (
+    commercialState !== PROJECT_OS_SALE_COMMERCIAL_STATE ||
+    billingAvailability !== PROJECT_OS_SALE_BILLING_AVAILABILITY
+  ) {
+    throw new PricingContractError(
+      'NOT_SALE_ENABLED',
+      `project_os is not sale-enabled (${commercialState}/${billingAvailability}); checkout offers must not be published`,
+    )
+  }
+
   const plans = value.plans.map((plan, index) => parsePlan(plan, index))
   const ids = plans.map((plan) => plan.planId)
   const missing = PAID_PLAN_IDS.filter((id) => !ids.includes(id))
@@ -194,11 +188,11 @@ function parseProjectOsProduct(value: unknown): ProjectOsProductBody {
   }
 
   return {
-    commercialState: requireString(value.commercialState, 'project_os.commercialState'),
-    billingAvailability: requireString(value.billingAvailability, 'project_os.billingAvailability'),
-    currencyCode: 'USD',
+    commercialState,
+    billingAvailability,
+    currencyCode: 'USD' as const,
     trial: parseTrial(value.trial, 'project_os.trial'),
-    nonMarketableFeatureKeys: value.nonMarketableFeatureKeys,
+    nonMarketableFeatureKeys: value.nonMarketableFeatureKeys as string[],
     plans: PAID_PLAN_IDS.map((id) => plans.find((plan) => plan.planId === id)!),
   }
 }
@@ -249,12 +243,16 @@ export function parseProjectOsCommercialTerms(raw: unknown): ProjectOsCommercial
 export function projectOsCommercialFingerprint(terms: ProjectOsCommercialTerms): string {
   return JSON.stringify({
     schemaVersion: terms.schemaVersion,
+    version: terms.version,
     currencyCode: terms.currencyCode,
+    commercialState: terms.commercialState,
+    billingAvailability: terms.billingAvailability,
     trial: terms.trial,
     nonMarketableFeatureKeys: terms.nonMarketableFeatureKeys,
     plans: terms.plans.map((plan) => ({
       planId: plan.planId,
       name: plan.name,
+      audience: plan.audience,
       monthlyPriceMinor: plan.monthlyPriceMinor,
       annualPriceMinor: plan.annualPriceMinor,
       annualDisplayMonthlyMinor: plan.annualDisplayMonthlyMinor,
@@ -267,21 +265,4 @@ export function projectOsCommercialFingerprint(terms: ProjectOsCommercialTerms):
       stripeLookupKeys: plan.stripeLookupKeys,
     })),
   })
-}
-
-export function assertApprovedDisplayTerms(terms: ProjectOsCommercialTerms): void {
-  for (const planId of PAID_PLAN_IDS) {
-    const plan = terms.plans.find((entry) => entry.planId === planId)!
-    const expected = EXPECTED_DISPLAY[planId]
-    if (
-      plan.monthlyPriceUsd !== expected.monthly ||
-      plan.annualTotalUsd !== expected.annualTotal ||
-      plan.annualMonthlyUsd !== expected.annualMonth
-    ) {
-      throw new PricingContractError(
-        'CANONICAL_DRIFT',
-        `${planId} display amounts drifted from the approved Project OS terms`,
-      )
-    }
-  }
 }
