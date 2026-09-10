@@ -10,12 +10,25 @@ const root = join(fileURLToPath(new URL('.', import.meta.url)), '..')
 const script = join(root, 'scripts/verify-pricing-manifest.mjs')
 const websiteManifest = join(root, 'shared/pricing-manifest.json')
 
+function isolatedEnv(extra = {}) {
+  const env = { ...process.env, ...extra }
+  delete env.PRICING_APP_MANIFEST
+  delete env.PRICING_PARITY_MODE
+  return env
+}
+
 function run(args = [], extraEnv = {}) {
-  return spawnSync(process.execPath, [script, ...args], {
+  return spawnSync(process.execPath, ['--experimental-strip-types', script, ...args], {
     encoding: 'utf8',
-    env: { ...process.env, ...extraEnv },
+    env: isolatedEnv(extraEnv),
   })
 }
+
+test('no-argument execution does not claim cross-repo parity', () => {
+  const result = run([])
+  assert.equal(result.status, 0)
+  assert.match(result.stdout, /CROSS_REPO_PARITY_NOT_CHECKED/)
+})
 
 test('accepted v2 website manifest validates in schema-only mode', () => {
   const result = run(['--schema-only'])
@@ -23,10 +36,17 @@ test('accepted v2 website manifest validates in schema-only mode', () => {
   assert.match(result.stdout, /CROSS_REPO_PARITY_NOT_CHECKED/)
 })
 
-test('explicit canonical match succeeds', () => {
+test('caller PRICING_PARITY_MODE does not leak into isolated schema-only assertion', () => {
+  const result = run(['--schema-only'], { PRICING_APP_MANIFEST: websiteManifest })
+  assert.equal(result.status, 0)
+  assert.match(result.stdout, /CROSS_REPO_PARITY_NOT_CHECKED/)
+})
+
+test('explicit website-copy path matches but discloses it is not independent provenance', () => {
   const result = run(['--canonical', websiteManifest])
   assert.equal(result.status, 0)
   assert.match(result.stdout, /match canonical input/)
+  assert.match(result.stdout, /CANONICAL_INPUT_IS_WEBSITE_COPY/)
 })
 
 test('missing explicit canonical path fails', () => {
@@ -53,7 +73,7 @@ test('unsupported schema on explicit input fails', () => {
   assert.match(result.stderr, /unsupported schemaVersion/)
 })
 
-test('canonical drift fails', () => {
+test('canonical price drift fails', () => {
   const dir = mkdtempSync(join(tmpdir(), 'pricing-drift-'))
   const path = join(dir, 'pricing-manifest.json')
   const parsed = JSON.parse(readFileSync(websiteManifest, 'utf8'))
@@ -62,4 +82,51 @@ test('canonical drift fails', () => {
   const result = run(['--canonical', path])
   assert.notEqual(result.status, 0)
   assert.match(result.stderr, /Canonical drift/)
+})
+
+test('canonical name drift fails', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'pricing-name-'))
+  const path = join(dir, 'pricing-manifest.json')
+  const parsed = JSON.parse(readFileSync(websiteManifest, 'utf8'))
+  parsed.products[0].plans[0].name = 'Starter Plus'
+  writeFileSync(path, JSON.stringify(parsed))
+  const result = run(['--canonical', path])
+  assert.notEqual(result.status, 0)
+  assert.match(result.stderr, /Canonical drift/)
+})
+
+test('canonical lookup-key and grant-rank drift fail', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'pricing-keys-'))
+  const lookupPath = join(dir, 'lookup.json')
+  const rankPath = join(dir, 'rank.json')
+  const parsed = JSON.parse(readFileSync(websiteManifest, 'utf8'))
+  const lookup = structuredClone(parsed)
+  lookup.products[0].plans[0].stripeLookupKeys.year = 'changed_annual'
+  writeFileSync(lookupPath, JSON.stringify(lookup))
+  const rank = structuredClone(parsed)
+  rank.products[0].plans[2].grants[0].rank = 99
+  writeFileSync(rankPath, JSON.stringify(rank))
+  const lookupResult = run(['--canonical', lookupPath])
+  const rankResult = run(['--canonical', rankPath])
+  assert.notEqual(lookupResult.status, 0)
+  assert.notEqual(rankResult.status, 0)
+  assert.match(lookupResult.stderr, /Canonical drift/)
+  assert.match(rankResult.stderr, /Canonical drift/)
+})
+
+test('schema-only fails closed when Project OS is not sale-enabled', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'pricing-sale-'))
+  const path = join(dir, 'pricing-manifest.json')
+  const parsed = JSON.parse(readFileSync(websiteManifest, 'utf8'))
+  parsed.products[0].commercialState = 'decision_pending'
+  parsed.products[0].billingAvailability = 'not_for_sale'
+  writeFileSync(path, JSON.stringify(parsed))
+  const websiteCopy = join(dir, 'website.json')
+  writeFileSync(websiteCopy, JSON.stringify(parsed))
+  const result = spawnSync(process.execPath, ['--experimental-strip-types', script, '--canonical', path], {
+    encoding: 'utf8',
+    env: isolatedEnv(),
+  })
+  assert.notEqual(result.status, 0)
+  assert.match(result.stderr, /not sale-enabled|Canonical drift|failed Project OS/)
 })
