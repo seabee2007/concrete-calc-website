@@ -1,84 +1,145 @@
 {
-  "version": "1.0.0",
-  "updatedAt": "2026-06-13",
-  "sourceOfTruthNotes": "Keep in sync across marketing and app repos. Verify with npm run verify:pricing in the marketing repo.",
-  "trial": {
-    "hasTrial": false,
-    "trialDays": null
-  },
-  "nonMarketableFeatureKeys": [
-    "design_builder",
-    "model_3d_takeoff",
-    "model_3d_extraction"
-  ],
-  "plans": [
+  "schemaVersion": 2,
+  "version": "2.0.0",
+  "updatedAt": "2026-08-14",
+  "sourceOfTruthNotes": "Canonical multi-product commercial manifest. Stripe remains payment authority; verify approved offers in both Stripe test and live modes before release activation.",
+  "products": [
     {
-      "planId": "starter",
-      "name": "Starter",
-      "audience": "For independent contractors who need a dependable estimating and proposal workflow.",
-      "monthlyPriceUsd": 49,
-      "annualMonthlyUsd": 41,
-      "annualTotalUsd": 490,
-      "recommended": false,
-      "activeProjectLimit": 3,
-      "includedFieldSeats": 1,
-      "marketableFeatureKeys": [
-        "quick_estimates",
-        "conceptual_estimates",
-        "employee_portal",
-        "calculators",
-        "resources",
-        "proposals"
+      "productId": "project_os",
+      "commercialState": "approved",
+      "billingAvailability": "standalone",
+      "currencyCode": "USD",
+      "trial": {
+        "hasTrial": false,
+        "trialDays": null
+      },
+      "nonMarketableFeatureKeys": [
+        "design_builder",
+        "model_3d_takeoff",
+        "model_3d_extraction"
       ],
-      "usageSummary": "Includes 50 AI requests and metered weather, map, and email usage each month."
+      "plans": [
+        {
+          "planId": "starter",
+          "name": "Starter",
+          "audience": "For independent contractors who need a dependable estimating and proposal workflow.",
+          "monthlyPriceMinor": 4900,
+          "annualPriceMinor": 49000,
+          "annualDisplayMonthlyMinor": 4100,
+          "recommended": false,
+          "stripeLookupKeys": {
+            "month": "arden_starter_monthly",
+            "year": "arden_starter_annual"
+          },
+          "grants": [
+            {
+              "productId": "project_os",
+              "planId": "starter",
+              "rank": 1
+            }
+          ],
+          "projectOsMarketing": {
+            "activeProjectLimit": 3,
+            "includedFieldSeats": 1,
+            "marketableFeatureKeys": [
+              "quick_estimates",
+              "conceptual_estimates",
+              "employee_portal",
+              "calculators",
+              "resources",
+              "proposals"
+            ],
+            "usageSummary": "Includes 50 AI requests and metered weather, map, and email usage each month."
+          }
+        },
+        {
+          "planId": "professional",
+          "name": "Professional",
+          "audience": "For contractors managing active field capacity, estimating, schedules, and change control.",
+          "monthlyPriceMinor": 12900,
+          "annualPriceMinor": 130800,
+          "annualDisplayMonthlyMinor": 10900,
+          "recommended": true,
+          "stripeLookupKeys": {
+            "month": "arden_professional_monthly",
+            "year": "arden_professional_annual"
+          },
+          "grants": [
+            {
+              "productId": "project_os",
+              "planId": "professional",
+              "rank": 2
+            }
+          ],
+          "projectOsMarketing": {
+            "activeProjectLimit": 10,
+            "includedFieldSeats": 5,
+            "marketableFeatureKeys": [
+              "activity_based_estimating",
+              "arden_calc_in_estimator",
+              "bill_of_materials",
+              "bom_ai_pricing",
+              "employee_portal",
+              "rfis",
+              "fars",
+              "qc",
+              "change_orders",
+              "logic_network",
+              "cpm",
+              "level_three_gantt"
+            ],
+            "usageSummary": "Includes 250 AI requests and expanded weather, map, and email usage each month."
+          }
+        },
+        {
+          "planId": "business",
+          "name": "Business",
+          "audience": "For multi-project contractors that need expanded field capacity, reporting, and portfolio visibility.",
+          "monthlyPriceMinor": 24900,
+          "annualPriceMinor": 250800,
+          "annualDisplayMonthlyMinor": 20900,
+          "recommended": false,
+          "stripeLookupKeys": {
+            "month": "arden_business_monthly",
+            "year": "arden_business_annual"
+          },
+          "grants": [
+            {
+              "productId": "project_os",
+              "planId": "business",
+              "rank": 3
+            }
+          ],
+          "projectOsMarketing": {
+            "activeProjectLimit": -1,
+            "includedFieldSeats": 15,
+            "marketableFeatureKeys": [
+              "level_three_gantt_export",
+              "accounting_exports",
+              "financial_dashboard",
+              "ai_concrete_chat",
+              "ai_scope_summary",
+              "ai_labor_crew_review",
+              "ai_batch_plant_tools",
+              "global_planner_hub"
+            ],
+            "usageSummary": "Includes 1,000 AI requests and the highest weather, map, and email usage allowances each month."
+          }
+        }
+      ]
     },
     {
-      "planId": "professional",
-      "name": "Professional",
-      "audience": "For contractors managing active field capacity, estimating, schedules, and change control.",
-      "monthlyPriceUsd": 129,
-      "annualMonthlyUsd": 109,
-      "annualTotalUsd": 1308,
-      "recommended": true,
-      "activeProjectLimit": 10,
-      "includedFieldSeats": 5,
-      "marketableFeatureKeys": [
-        "activity_based_estimating",
-        "arden_calc_in_estimator",
-        "bill_of_materials",
-        "bom_ai_pricing",
-        "employee_portal",
-        "rfis",
-        "fars",
-        "qc",
-        "change_orders",
-        "logic_network",
-        "cpm",
-        "level_three_gantt"
-      ],
-      "usageSummary": "Includes 250 AI requests and expanded weather, map, and email usage each month."
-    },
-    {
-      "planId": "business",
-      "name": "Business",
-      "audience": "For multi-project contractors that need expanded field capacity, reporting, and portfolio visibility.",
-      "monthlyPriceUsd": 249,
-      "annualMonthlyUsd": 209,
-      "annualTotalUsd": 2508,
-      "recommended": false,
-      "activeProjectLimit": -1,
-      "includedFieldSeats": 15,
-      "marketableFeatureKeys": [
-        "level_three_gantt_export",
-        "accounting_exports",
-        "financial_dashboard",
-        "ai_concrete_chat",
-        "ai_scope_summary",
-        "ai_labor_crew_review",
-        "ai_batch_plant_tools",
-        "global_planner_hub"
-      ],
-      "usageSummary": "Includes 1,000 AI requests and the highest weather, map, and email usage allowances each month."
+      "productId": "proposals",
+      "commercialState": "decision_pending",
+      "billingAvailability": "not_for_sale",
+      "currencyCode": "USD",
+      "trial": {
+        "hasTrial": false,
+        "trialDays": null
+      },
+      "nonMarketableFeatureKeys": [],
+      "plans": []
     }
-  ]
+  ],
+  "bundles": []
 }
