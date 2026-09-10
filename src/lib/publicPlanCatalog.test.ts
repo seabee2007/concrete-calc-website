@@ -7,8 +7,14 @@ import {
   getPublicPlanCtaLabel,
   PAID_PLAN_ORDER,
 } from './publicPlanCatalog'
-import { EXPECTED_DISPLAY, parseProjectOsCommercialTerms } from './projectOsPricingContract'
+import { parseProjectOsCommercialTerms } from './projectOsPricingContract'
 import manifest from '../../shared/pricing-manifest.json'
+
+const APPROVED_DISPLAY_FIXTURE = {
+  starter: { monthly: 49, annualTotal: 490, annualMonth: 41 },
+  professional: { monthly: 129, annualTotal: 1308, annualMonth: 109 },
+  business: { monthly: 249, annualTotal: 2508, annualMonth: 209 },
+} as const
 
 describe('publicPlanCatalog', () => {
   const projectOs = parseProjectOsCommercialTerms(manifest)
@@ -19,10 +25,10 @@ describe('publicPlanCatalog', () => {
     expect(names).not.toContain('Pro')
   })
 
-  it('matches approved Project OS monthly and annual display prices', () => {
+  it('matches approved Project OS monthly and annual display prices from the manifest', () => {
     for (const planId of PAID_PLAN_ORDER) {
       const plan = getPublicPlan(planId)
-      const expected = EXPECTED_DISPLAY[planId]
+      const expected = APPROVED_DISPLAY_FIXTURE[planId as keyof typeof APPROVED_DISPLAY_FIXTURE]
       expect(plan.monthlyPriceUsd).toBe(expected.monthly)
       expect(plan.annualTotalUsd).toBe(expected.annualTotal)
       expect(plan.annualMonthlyUsd).toBe(expected.annualMonth)
