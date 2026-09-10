@@ -27,6 +27,7 @@ export interface ProjectOsPlanTerms {
   marketableFeatureKeys: string[]
   usageSummary: string
   grantRank: number
+  grants: Array<{ productId: string; planId: string; rank: number }>
   stripeLookupKeys: { month: string; year: string }
 }
 
@@ -109,14 +110,37 @@ function parsePlan(value: unknown, index: number): ProjectOsPlanTerms {
   if (!isRecord(lookups)) {
     throw new PricingContractError('INVALID_STRUCTURE', `plans[${index}].stripeLookupKeys is required`)
   }
-  const grants = value.grants
-  if (!Array.isArray(grants) || grants.length === 0 || !isRecord(grants[0])) {
+  const rawGrants = value.grants
+  if (!Array.isArray(rawGrants) || rawGrants.length === 0) {
     throw new PricingContractError('INVALID_STRUCTURE', `plans[${index}].grants must include a Project OS grant`)
+  }
+  const grants = rawGrants.map((entry, grantIndex) => {
+    if (!isRecord(entry)) {
+      throw new PricingContractError(
+        'INVALID_STRUCTURE',
+        `plans[${index}].grants[${grantIndex}] must be an object`,
+      )
+    }
+    return {
+      productId: requireString(entry.productId, `${planId}.grants[${grantIndex}].productId`),
+      planId: requireString(entry.planId, `${planId}.grants[${grantIndex}].planId`),
+      rank: requireSafeInteger(entry.rank, `${planId}.grants[${grantIndex}].rank`),
+    }
+  })
+  if (grants.length !== 1) {
+    throw new PricingContractError(
+      'UNSUPPORTED_GRANT',
+      `plans[${index}] must have exactly one Project OS grant; extra or parallel grants are not part of the website contract`,
+    )
   }
   const grant = grants[0]
   if (grant.productId !== PROJECT_OS_PRODUCT_ID || grant.planId !== planId) {
     throw new PricingContractError('INVALID_PLAN_IDENTITY', `plans[${index}] grant must bind project_os/${planId}`)
   }
+  if (typeof value.recommended !== 'boolean') {
+    throw new PricingContractError('INVALID_STRUCTURE', `${planId}.recommended must be a boolean`)
+  }
+  const recommended = value.recommended
 
   const monthlyPriceMinor = requireSafeInteger(value.monthlyPriceMinor, `${planId}.monthlyPriceMinor`)
   const annualPriceMinor = requireSafeInteger(value.annualPriceMinor, `${planId}.annualPriceMinor`)
@@ -135,12 +159,13 @@ function parsePlan(value: unknown, index: number): ProjectOsPlanTerms {
     monthlyPriceUsd: minorToUsd(monthlyPriceMinor, `${planId}.monthlyPriceMinor`),
     annualTotalUsd: minorToUsd(annualPriceMinor, `${planId}.annualPriceMinor`),
     annualMonthlyUsd: minorToUsd(annualDisplayMonthlyMinor, `${planId}.annualDisplayMonthlyMinor`),
-    recommended: value.recommended === true,
+    recommended,
     activeProjectLimit: requireSafeInteger(marketing.activeProjectLimit, `${planId}.activeProjectLimit`),
     includedFieldSeats: requireSafeInteger(marketing.includedFieldSeats, `${planId}.includedFieldSeats`),
     marketableFeatureKeys: marketing.marketableFeatureKeys as string[],
     usageSummary: requireString(marketing.usageSummary, `${planId}.usageSummary`),
-    grantRank: requireSafeInteger(grant.rank, `${planId}.grant.rank`),
+    grantRank: grant.rank,
+    grants,
     stripeLookupKeys: {
       month: requireString(lookups.month, `${planId}.stripeLookupKeys.month`),
       year: requireString(lookups.year, `${planId}.stripeLookupKeys.year`),
@@ -262,6 +287,7 @@ export function projectOsCommercialFingerprint(terms: ProjectOsCommercialTerms):
       marketableFeatureKeys: plan.marketableFeatureKeys,
       usageSummary: plan.usageSummary,
       grantRank: plan.grantRank,
+      grants: plan.grants,
       stripeLookupKeys: plan.stripeLookupKeys,
     })),
   })
