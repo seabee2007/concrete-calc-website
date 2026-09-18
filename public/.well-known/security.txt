@@ -1,0 +1,4 @@
+Contact: mailto:support@ardenprojectos.com
+Expires: 2027-09-18T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://ardenprojectos.com/.well-known/security.txt
