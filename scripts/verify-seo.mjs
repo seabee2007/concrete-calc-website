@@ -43,6 +43,17 @@ function parseSitemapUrls(xml) {
   return [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1])
 }
 
+/** React escapes text in server output; compare against the source strings. */
+function decodeEntities(value) {
+  return value
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#x27;/g, "'")
+    .replace(/&#39;/g, "'")
+}
+
 /** Expected public marketing metadata compiled from source. */
 const EXPECTED_PAGES = [
   {
@@ -67,7 +78,7 @@ const EXPECTED_PAGES = [
     path: '/pricing',
     title: 'Pricing | Project OS',
     description:
-      'Simple, transparent pricing for construction project management. Starter, Professional, and Business plans.',
+      'Starter, Professional, and Business plans for construction estimating, field work, schedules, and portfolio control. Prices match in-app Billing.',
     canonical: `${MARKETING_URL}/pricing`,
     h1Files: ['src/pages/PricingPage.tsx'],
     h1Pattern: /<h1\b/,
@@ -229,28 +240,75 @@ function checkH1Coverage() {
   }
 }
 
-function checkSpaShellLimitation() {
-  const distIndex = join(root, 'dist/index.html')
-  const sourceIndex = read('index.html')
-
-  if (existsSync(distIndex)) {
-    const html = readFileSync(distIndex, 'utf8')
-    if (!html.includes('meta name="description"') && html.includes('<title>Project OS</title>')) {
-      pass('dist/index.html is SPA shell with generic fallback title only (expected before prerender)')
-    } else if (html.includes('meta name="description"')) {
-      warn('dist/index.html contains route-specific description ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â prerender may already be active')
-    } else {
-      warn('dist/index.html title/meta pattern differs from expected SPA shell')
-    }
-  } else {
-    warn('dist/index.html not found ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â run npm run build for SPA shell verification')
+/**
+ * SEO Phase 2: every expected page must exist in dist/ as prerendered HTML
+ * whose <head> already carries the route's title, description and canonical,
+ * with the page's H1 in the body (scripts/prerender.mjs writes these files).
+ */
+function checkPrerenderedOutput() {
+  if (!existsSync(join(root, 'dist/index.html'))) {
+    warn('dist/ not found; run npm run build to verify the prerendered HTML')
+    return
   }
 
-  if (!sourceIndex.includes('react-helmet-async')) {
-    pass('route metadata is injected client-side via react-helmet-async (not in raw index.html)')
-    warn(
-      'SPA limitation: View Page Source will not show route-specific title/description/canonical/JSON-LD until SEO Phase 2 prerender/SSR',
-    )
+  for (const page of EXPECTED_PAGES) {
+    const file = page.path === '/' ? 'dist/index.html' : `dist${page.path}/index.html`
+    if (!existsSync(join(root, file))) {
+      fail(`${file} is missing; scripts/prerender.mjs did not write ${page.path}`)
+      continue
+    }
+
+    const html = readFileSync(join(root, file), 'utf8')
+    const head = html.slice(0, html.indexOf('</head>'))
+    const body = html.slice(html.indexOf('<div id="root">'))
+    const titles = [...head.matchAll(/<title>([^<]*)<\/title>/g)].map((match) => decodeEntities(match[1]))
+    const description = decodeEntities(head.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? '')
+    const canonical = head.match(/<link rel="canonical" href="([^"]*)"/)?.[1]
+
+    if (titles.length === 1 && titles[0] === page.title) {
+      pass(`${page.path} prerendered <title> is "${page.title}"`)
+    } else {
+      fail(`${page.path} prerendered <title> is ${JSON.stringify(titles)}, expected "${page.title}"`)
+    }
+
+    if (!description) {
+      fail(`${page.path} prerendered HTML has no meta description in <head>`)
+    } else if (description === page.description) {
+      pass(`${page.path} prerendered meta description matches`)
+    } else {
+      warn(
+        `${page.path} prerendered meta description differs from EXPECTED_PAGES in this script; update the list if the source changed`,
+      )
+    }
+
+    if (canonical === page.canonical) {
+      pass(`${page.path} prerendered canonical is ${page.canonical}`)
+    } else {
+      fail(`${page.path} prerendered canonical is ${canonical ?? 'missing'}, expected ${page.canonical}`)
+    }
+
+    if (/<h1[\s>]/.test(body)) {
+      pass(`${page.path} prerendered body contains an H1`)
+    } else {
+      fail(`${page.path} prerendered body has no H1`)
+    }
+
+    if (page.path === '/' && !body.includes('"@type":"Organization"')) {
+      fail('/ prerendered body is missing the Organization JSON-LD')
+    }
+  }
+
+  const redirects = read('public/_redirects')
+  if (/^\/\*\s+\/404\.html\s+404\s*$/m.test(redirects) && existsSync(join(root, 'public/404.html'))) {
+    pass('unknown paths return a real 404 (public/_redirects + public/404.html)')
+  } else {
+    fail('public/_redirects must end with "/* /404.html 404" and public/404.html must exist')
+  }
+
+  if (existsSync(join(root, 'public/.well-known/security.txt'))) {
+    pass('public/.well-known/security.txt exists')
+  } else {
+    fail('public/.well-known/security.txt is missing')
   }
 }
 
@@ -356,7 +414,7 @@ async function main() {
   checkSitemapConsistency()
   checkMetadataUniqueness()
   checkH1Coverage()
-  checkSpaShellLimitation()
+  checkPrerenderedOutput()
 
   if (baseUrl) {
     await checkRemote(baseUrl)

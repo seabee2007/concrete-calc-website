@@ -5,4 +5,6 @@
 /apps /hub 301
 /privacy-policy /privacy 301
 
-/* /index.html 200
+# Every public route is prerendered to its own dist/<route>/index.html by
+# scripts/prerender.mjs, so unknown paths get a real 404 instead of the shell.
+/* /404.html 404

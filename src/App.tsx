@@ -1,5 +1,6 @@
 import type { ComponentType } from 'react'
 import { useSyncExternalStore } from 'react'
+import { normalizePathname } from './lib/marketingRoutePaths'
 import ContactPage from './pages/ContactPage'
 import MarketingHomeRefresh from './pages/MarketingHomeRefresh'
 import PricingPage from './pages/PricingPage'
@@ -15,14 +16,17 @@ import ConstructionSchedulingPage from './pages/marketing/ConstructionScheduling
 import ContractorProposalPage from './pages/marketing/ContractorProposalPage'
 import RfiFarQcPage from './pages/marketing/RfiFarQcPage'
 
-function usePathname() {
+// The server snapshot is what the prerender renders for a route and what the
+// browser hydrates against; both sides pass the pathname they know, so the
+// first client render matches the static HTML.
+function usePathname(initialPathname: string) {
   return useSyncExternalStore(
     (onStoreChange) => {
       window.addEventListener('popstate', onStoreChange)
       return () => window.removeEventListener('popstate', onStoreChange)
     },
     () => window.location.pathname,
-    () => '/',
+    () => initialPathname,
   )
 }
 
@@ -43,8 +47,13 @@ const PAGE_ROUTES: Readonly<Record<string, ComponentType>> = {
   '/rfi-far-qc-construction-software': RfiFarQcPage,
 }
 
-export default function App() {
-  const pathname = usePathname()
+export interface AppProps {
+  /** Pathname to render before the browser location is read (prerender and hydration). */
+  initialPathname?: string
+}
+
+export default function App({ initialPathname = '/' }: AppProps) {
+  const pathname = normalizePathname(usePathname(initialPathname))
   const Page = PAGE_ROUTES[pathname]
   return Page ? <Page /> : <MarketingHomeRefresh />
 }

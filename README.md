@@ -1,3 +1,18 @@
+# Project OS marketing site
+
+Vite + React 19 site for `ardenprojectos.com`. Public routes are prerendered to static HTML at build time (`docs/SEO-PHASE2-PRERENDER.md`):
+
+```bash
+npm run build        # tsc -b, vite build, then scripts/prerender.mjs writes dist/<route>/index.html
+npm run verify:seo   # checks the prerendered titles, descriptions, canonicals and H1s
+npm test             # includes src/lib/prerender.test.ts, which renders every route
+npm run preview      # open http://localhost:4173/pricing/ (trailing slash) to hydrate a prerendered page
+```
+
+Routes live in `src/lib/marketingRoutePaths.ts` and `src/App.tsx`; add a route to both, give the page a `SeoHead`, and add its URL to `public/sitemap.xml` and the expected list in `scripts/verify-seo.mjs`. Unknown paths return `public/404.html` with a 404 status.
+
+---
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
