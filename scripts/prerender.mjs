@@ -3,10 +3,14 @@
  * SEO Phase 2: prerender the public marketing routes to static HTML.
  *
  * Runs after `vite build`. It builds src/entry-server.tsx for Node, renders
- * every route in MARKETING_ROUTE_PATHS, and writes dist/<route>/index.html
+ * every route in MARKETING_ROUTE_PATHS, and writes dist/<route>.html
  * (dist/index.html for "/") with the route's title, meta, canonical, Open
  * Graph and JSON-LD tags in <head> and the rendered page inside #root. The
  * browser then hydrates instead of rendering from an empty shell.
+ *
+ * Flat files, not <route>/index.html: Netlify's pretty URLs serve
+ * /pricing from pricing.html with a 200, whereas a directory index makes
+ * /pricing a 301 to /pricing/, which contradicts the canonical and sitemap.
  *
  * Usage: node scripts/prerender.mjs   (or as part of `npm run build`)
  */
@@ -73,7 +77,7 @@ try {
       }
     }
 
-    const outFile = route === '/' ? templatePath : join(distDir, route.slice(1), 'index.html')
+    const outFile = route === '/' ? templatePath : join(distDir, `${route.slice(1)}.html`)
     await mkdir(dirname(outFile), { recursive: true })
     await writeFile(outFile, page)
     written.push(outFile.slice(distDir.length + 1).replaceAll('\\', '/'))

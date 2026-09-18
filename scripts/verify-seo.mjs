@@ -252,7 +252,7 @@ function checkPrerenderedOutput() {
   }
 
   for (const page of EXPECTED_PAGES) {
-    const file = page.path === '/' ? 'dist/index.html' : `dist${page.path}/index.html`
+    const file = page.path === '/' ? 'dist/index.html' : `dist${page.path}.html`
     if (!existsSync(join(root, file))) {
       fail(`${file} is missing; scripts/prerender.mjs did not write ${page.path}`)
       continue
